@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>PyKota's internals</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Manual installation"
+HREF="x233.html"><LINK
+REL="NEXT"
+TITLE="Initialize your database with pkturnkey"
+HREF="c767.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x233.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c767.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN735"
+></A
+>Chapter 3. PyKota's internals</H1
+><P
+>Last modified on $Date: 2005-03-06 17:52:43 +0100 (dim, 06 mar 2005) $</P
+><P
+>    To account for pages or eventually ink usage 
+    <A
+NAME="AEN739"
+HREF="#FTN.AEN739"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>  
+    , you must plug your accounting
+    system somewhere into the printing system you use. One way to do this without having
+    to modify the printing system itself, is by using a <I
+CLASS="FIRSTTERM"
+>filter</I
+>.
+  </P
+><P
+>    A filter is a computer program which takes data in one format as its input, and outputs the
+    same data but transformed into another format. <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+> already
+    contains many filters. For example there's one filter named <B
+CLASS="COMMAND"
+>pstops</B
+> which accepts 
+    PostScript data as its input, and, as its name implies, outputs PostScript data too, but after having
+    eventually rearranged the pages to fit several pages on a single sheet of paper, or other manipulations
+    like that.
+  </P
+><P
+>    The <B
+CLASS="COMMAND"
+>pstops</B
+> filter described above is also in charge of doing basic page
+    accounting, but <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> currently doesn't use this facility since it may
+    prove to be unreliable depending on the drivers used or if a paper jam occurs for example.
+  </P
+><P
+>    So to do its own accounting, <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> has its own filters, for <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+>
+    it's named <B
+CLASS="COMMAND"
+>cupspykota</B
+>, which is in fact a <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+> backends wrapper.
+    The procedure to plug the correct filter into your printing system is described in the 
+    <A
+HREF="c194.html#AEN194"
+><I
+>Installation</I
+></A
+> chapter.
+  </P
+><P
+>    Currently with <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+>' internal accounting mechanism, the <B
+CLASS="COMMAND"
+>pstops</B
+>
+    filter can be bypassed. That's why <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> uses its own backend.
+    The <B
+CLASS="COMMAND"
+>cupspykota</B
+> backend wrapper ensures that jobs can't bypass it, so you can use
+    any printer with any driver and any command line option, and you can be sure that your
+    print job will be correctly accounted for.
+  </P
+><P
+>    When using the <TT
+CLASS="LITERAL"
+>hardware</TT
+> accounting method,
+    <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> launches the script you specified to
+    ask the printer for its internal page counter at the start and at the end of the print job, and
+    computes the values' difference to know the job's size. 
+  </P
+><P
+>    When using the <TT
+CLASS="LITERAL"
+>software</TT
+> accounting method,
+    the command you specified is launched with the job's data on its 
+    standard input. Your command must print the job's size in number of
+    pages on a single line on its standard output. This number is then
+    read by <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> and used to update the current user's quota information.
+  </P
+><P
+>    If a problem occurs, it is logged either to the filter's standard error or to the system logger, depending on
+    your preferences in <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s configuration files. Also if a print quota is reached
+    you may choose if the administrator, the user, both or no-one will receive an email message explaining
+    the situation and proposing a solution. You can even configure another action instead of sending email
+    messages if you want.
+  </P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN739"
+HREF="c735.html#AEN739"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>        PyKota doesn't currently account for ink usage, it only accounts
+        pages. To account for ink usage, you should use PrintBill instead for now.
+      </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x233.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c767.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Manual installation</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Initialize your database with pkturnkey</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,786 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Introduction to PyKota</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="NEXT"
+TITLE="Installation"
+HREF="c194.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c194.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN38"
+></A
+>Chapter 1. Introduction to PyKota</H1
+><P
+>Last modified on $Date: 2006-12-03 12:26:33 +0100 (dim, 03 déc 2006) $</P
+><P
+>    This chapter will briefly introduce you to PyKota, and will familiarize
+    you with this software and its components.
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN42"
+>1.1. What is <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> ?</A
+></H1
+><P
+>      <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> is a print quota and print accounting software solution
+      for GNU/Linux and compatible print servers.
+    </P
+><P
+>      PyKota currently supports the
+      <A
+HREF="http://www.cups.org"
+TARGET="_top"
+><SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+></A
+>
+      <A
+NAME="AEN50"
+HREF="#FTN.AEN50"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+      printing subsystem, although older releases also supported 
+      <A
+HREF="http://lprng.sourceforge.net"
+TARGET="_top"
+><SPAN
+CLASS="APPLICATION"
+>LPRng</SPAN
+></A
+>.
+    </P
+><P
+>      PyKota is distributed under the terms of the GNU General Public License of the
+      <A
+HREF="http://www.fsf.org"
+TARGET="_top"
+>Free Software Foundation</A
+>. This means that
+      you are allowed to use, modify or redistribute its code provided that you respect
+      the terms of this license.
+    </P
+><P
+>      We believe that despite being a bit rough around the edges sometimes, <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+      offers an unmatched flexibility and probably all you want to do with a print quota software is
+      either already included, easily scriptable with a few lines of shell scripting, or planned
+      for the next release.
+    </P
+><P
+>      <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> is however a somewhat complex piece of software, and installing
+      it will mandate that you also install several dependencies beforehand, as you'll see in the
+      next chapter.
+    </P
+><P
+>      <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> is made of the following components :
+      <P
+></P
+><UL
+><LI
+><P
+>            Configuration files, which must be placed into the system user
+            <TT
+CLASS="LITERAL"
+>pykota</TT
+>'s home directory as defined in <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>
+            <A
+NAME="AEN67"
+HREF="#FTN.AEN67"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+> :
+            <P
+></P
+><UL
+><LI
+><P
+>                  <TT
+CLASS="FILENAME"
+>pykotadmin.conf</TT
+> : this file contains sensitive database settings
+                  allowing the <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> software to modify the
+                  print quota database. This file should be protected and should only be
+                  made readable by the administrators of <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+                  and the system user the printing subsystem is running as.
+                  The possibility for a particular user to read this file determines if
+                  this user is a <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> Administrator or not,
+                  so please give particular attention to this file's permissions.
+                </P
+></LI
+><LI
+><P
+>                  <TT
+CLASS="FILENAME"
+>pykota.conf</TT
+> : this is the main configuration file for 
+                  <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>. It contains database settings which
+                  allow the <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> software to access to the print
+                  quota database in readonly mode, as well as global and print queue specific
+                  configuration directives. With a properly configured <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>, 
+                  letting normal users read this file is safe
+                  excepted where you want to forbid users to read other users' print quota
+                  information. However if you're not confident about your database settings,
+                  it's better to not let normal users read this file. This way they can't even
+                  use any of the <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> command line tools.
+                </P
+></LI
+></UL
+>
+          </P
+></LI
+><LI
+><P
+>            Either a <SPAN
+CLASS="APPLICATION"
+>PostgreSQL</SPAN
+>, <SPAN
+CLASS="APPLICATION"
+>MySQL</SPAN
+> or <SPAN
+CLASS="APPLICATION"
+>SQLite</SPAN
+> database, or an <ACRONYM
+CLASS="ACRONYM"
+>LDAP</ACRONYM
+>
+            <A
+NAME="AEN92"
+HREF="#FTN.AEN92"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>
+            <ACRONYM
+CLASS="ACRONYM"
+>DIT</ACRONYM
+>
+            <A
+NAME="AEN95"
+HREF="#FTN.AEN95"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+> :
+            <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> can store its datas into any of these. Support
+            for other database backends might be added in a future release.
+          </P
+></LI
+><LI
+><P
+>            A generic <ACRONYM
+CLASS="ACRONYM"
+>CUPS</ACRONYM
+> backend wrapper, named <B
+CLASS="COMMAND"
+>cupspykota</B
+> :
+            this software captures all print jobs passing through the print queues it manages,
+            and does the accounting and quota checking. It can reject print jobs in a number
+            of circumstances like the user being over quota, and interact with the end user through the use of external
+            commands or shell scripts. This software is written in such a manner than system
+            administrators can plug their own scripts at the most strategic points of the 
+            printing process, through specific directives that you put in <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s
+            configuration files.
+          </P
+></LI
+><LI
+><P
+>            Several command line tools to manage print quotas and accounting. All of these
+            commands accept the <TT
+CLASS="LITERAL"
+>--version</TT
+> and <TT
+CLASS="LITERAL"
+>--help</TT
+>
+            command line switches, and all have a manual page. Many manual pages are available
+            in several native languages and contain usage examples. Some commands have many
+            options and switches, so please read their help carefully.
+            <P
+></P
+><UL
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pksetup</B
+> : to install PyKota in a completely
+                  interactive way, but currently only under Debian and Ubuntu.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkturnkey</B
+> : to help you do the initial
+                  configuration and database initialization. This command almost transforms <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+                  into a turn-key solution, hence the name.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkprinters</B
+> : to manage printers and printers groups.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkusers</B
+> : to manage users and users groups.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>edpykota</B
+> : to manage users' and users groups' print quota entries.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkbcodes</B
+> : to manage billing codes.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>repykota</B
+> : to do some basic print quota reporting.
+                </P
+></LI
+><LI
+><P
+>                   <B
+CLASS="COMMAND"
+>dumpykota</B
+> : to dump the database's contents in a portable
+                   way. This command can be used to export <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s
+                   datas to third party software, like print log analyzers or spreadsheets, and
+                   numerous output formats are supported, like <ACRONYM
+CLASS="ACRONYM"
+>csv</ACRONYM
+> and <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>
+                </P
+></LI
+><LI
+><P
+>                   <B
+CLASS="COMMAND"
+>autopykota</B
+> : to automate the creation of user print accounts on
+                   first print. This command is not meant to be used from the command line, but
+                   instead from <TT
+CLASS="FILENAME"
+>pykota.conf</TT
+>'s <TT
+CLASS="LITERAL"
+>policy</TT
+> directive.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pykosd</B
+> : to display their remaining credits or
+                  pages to end users. This is an <ACRONYM
+CLASS="ACRONYM"
+>OSD</ACRONYM
+> <A
+NAME="AEN145"
+HREF="#FTN.AEN145"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+>
+                  application which works under the X Window system.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pykotme</B
+> : to give detailed quotes to end users before they print, this way
+                  they know in advance how much a print job will cost to them and can decide to route it to
+                  a less costly printer.
+                </P
+></LI
+><LI
+><P
+>                   <B
+CLASS="COMMAND"
+>pkbanner</B
+> : to generate dynamic banner pages when printing.
+                   This command is
+                   not meant to be used from the command line, but
+                   instead from <TT
+CLASS="FILENAME"
+>pykota.conf</TT
+>'s <TT
+CLASS="LITERAL"
+>startingbanner</TT
+> 
+                   and <TT
+CLASS="LITERAL"
+>endingbanner</TT
+> directives. If you prefer you can use
+                   your own generator of dynamic banner pages or even static banner pages.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>warnpykota</B
+> : to warn users over quota from time to time, for example
+                  from <TT
+CLASS="FILENAME"
+>crontab</TT
+>. Users are warned while printing in any case, so
+                  this command is meant to be used as a periodic reminder.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkmail</B
+> : to let users obtain their print quota situation by email.
+                  In the future other functionnalities will be added.
+                  This command is not meant to be used from the command line, but
+                  instead as a pipe from your mail server's <TT
+CLASS="FILENAME"
+>/etc/aliases</TT
+> file.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pknotify</B
+> : a client for the <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+> cross-platform generic network dialog box manager. This
+                  tools allow you to interact with end users at printing time.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkinvoice</B
+> : an invoice generator which can create personalized PDF invoices
+                  for your users from their printing history.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pkrefund</B
+> : a tool with which you can refund print jobs 
+                  when there was an accounting problem. It can generate printable receipts
+                  in the PDF format.
+                </P
+></LI
+></UL
+>
+          </P
+></LI
+><LI
+><P
+>            Several <ACRONYM
+CLASS="ACRONYM"
+>CGI</ACRONYM
+> scripts which constitute <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s web interface.
+            All these scripts behave differently when they are protected with an username and password
+            compared to when they are not. See <TT
+CLASS="FILENAME"
+>pykota/cgi-bin/README</TT
+> for
+            details.
+            <P
+></P
+><UL
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>printquota.cgi</B
+> : to do basic print quota reports like repykota, 
+                  and also to examine the printing history, which is not possible with repykota for now.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>dumpykota.cgi</B
+> : identical to the <B
+CLASS="COMMAND"
+>dumpykota</B
+>
+                  command line tool, but works from within a web browser.
+                </P
+></LI
+><LI
+><P
+>                  <B
+CLASS="COMMAND"
+>pykotme.cgi</B
+> : identical to the <B
+CLASS="COMMAND"
+>pykotme</B
+>
+                  command line tool, but works from within a web browser.
+                </P
+></LI
+></UL
+>
+          </P
+></LI
+><LI
+><P
+>            Several helper scripts and contributed stuff to handle very specific configurations.
+            Please visit the subdirectories of the <TT
+CLASS="FILENAME"
+>pykota/</TT
+> source directory, and
+            you may find interesting things...
+          </P
+></LI
+></UL
+>
+    </P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN50"
+HREF="c38.html#AEN50"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Common UNIX Printing System</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN67"
+HREF="c38.html#AEN67"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>If your <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> contains something like
+                <TT
+CLASS="LITERAL"
+>pykota:x:1001:1001:PyKota Admin,,,:/etc/pykota:/bin/sh</TT
+>
+                then the home directory is <TT
+CLASS="FILENAME"
+>/etc/pykota</TT
+>
+              </P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN92"
+HREF="c38.html#AEN92"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Lightweight Directory Access Protocol</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN95"
+HREF="c38.html#AEN95"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>Directory Information Tree</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN145"
+HREF="c38.html#AEN145"
+><SPAN
+CLASS="footnote"
+>[5]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>On Screen Display</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c194.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>PyKota Documentation</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Installation</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

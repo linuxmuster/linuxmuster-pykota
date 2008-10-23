@@ -1,0 +1,11 @@
+Package: linuxmuster-pkpgcounter
+Version: 3.50.0-3
+Section: python
+Priority: optional
+Architecture: all
+Depends: python (>= 2.4), python (<< 2.5)
+Installed-Size: 316
+Maintainer: Frank Schiebel <schiebel@rheinstrasse.net>
+Description: pkpgcounter package for pykota integration to "Linux Musterloesung"
+ .
+ This package provides modules for python 2.4

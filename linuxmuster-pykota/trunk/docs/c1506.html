@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Interact with end users with pknotify and pykoticon</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Generate banners with pkbanner"
+HREF="c1446.html"><LINK
+REL="NEXT"
+TITLE="Control PyKota by email with pkmail"
+HREF="c1546.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c1446.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c1546.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN1506"
+></A
+>Chapter 18. Interact with end users with pknotify and pykoticon</H1
+><P
+>Last modified on $Date: 2006-04-06 22:17:58 +0200 (jeu, 06 avr 2006) $</P
+><P
+>    Printing under GNU/Linux and UNIX-Like systems usually lack features to dialog with end users.
+    They usually submit their print jobs, and then wait for them to complete, most of the time
+    silently.
+  </P
+><P
+>    Some add-ons to printing systems, like print accounting software, could however benefit
+    a lot from being able to interact with users who submitted print jobs. That's exactly what
+    allow the <B
+CLASS="COMMAND"
+>pknotify</B
+> and <B
+CLASS="COMMAND"
+>pykoticon</B
+> commands, and they
+    do so in a completely generic way.
+  </P
+><P
+>    <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+> is a cross-platform, generic, networked, dialog box manager
+    which sits on client hosts and listen for incoming connections coming from the print servers.
+    This application is in fact a small server which publishes some of its functions over XML-RPC.
+    These functions offer the following possibilities :
+    <P
+></P
+><UL
+><LI
+><P
+>          Display an informational message to the end user ;
+        </P
+></LI
+><LI
+><P
+>          Display a message to the end user and asks for confirmation or cancellation.
+          The result is sent back to the calling program, usually on the print server ;
+        </P
+></LI
+><LI
+><P
+>          Asks the end user to fill a simple form containing a number of labelled fields.
+          The values the user typed in are sent back to the calling program, usually on the print server ;
+        </P
+></LI
+><LI
+><P
+>          Automatically shutdown the <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+> application when asked to
+          do so by an authorized host, usually the print server.
+        </P
+></LI
+></UL
+>
+  </P
+><P
+>    It is important to know that <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+> is completely independant from <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+    and can be used outside of <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>. In reality <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+>
+    knows NOTHING about print accounting, and doesn't need to. That's why it's distributed separately.
+  </P
+><P
+>    <SPAN
+CLASS="APPLICATION"
+>pknotify</SPAN
+> is a client program for <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+>, which is usually
+    launched from directives in <TT
+CLASS="FILENAME"
+>~pykota/pykota.conf</TT
+>, but which can be used directly
+    from the command line as well, if needed.
+  </P
+><P
+>    <SPAN
+CLASS="APPLICATION"
+>pknotify</SPAN
+>, through command line options, can use any of the functions published
+    by <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+>. In addition, if it is configured to tell <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+>
+    to ask the end user for an username and password, it can try to authenticate this user with this password on the print server side.
+    This possibility is extremely useful when you allow anonymous logins on printing clients, but still want
+    print accounting to be done on a per user basis : each time an anonymous user prints, we can ask
+    him remotely to enter his authentication credentials. These credentials are then sent back to the
+    print server (NB : in the clear for now), which uses them to decide if printing is to be denied, or
+    allowed to continue until the next phase of print accounting and optional quota enforcement.
+  </P
+><P
+>    For more details, see <B
+CLASS="COMMAND"
+>pknotify</B
+>'s manual page.
+  </P
+><DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Warning</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>      While <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+> sits on the printing clients, it is in fact
+      a server application. While <SPAN
+CLASS="APPLICATION"
+>pknotify</SPAN
+> is run on the print server,
+      it is in fact a client application to <SPAN
+CLASS="APPLICATION"
+>PyKotIcon</SPAN
+>.
+    </P
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c1446.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c1546.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Generate banners with pkbanner</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Control PyKota by email with pkmail</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

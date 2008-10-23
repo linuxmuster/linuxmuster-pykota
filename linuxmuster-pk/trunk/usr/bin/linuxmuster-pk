@@ -1,0 +1,173 @@
+#!/usr/bin/perl -w
+
+# linuxmuster-pk
+# Wrapper script for pykota tasks
+# Simplifiying tasks for pykota integration
+# to Linux Musterloesung
+# 
+# License: GPLv2
+# Author: Frank Schiebel <schiebel@rheinstrasse.net>
+#
+
+#
+# Globals
+#
+
+use DBI;
+use Sophomorix::SophomorixConfig;
+use Sophomorix::SophomorixBase;
+use Sophomorix::SophomorixPgLdap qw(check_connections get_print_data);
+
+my $setbalance;
+my $opt_h;
+my $opt_initdb;
+my $opt_deletedb;
+my $opt_sync_users;
+
+#
+# Command line options processing
+#
+sub init() 
+{
+	use Getopt::Long;
+	GetOptions( "h"     =>  \$opt_h,
+		    "init-db" => \$opt_initdb,
+		    "delete-db" => \$opt_deletedb,
+		    "sync-users" => \$opt_sync_users
+		    );
+	
+	usage() if $opt_h;
+	usage() if ($opt_initdb && $opt_deletedb);
+	conf_read();
+}
+
+#
+# About message
+#
+
+sub usage()
+{
+	print "Usage...\n";
+	exit;
+}
+
+init();
+
+db_init() if $opt_initdb;
+db_drop() if $opt_deletedb;
+sync_users() if $opt_sync_users;
+
+#
+# conf_read
+# + reads configuration file
+# 
+sub conf_read {
+  do "/etc/linuxmuster/pykota.conf";
+}
+
+
+#
+# sync_users
+# + sync pykota db with ouput of sophomorix-print
+# + adds users with default values
+#
+
+sub sync_users {
+ my @print_data = &get_print_data(); 
+ foreach $line (@print_data) {
+   my @fields = split(";", $line);
+   my $group  = $fields[0]; 
+   my $user  =  $fields[2]; 
+   $setbalance = $balance{"students"};
+   if (defined $balance{"$group"} ) {
+         $setbalance = $balance{"$group"};
+   } 
+
+   my $result = system("$PKUSERS_COMMAND --list $user > /dev/null 2>&1");
+
+   if ( $result ) {
+   	print "$user nicht in pykota-DB. ";
+	system("$PKUSERS_COMMAND --limitby balance --balance $setbalance --add $user");
+	system("$EDPYKOTA_COMMAND --add $user");
+   }
+   }
+  
+}
+
+
+
+#
+# db_init
+# + Init DB pykota on fresh install
+#
+sub db_init {
+   
+   if ( ! -r $PGSQLTEMPLATE ) { print "Cannot read $PGSQLTEMPLATE, exiting!\n"; exit 1; }
+   if ( `su - postgres -c "psql -l | grep pykota" ` ) { print "DB pykota exists, exiting!\n"; exit 1; } 
+   # Template readable, DB doesnt exist: Installing fresh DB 
+   if (`su - postgres -c "psql -f $PGSQLTEMPLATE template1"`) { print "DB pykota sccessfully installed!\n"; }
+
+   exit;
+}
+
+#
+# db_drop
+# + Drop DB pykota
+#
+sub db_drop {
+   if ( ! `su - postgres -c "psql -l | grep pykota" ` ) { print "DB pykota doesnt exist, exiting!\n"; exit 1; } 
+   `su - postgres -c "psql -d template1 -c 'DROP DATABASE pykota;'"`;
+   print "Dropped DB pykota.\n";
+   exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

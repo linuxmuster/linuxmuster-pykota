@@ -1,0 +1,12 @@
+linuxmuster-pkpgcounter (3.50.0-3) unstable; urgency=low
+
+  * Update to support python 2.4 (linuxmuster 4)
+  * Removed .svn files from package
+  
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Wed, 24 Sep 2008 15:49:26 +0100
+
+linuxmuster-pkpgcounter (3.50.0-1) unstable; urgency=low
+
+  * Initial Release 
+  
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Sat, 01 Mar 2008 11:49:26 +0100

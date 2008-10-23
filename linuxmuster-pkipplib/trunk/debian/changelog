@@ -1,0 +1,11 @@
+linuxmuster-pkipplib (0.07.0-3) unstable; urgency=low
+
+  * First version for python2.4 (linuxmusterloseung 4)
+  
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Wed, 24 Sep 2008 14:49:26 +0100
+
+linuxmuster-pkipplib (0.07.0-1) unstable; urgency=low
+
+  * Initial Release 
+  
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Sat, 01 Mar 2008 11:49:26 +0100

@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Control PyKota by email with pkmail</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Interact with end users with pknotify and pykoticon"
+HREF="c1506.html"><LINK
+REL="NEXT"
+TITLE="Usage"
+HREF="x1577.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c1506.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1577.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN1546"
+></A
+>Chapter 19. Control PyKota by email with pkmail</H1
+><P
+>Last modified on $Date: 2005-10-09 22:39:06 +0200 (dim, 09 oct 2005) $</P
+><P
+>    <B
+CLASS="COMMAND"
+>pkmail</B
+> is an email gateway which allows you to control
+    <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> using email messages.
+  </P
+><P
+>    For now, this command can't do more than print quota reports, but more
+    powerful functionnalities are planned for a future release.
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN1553"
+>19.1. Installation</A
+></H1
+><P
+>      Contrary to other commands included with <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>,
+      <B
+CLASS="COMMAND"
+>pkmail</B
+> is not meant to be used from the command line,
+      but instead launched from your mail server when particular messages are
+      received.
+    </P
+><P
+>      In order to achieve this, the easiest way is to define a special
+      email alias. Every message received on this address will cause your webserver to automatically
+      launch <B
+CLASS="COMMAND"
+>pkmail</B
+>, passing the message's content on <B
+CLASS="COMMAND"
+>pkmail</B
+>'s standard input.
+    </P
+><P
+>      The name of the email alias is completely free, let's call it <TT
+CLASS="LITERAL"
+>pykotacmd</TT
+> for example.
+      Now edit <TT
+CLASS="FILENAME"
+>/etc/aliases</TT
+> with your favorite text editor and enter the following :
+<PRE
+CLASS="SCREEN"
+>      
+pykotacmd :     "|/usr/bin/pkmail"</PRE
+>
+    </P
+><P
+>      Finally, tell your mail server that new aliases are available. To do so, at the command prompt just
+      type :
+<PRE
+CLASS="SCREEN"
+>      
+$ newaliases</PRE
+>      
+    </P
+><P
+>      But to be useful, <B
+CLASS="COMMAND"
+>pkmail</B
+> must be able to read <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s
+      <TT
+CLASS="FILENAME"
+>pykotadmin.conf</TT
+> configuration file. A simple way to do so is to put the system
+      user your mail server runs aliases commands as into the <TT
+CLASS="LITERAL"
+>pykota</TT
+> system group, then
+      restart your mail server software.
+      <DIV
+CLASS="TIP"
+><P
+></P
+><TABLE
+CLASS="TIP"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/tip.gif"
+HSPACE="5"
+ALT="Tip"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Tip</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>          Depending on the software you use as the mail server, additional work may be needed. For example
+          <SPAN
+CLASS="APPLICATION"
+>Exim</SPAN
+> doesn't by default initialize all the groups when launching a
+          command from the <TT
+CLASS="FILENAME"
+>/etc/aliases</TT
+> database. Please refer to your mail server's
+          documentation for details.
+        </P
+></TD
+></TR
+></TABLE
+></DIV
+>  
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c1506.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1577.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Interact with end users with pknotify and pykoticon</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Usage</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

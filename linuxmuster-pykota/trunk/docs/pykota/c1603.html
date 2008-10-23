@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Useful Shell Scripts</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Reference"
+HREF="x1592.html"><LINK
+REL="NEXT"
+TITLE="papwaitprinter.sh"
+HREF="x1626.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1592.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1626.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN1603"
+></A
+>Chapter 20. Useful Shell Scripts</H1
+><P
+>Last modified on $Date: 2005-10-09 22:39:06 +0200 (dim, 09 oct 2005) $</P
+><P
+>    <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> comes with a number of shell scripts which
+    help do complex things. They can be used as-is, but you may prefer to adapt
+    them to your own configuration. All are installed in the <TT
+CLASS="FILENAME"
+>/usr/share/pykota</TT
+>
+    directory.
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN1609"
+>20.1. waitprinter.sh</A
+></H1
+><P
+>      This script which accepts a printer's hostname or <ACRONYM
+CLASS="ACRONYM"
+>IP</ACRONYM
+> address as its first parameter 
+      is used to wait for a printer which supports the <ACRONYM
+CLASS="ACRONYM"
+>SNMP</ACRONYM
+> protocol to be in <TT
+CLASS="LITERAL"
+>idle</TT
+> state.
+      It exits as soon as the printer is <TT
+CLASS="LITERAL"
+>idle</TT
+>, else loops forever.
+    </P
+><P
+>      When defining an hardware <TT
+CLASS="LITERAL"
+>accounter</TT
+> for a printer, it is important to wait for the printer being
+      <TT
+CLASS="LITERAL"
+>idle</TT
+> before asking it for its internal page counter, otherwise results could
+      be inaccurate. If the printer is asked while the job is still being printed, then the page counter's
+      value will be lower than expected with regard to the real job's size.
+    </P
+><P
+>      <B
+CLASS="COMMAND"
+>waitprinter.sh</B
+> can be used to be sure that <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+      waits until no job is being printed, and no paper sheet is travelling inside the printer. 
+    </P
+><DIV
+CLASS="TIP"
+><P
+></P
+><TABLE
+CLASS="TIP"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/tip.gif"
+HSPACE="5"
+ALT="Tip"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Tip</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>        See the sample configuration file <TT
+CLASS="FILENAME"
+>conf/pykota.conf.sample</TT
+> for examples.
+      </P
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1592.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1626.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Reference</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>papwaitprinter.sh</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

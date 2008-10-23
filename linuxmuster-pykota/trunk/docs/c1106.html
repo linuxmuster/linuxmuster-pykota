@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Get print quotes before printing for real with pykotme</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Web based Print Quota reports"
+HREF="x1061.html"><LINK
+REL="NEXT"
+TITLE="Reference"
+HREF="x1137.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1061.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1137.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN1106"
+></A
+>Chapter 9. Get print quotes before printing for real with <B
+CLASS="COMMAND"
+>pykotme</B
+></H1
+><P
+>Last modified on $Date: 2006-06-01 15:56:00 +0200 (jeu, 01 jun 2006) $</P
+><P
+>    PyKota features a print quote generator, named <B
+CLASS="COMMAND"
+>pykotme</B
+>.
+    This command line tool can be used to learn in advance how much a print job
+    will cost to you if you really send it to a printer.
+    You can then decide if printing your document is a good idea or not, and do it
+    knowingly.
+  </P
+><P
+>    To get a print quote, you have to launch <B
+CLASS="COMMAND"
+>pykotme</B
+>
+    from the command line, passing your print job's content in any format
+    recognized by PyKota 
+    <A
+NAME="AEN1114"
+HREF="#FTN.AEN1114"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>, either in the form of one or more file names on the command line,
+    or on its standard input (i.e. in a shell pipe or redirection).
+  </P
+><P
+>    Without any command line argument, <B
+CLASS="COMMAND"
+>pykotme</B
+>
+    automatically reads your job's data from its standard input.
+  </P
+><P
+>    By default, <B
+CLASS="COMMAND"
+>pykotme</B
+>
+    will display a quote for your job on all printers. You can restrict
+    this by using the <TT
+CLASS="LITERAL"
+>-p | --printer</TT
+> command line
+    option followed with either a printer's name or a wildcard
+    which will be used to search all printers which name matches.
+    You can pass more than one printer name wildcard, separating
+    them with commas.
+  </P
+><P
+>    <B
+CLASS="COMMAND"
+>pykotme</B
+>'s functionnality is also available through the
+    use of the <B
+CLASS="COMMAND"
+>pykotme.cgi</B
+> <ACRONYM
+CLASS="ACRONYM"
+>CGI</ACRONYM
+> script.
+    However without authentication <B
+CLASS="COMMAND"
+>pykotme.cgi</B
+> will only
+    return the print job's size and not its cost, because the cost depends on
+    the value of the user's overcharging factor and the printer being used. 
+    That's why if you want to 
+    obtain the same functionnality with the <ACRONYM
+CLASS="ACRONYM"
+>CGI</ACRONYM
+> script than 
+    with the command line tool, you must configure your web server to force
+    users to authenticate whevenver they access to <B
+CLASS="COMMAND"
+>pykotme.cgi</B
+>.
+    Then they will be able to choose one or more printers (all by default), 
+    and also to enter their username,
+    and the exact cost of the print job will be computed.
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN1129"
+>9.1. Examples</A
+></H1
+><P
+>      Here are some examples of <B
+CLASS="COMMAND"
+>pykotme</B
+> usage.
+    </P
+><P
+>      The simplest form :
+<PRE
+CLASS="SCREEN"
+>    
+port50-2:~$ pykotme pykota.ps
+Your account balance : 16.25
+Job size : 22 pages
+Cost on printer apple : 1.35
+port50-2:~$ </PRE
+>    
+    </P
+><P
+>      More complex, with printer name wildcard and within a pipe :
+<PRE
+CLASS="SCREEN"
+>      
+port50-2:~$ a2ps -o - pykota/README | pykotme --printer "a*"
+[pykota/README (plain): 6 pages on 3 sheets]
+[Total: 6 pages on 3 sheets] sent to the standard output
+Your account balance : 16.25
+Job size : 3 pages
+Cost on printer apple : 0.40
+port50-2:~$ </PRE
+>
+    </P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1114"
+HREF="c1106.html#AEN1114"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>PyKota now uses <A
+HREF="http://www.pykota.com/software/pkpgcounter"
+TARGET="_top"
+>pkpgcounter</A
+>
+    which recognizes PostScript (both binary and DSC compliant),
+    PCLXL (aka PCL6), PDF, PCL3/4/5, ESC/P2, TIFF, DVI, OpenOffice Writer, and OpenOffice Impress.
+    </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1061.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1137.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Web based Print Quota reports</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Reference</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Manage printers with pkprinters</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Initialize your database with pkturnkey"
+HREF="c767.html"><LINK
+REL="NEXT"
+TITLE="Manage Users and Groups with pkusers"
+HREF="c928.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c767.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c928.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN836"
+></A
+>Chapter 5. Manage printers with pkprinters</H1
+><P
+>Last modified on $Date: 2005-10-09 22:39:06 +0200 (dim, 09 oct 2005) $</P
+><P
+>    <B
+CLASS="COMMAND"
+>pkprinters</B
+> is the preferred tool to manage printers in <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>.  
+    It only manages printers, and do it well. With it you can add or delete printers or printer groups, or modify
+    existing printers or printers groups. This is also the tool to use to put printers into one or more printers groups.
+  </P
+><P
+>    The very first thing you have to do once <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> is installed but before it can work, 
+    is to add into <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s database an entry for each of the print queues on
+    which you want to have print quota or accounting.
+    Although the <B
+CLASS="COMMAND"
+>pkturnkey</B
+> command can be used to initialize your database and import
+    printers into it, the <B
+CLASS="COMMAND"
+>pkprinters</B
+> command offers additionnal functionnalities
+    like full management of printers.
+  </P
+><P
+>    Let's say your printing system has several print queues defined : <TT
+CLASS="LITERAL"
+>HP2100</TT
+>, <TT
+CLASS="LITERAL"
+>TekTro</TT
+>,
+    and <TT
+CLASS="LITERAL"
+>StylusColor1</TT
+> and <TT
+CLASS="LITERAL"
+>StylusColor2</TT
+>. You want to charge 5 cents per page on each of this print queues.
+    You just have to type :
+<PRE
+CLASS="SCREEN"
+>    
+$ pkprinters --add --charge 0.05 HP2100 TekTro StylusColor1 StylusColor2</PRE
+>
+    <DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Warning</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>Printers' names in PyKota are case-sensitive, so be careful to use the exact names
+            exposed by your printing system.
+      </P
+></TD
+></TR
+></TABLE
+></DIV
+>
+  </P
+><P
+>    After some minutes, you think that you should charge more on the <TT
+CLASS="LITERAL"
+>StylusColor1</TT
+> 
+    and <TT
+CLASS="LITERAL"
+>StylusColor2</TT
+> because they can do color. 
+    You also want to enter a description for these printers, because you have several
+    of them :
+<PRE
+CLASS="SCREEN"
+>    
+$ pkprinters --charge 0.25 "StylusColor*"
+$ pkprinters --description "Stylus Color 900 First floor" StylusColor1
+$ pkprinters --description "Stylus Color 900 Second floor" StylusColor2</PRE
+>
+  </P
+><P
+>    You can now verify what you did :
+<PRE
+CLASS="SCREEN"
+>    
+$ pkprinters --list
+HP2100 [] (0.0 + #*0.05)
+TekTro [] (0.0 + #*0.05)
+StylusColor1 [Stylus Color 900 First floor] (0.0 + #*0.25)
+StylusColor2 [Stylus Color 900 Second floor] (0.0 + #*0.25)</PRE
+>
+  </P
+><P
+>    The command above has listed all print queues present in <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s database,
+    along with their optional description and their base cost formula. 
+    The cost formula includes the price per job, <TT
+CLASS="LITERAL"
+>0.0</TT
+> in our examples,
+    and the price per page (<TT
+CLASS="LITERAL"
+>#</TT
+> representing the number of pages).
+  </P
+><P
+>    If you defined printers groups, then the total cost is computed as the recursive
+    sum of the printing cost on the current printer plus all the printers groups it
+    is a member of. In addition, each user can have an overcharging (or undercharging)
+    factor, by which the total printing cost will be multiplied to determine the real
+    cost of printing on a particular printer for a particular user.
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN867"
+>5.1. Reference</A
+></H1
+><P
+>      <P
+><B
+CLASS="COMMAND"
+>pkprinters</B
+>  [-v | --version] [-h | --help] [-a | --add] [-d | --delete] [-D <TT
+CLASS="REPLACEABLE"
+><I
+>desc</I
+></TT
+> | --description <TT
+CLASS="REPLACEABLE"
+><I
+>desc</I
+></TT
+>] [-r | --remove] [-c <TT
+CLASS="REPLACEABLE"
+><I
+>p</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>j</I
+></TT
+> | --charge <TT
+CLASS="REPLACEABLE"
+><I
+>p</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>j</I
+></TT
+>] [-g <TT
+CLASS="REPLACEABLE"
+><I
+>pgroup1</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>pgroup2</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>...</I
+></TT
+> | --groups <TT
+CLASS="REPLACEABLE"
+><I
+>pgroup1</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>pgroup2</I
+></TT
+>,<TT
+CLASS="REPLACEABLE"
+><I
+>...</I
+></TT
+>] [-l | --list] [-r | --remove] [-s | --skipexisting] [-m <TT
+CLASS="REPLACEABLE"
+><I
+>s</I
+></TT
+> | --maxjobsize <TT
+CLASS="REPLACEABLE"
+><I
+>s</I
+></TT
+>] [-p | --passthrough] [-n | --nopassthrough]</P
+>
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c767.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c928.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Initialize your database with pkturnkey</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Manage Users and Groups with pkusers</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

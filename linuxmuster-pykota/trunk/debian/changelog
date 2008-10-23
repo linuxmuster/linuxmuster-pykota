@@ -1,0 +1,18 @@
+linuxmuster-pykota (1.26-4) unstable; urgency=low
+  
+  * Removed .svn from deb-Package
+  
+ -- Frank Schiebel <schiebel@rheinstrasse.net>  Wed, 24 Sep 2008 13:30:45 +0200
+
+linuxmuster-pykota (1.26-3) unstable; urgency=low
+  
+  * First testing version
+  
+ -- Frank Schiebel <schiebel@rheinstrasse.net>  Sun, 02 Mar 2008 18:30:45 +0200
+
+linuxmuster-pykota (1.26-2) unstable; urgency=low
+  
+  * Initial linuxmuster deb.
+
+ -- Frank Schiebel <schiebel@rheinstrasse.net>  Sat, 01 Mar 2008 21:30:45 +0200
+

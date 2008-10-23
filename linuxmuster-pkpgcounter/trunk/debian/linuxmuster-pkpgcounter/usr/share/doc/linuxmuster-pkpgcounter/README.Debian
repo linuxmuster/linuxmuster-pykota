@@ -1,0 +1,33 @@
+jabber.py for Debian
+------------------------
+
+A patch has been applied:
+ - Typo fixing patch, from David in jabber-devel ML.
+	on 20/06/2003
+
+
+Not yet used patches:
+
+Some patches had been applied to fix some problem in the old jabber.py
+version (prior to 0.4.0):
+ - SSL patch, according to Ross Karchner notes in jabberpy-devel ML.
+ 	on 05/29/2002
+ - xmlstream.Stream._parser stacking problem, kludged by me
+ - jabber.Iq.setQueryNode fix: 2nd arg have to exist
+ 	on 05/16/2002 by Erik Westra
+ - jabber.Client.auth() as Erik Westra advised in jabberpy-devel ML
+ 	on 05/16/2002
+
+Any patch applied can be found in /usr/share/doc/pythonX.Y-jabber/patches/
+
+Since upstream maintainer is quite slow, I've to patch myself bugged
+code. If something that yesterday worked now does not work anymore:
+- see Changelog.Debian and reverse patch I've applied, rebuild package
+  yourself so that you can have working modules.
+- try to undestand what is not working and why
+- write a small program that show the behaviour with and without the
+  patch
+- file a bug against python-jabber on BTS (see reportbug or bug
+  packages)
+
+ -- Cosimo Alfarano <kalfa@debian.org>, Thu, 30 May 2002 11:49:26 +0200

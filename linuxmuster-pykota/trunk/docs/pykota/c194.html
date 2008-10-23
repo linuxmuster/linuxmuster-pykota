@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Installation</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction to PyKota"
+HREF="c38.html"><LINK
+REL="NEXT"
+TITLE="Manual installation"
+HREF="x233.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c38.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x233.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN194"
+></A
+>Chapter 2. Installation</H1
+><P
+>Last modified on $Date: 2007-07-09 21:53:04 +0200 (lun, 09 jui 2007) $</P
+><P
+>    Before being able to use <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>, you have of course to
+    install it first. But before installing, you must carefully plan your installation.
+  </P
+><P
+>    First you have to determine which machine will be the <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+    database server. The database server is the host responsible
+    for keeping a centralized database of print usage for all your printers, users and groups.
+  </P
+><P
+>    Then you have to list all the <I
+CLASS="FIRSTTERM"
+>Print Servers</I
+> for which
+    you plan to use print quota facilities.
+  </P
+><P
+>    With most database backends, several print servers can share a single database, however
+    as we'll see later this is not possible if you choose to use <SPAN
+CLASS="APPLICATION"
+>SQLite</SPAN
+>
+    as your print quota database backend.
+  </P
+><P
+>    Finally you have to download <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s latest version
+    or buy an official package, from 
+    <A
+HREF="http://www.pykota.com/software/pykota"
+TARGET="_top"
+>http://www.pykota.com/software/pykota</A
+>.
+    If you've just bought an official package, then as soon as you've receive it you
+    have to decompress and visit its archive, to do so just type the following commands :
+    <PRE
+CLASS="SCREEN"
+>jerome@nordine:~$ tar -zxf pykota-1.26_official.tar.gz    
+jerome@nordine:~$ cd pykota-1.26_official
+jerome@nordine:~/pykota-1.26_official$
+    </PRE
+>
+  </P
+><P
+>    You can see many files in this directory, the first ones to read are <TT
+CLASS="FILENAME"
+>README</TT
+>,
+    then <TT
+CLASS="FILENAME"
+>COPYING</TT
+> and <TT
+CLASS="FILENAME"
+>LICENSE</TT
+>. They will give you
+    basic installation instructions and explain the licensing terms under which 
+    <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> is distributed. Of course they are also mostly
+    boring to read ! Detailed installation and operating instructions are defined
+    in the <TT
+CLASS="FILENAME"
+>./docs</TT
+> directory, in the form of <ACRONYM
+CLASS="ACRONYM"
+>SGML</ACRONYM
+>
+    documentation in the <A
+HREF="http://www.docbook.org"
+TARGET="_top"
+>DocBook</A
+> format.
+    You have to compile these files into readable documentation like the <ACRONYM
+CLASS="ACRONYM"
+>HTML</ACRONYM
+>
+    or <ACRONYM
+CLASS="ACRONYM"
+>PDF</ACRONYM
+> formats, or buy an official <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> package
+    which already contains these compiled forms of the documentation. Of course you already
+    know this because that's what you are currently reading !
+  </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN220"
+>2.1. Interactive step-by-step installation of PyKota with pksetup</A
+></H1
+><P
+>      <B
+CLASS="COMMAND"
+>pksetup</B
+> is a command line tool with which you'll be able
+      to install <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> and all its dependencies in
+      a completely interactive way. At the end of the installation, a shell
+      script is created which allows you to replicate the very same
+      installation in an automated way. This can be useful if you've got
+      several servers to install identically.
+    </P
+><P
+>      Currently, <B
+CLASS="COMMAND"
+>pksetup</B
+> is experimental, and only works
+      with <A
+HREF="http://www.debian.org"
+TARGET="_top"
+>Debian</A
+> and 
+      <A
+HREF="http://www.ubuntu.com"
+TARGET="_top"
+>Ubuntu</A
+> distributions.
+      In addition, the database backend which will be installed with
+      this command is <A
+HREF="http://www.postgresql.org"
+TARGET="_top"
+>PostgreSQL</A
+>
+      and you have no choice for another backend. If you want another
+      database backend, or use a different distribution, or want to do
+      the installation manually, then read and follow the instructions in the next section.
+    </P
+><P
+>      To launch the installation procedure, just type <TT
+CLASS="LITERAL"
+>pksetup</TT
+>
+      followed with the name of your distribution, like :
+    <PRE
+CLASS="SCREEN"
+>    
+jerome@nordine:~/pykota-1.26_official$ ./bin/pksetup debian
+    </PRE
+>  
+      and then follow the instructions and answer to the several questions you'll
+      be asked.
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c38.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x233.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction to PyKota</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Manual installation</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

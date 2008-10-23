@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Export datas to other software with dumpykota</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Warn users above print quota with warnpykota"
+HREF="c1162.html"><LINK
+REL="NEXT"
+TITLE="Manage billing codes with pkbcodes"
+HREF="c1303.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c1162.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c1303.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN1211"
+></A
+>Chapter 11. Export datas to other software with dumpykota</H1
+><P
+>Last modified on $Date: 2005-10-09 22:39:06 +0200 (dim, 09 oct 2005) $</P
+><P
+>    If you want to reuse <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> datas from another
+    software, but don't want to modify your existing application to
+    have it connect to <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>'s database, your
+    best option is the new <B
+CLASS="COMMAND"
+>dumpykota</B
+> command.
+  </P
+><P
+>    <B
+CLASS="COMMAND"
+>dumpykota</B
+> can export <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+    datas in a number of formats. The supported output formats are
+    comma separated values, semicolon separated values, tab separated values, and <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>.
+  </P
+><P
+>    For the print job history's datas, a special format identical to <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+>' <TT
+CLASS="LITERAL"
+>page_log</TT
+>
+    format is also supported.
+    This allows you to interface <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> with third party tools like
+    <SPAN
+CLASS="APPLICATION"
+>phpPrintAnalyzer</SPAN
+> which is a logfile analyzer for <SPAN
+CLASS="APPLICATION"
+>CUPS</SPAN
+>.
+  </P
+><P
+>    More formats may be added in the future. In particular, 
+    <ACRONYM
+CLASS="ACRONYM"
+>SQL</ACRONYM
+> and <ACRONYM
+CLASS="ACRONYM"
+>LDIF</ACRONYM
+> are planned, but 
+    are currently not implemented. 
+  </P
+><P
+>    <B
+CLASS="COMMAND"
+>dumpykota</B
+> can't dump all datas at once though, you have
+    to specify which type of datas you want. The possible types are :
+    <P
+></P
+><UL
+><LI
+><P
+>Users</P
+></LI
+><LI
+><P
+>Users groups</P
+></LI
+><LI
+><P
+>Printers</P
+></LI
+><LI
+><P
+>Printers groups membership</P
+></LI
+><LI
+><P
+>Users groups membership</P
+></LI
+><LI
+><P
+>Users print quota entries</P
+></LI
+><LI
+><P
+>Users groups print quota entries</P
+></LI
+><LI
+><P
+>History of payments</P
+></LI
+><LI
+><P
+>History of print jobs</P
+></LI
+></UL
+>  
+  </P
+><P
+>    You can then import the dumped datas into a spreadsheet for example, 
+    if you want to create complex reports with nice looking graphs and
+    the like.
+  </P
+><P
+>    An important feature of this command is the possibility to use
+    a simple but powerful filtering mechanism to only export the datas
+    you want. You can pass any number of filter expressions which will
+    be ANDed together to select only certain records in the database.
+    For example the filter expression <TT
+CLASS="LITERAL"
+>username=jerome</TT
+>
+    would only dump datas pertaining to user <TT
+CLASS="LITERAL"
+>jerome</TT
+>
+    while the filter expression <TT
+CLASS="LITERAL"
+>start=2005</TT
+> used
+    when dumping the history would only dump jobs printed during
+    the year <TT
+CLASS="LITERAL"
+>2005</TT
+>.
+  </P
+><P
+>    Several keys like <TT
+CLASS="LITERAL"
+>username</TT
+> are possible, but some
+    only apply to certain data types. Using a key which is not supported
+    for a particular data type may return an incorrect result.
+    <DIV
+CLASS="TIP"
+><P
+></P
+><TABLE
+CLASS="TIP"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/tip.gif"
+HSPACE="5"
+ALT="Tip"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Tip</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>        Please refer to dumpykota's help or manual page to obtain
+        the complete list of supported keys.
+      </P
+></TD
+></TR
+></TABLE
+></DIV
+>  
+  </P
+><P
+>    This command could also be used if you plan to write your own management
+    tools : just write wrappers around the <B
+CLASS="COMMAND"
+>pkprinters</B
+>,
+    <B
+CLASS="COMMAND"
+>edpykota</B
+>, and <B
+CLASS="COMMAND"
+>dumpykota</B
+>
+    tools, and your own tools will automatically benefit from <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>
+    database backend independance layer.
+    This is exactly what the third party software <SPAN
+CLASS="APPLICATION"
+>phpPykotaAdmin</SPAN
+> does.
+  </P
+><P
+>    Finally, <B
+CLASS="COMMAND"
+>dumpykota</B
+>'s functionnality is now also available remotely through
+    the use of the <B
+CLASS="COMMAND"
+>dumpykota.cgi</B
+> <ACRONYM
+CLASS="ACRONYM"
+>CGI</ACRONYM
+> script.
+  </P
+><DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/warning.gif"
+HSPACE="5"
+ALT="Warning"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Warning</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>      Only <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+> administrators can dump PyKota's datas.
+    </P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN1277"
+>11.1. Reference</A
+></H1
+><P
+>      <P
+><B
+CLASS="COMMAND"
+>dumpykota</B
+>  [-v | --version] [-h | --help] [-f <TT
+CLASS="REPLACEABLE"
+><I
+>outputformat</I
+></TT
+> | --format <TT
+CLASS="REPLACEABLE"
+><I
+>outputformat</I
+></TT
+>] [-o <TT
+CLASS="REPLACEABLE"
+><I
+>filename</I
+></TT
+> | --output <TT
+CLASS="REPLACEABLE"
+><I
+>filename</I
+></TT
+>] {-d <TT
+CLASS="REPLACEABLE"
+><I
+>datatype</I
+></TT
+> | --data <TT
+CLASS="REPLACEABLE"
+><I
+>datatype</I
+></TT
+>}</P
+>
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c1162.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c1303.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Warn users above print quota with warnpykota</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Manage billing codes with pkbcodes</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

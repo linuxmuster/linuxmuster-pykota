@@ -1,0 +1,103 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=4
+
+# python version for which a pkg will be build
+export PYVERSIONS=python2.4
+
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -g
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# Add here commands to configure the package.
+	touch configure-stamp
+
+
+build: build-stamp
+
+build-stamp: configure-stamp 
+	dh_testdir
+
+	# Add here commands to compile the package.
+	python $(CURDIR)/setup.py build
+	#python2.1 $(CURDIR)/setup.py build
+	#python2.2 $(CURDIR)/setup.py build --build-purelib $(CURDIR)/debian/tmp
+	
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	find $(CURDIR) -name \*.pyc -exec rm -f {} \;
+	find $(CURDIR) -name \*.pyo -exec rm -f {} \;
+	rm -f build-stamp configure-stamp
+
+	# Add here commands to clean up after the build process.
+	python $(CURDIR)/setup.py clean
+	#python2.1 $(CURDIR)/setup.py clean
+	#python2.2 $(CURDIR)/setup.py clean
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs -v
+
+	# Add here commands to install the package into debian/linuxmuster-pkipplib.
+	#python $(CURDIR)/setup.py install \
+	#	--no-compile --prefix $(CURDIR)/debian/python2.3-pkipplib/usr/
+	python $(CURDIR)/setup.py install \
+		--no-compile --prefix $(CURDIR)/debian/linuxmuster-pkipplib/usr/
+	#python2.1 $(CURDIR)/setup.py install \
+	#	--no-compile --prefix $(CURDIR)/debian/python2.1-jabber/usr/
+	#python2.2 $(CURDIR)/setup.py install \
+	#	--no-compile --prefix $(CURDIR)/debian/python2.2-jabber/usr/
+	#rm -rf $(CURDIR)/build/
+
+#	install -m 0644 $(CURDIR)/pkipplib/*.py \
+#		$(CURDIR)/debian/python2.1-pkipplib/usr/lib/python2.1/site-packages
+#	install -m 0644 $(CURDIR)/pkipplib/*.py \
+#		$(CURDIR)/debian/python2.2-pkipplib/usr/lib/python2.2/site-packages
+
+#	install -m 0644 $(CURDIR)/pkipplib/*.py \
+#		$(CURDIR)/debian/python2.3-pkipplib/usr/lib/python2.3/site-packages
+	install -m 0644 $(CURDIR)/pkipplib/*.py \
+		$(CURDIR)/debian/linuxmuster-pkipplib/usr/lib/python2.4/site-packages/pkipplib/
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+	dh_testdir -i
+	dh_testroot -i
+	
+	dh_installdocs -i
+	dh_installexamples -i
+	dh_installchangelogs  -i
+	dh_link -i 
+	dh_compress -i
+	dh_fixperms -i
+#	dh_makeshlibs -i
+	dh_installdeb -i
+	dh_shlibdeps -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+# Build architecture-dependent files here.
+binary-arch: build install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

@@ -1,0 +1,15 @@
+Source: linuxmuster-pk
+Section: debian-linuxmuster
+Priority: optional
+Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.0
+
+Package: linuxmuster-pk
+Section: unknown
+Priority: optional
+Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
+Architecture: i386
+Depends: linuxmuster-pykota
+Description: This package provides some wrapper tools for pykota  
+

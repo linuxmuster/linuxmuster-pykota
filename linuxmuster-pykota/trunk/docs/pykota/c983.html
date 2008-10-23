@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Manage Print Quotas with edpykota</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Manage Users and Groups with pkusers"
+HREF="c928.html"><LINK
+REL="NEXT"
+TITLE="Create print quota usage reports with repykota"
+HREF="c1009.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c928.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c1009.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="AEN983"
+></A
+>Chapter 7. Manage Print Quotas with edpykota</H1
+><P
+>Last modified on $Date: 2006-04-05 21:17:51 +0200 (mer, 05 avr 2006) $</P
+><P
+>    You'll use this tool to create, manage or delete print quota entries for users
+    or users groups on printers or printers groups.
+  </P
+><P
+>    By default, before being allowed to print through <SPAN
+CLASS="APPLICATION"
+>PyKota</SPAN
+>,
+    an user must exist in the database and have a print quota entry on every printer
+    he should be allowed to use. As seen in the previous chapter, the simplest way to add an user named <TT
+CLASS="LITERAL"
+>jerome</TT
+> to the database is
+    to type :
+<PRE
+CLASS="SCREEN"
+>    
+$ pkusers --add jerome</PRE
+>
+
+    But this is not sufficient to allow user <TT
+CLASS="LITERAL"
+>jerome</TT
+> to print. You have to create a print quota entry for <TT
+CLASS="LITERAL"
+>jerome</TT
+> on all printers
+    he is allowed to print to. The easiest way to do so is to type :
+<PRE
+CLASS="SCREEN"
+>    
+$ edpykota --add jerome</PRE
+>
+  </P
+><P
+>    The commands above have created user <TT
+CLASS="LITERAL"
+>jerome</TT
+> in the database, and have automatically
+    created print quota entries with no limit for this user on all existing printers. This means
+    that user <TT
+CLASS="LITERAL"
+>jerome</TT
+> is allowed to print without limitation, but that full accounting
+    will still be done for this user : you'll know whenever he prints and how much.
+  </P
+><P
+>    Here's an incomplete list of features :
+    
+    <P
+></P
+><UL
+><LI
+><P
+>          Add and delete users and groups print quota entries ;
+        </P
+></LI
+><LI
+><P
+>          Define, increase or decrease hard and soft page limits for users ou users groups, on a per printer basis ;
+        </P
+></LI
+><LI
+><P
+>          Reset or modify page counters for users or groups, on a per printer basis ;
+        </P
+></LI
+><LI
+><P
+>          List print quota entries ;
+        </P
+></LI
+></UL
+>
+  </P
+><P
+>    For more details on the use of <B
+CLASS="COMMAND"
+>edpykota</B
+>, please see this command's manual
+    page or help.
+  </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c928.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c1009.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Manage Users and Groups with pkusers</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Create print quota usage reports with repykota</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

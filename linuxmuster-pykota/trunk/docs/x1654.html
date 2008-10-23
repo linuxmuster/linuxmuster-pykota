@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>pagecount.pl</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REL="HOME"
+TITLE="PyKota Documentation"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Useful Shell Scripts"
+HREF="c1603.html"><LINK
+REL="PREVIOUS"
+TITLE="mailandpopup.sh"
+HREF="x1642.html"><LINK
+REL="NEXT"
+TITLE="GNU General Public License"
+HREF="a1671.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>PyKota Documentation: A full featured Print Quota Solution for CUPS</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1642.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 20. Useful Shell Scripts</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="a1671.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="AEN1654"
+>20.4. pagecount.pl</A
+></H1
+><P
+>      This <SPAN
+CLASS="APPLICATION"
+>Perl</SPAN
+> script can be used in the <TT
+CLASS="LITERAL"
+>accounter</TT
+> directive of <TT
+CLASS="FILENAME"
+>pykota.conf</TT
+>,
+      to ask a printer for its internal page counter by sending a specially crafted <ACRONYM
+CLASS="ACRONYM"
+>PJL</ACRONYM
+> job
+      to it over the AppSocket protocol, usually on <ACRONYM
+CLASS="ACRONYM"
+>TCP</ACRONYM
+> port 9100.
+      It accepts the printer's hostname or <ACRONYM
+CLASS="ACRONYM"
+>IP</ACRONYM
+> address as its first parameter,
+      and the optional <ACRONYM
+CLASS="ACRONYM"
+>TCP</ACRONYM
+> port as its second parameter (it defaults to 9100).
+    </P
+><P
+>      Most of the time you'll use this script in combination with a script which waits for the printer
+      to be in <TT
+CLASS="LITERAL"
+>idle</TT
+> state, in something like :
+<PRE
+CLASS="SCREEN"
+>      
+accounter: hardware(somewaitscript.sh &#38;&#38; pagecount.pl %(printer)s)</PRE
+>
+    </P
+><DIV
+CLASS="TIP"
+><P
+></P
+><TABLE
+CLASS="TIP"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="../images/tip.gif"
+HSPACE="5"
+ALT="Tip"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+><B
+>Tip</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>        See the sample configuration file <TT
+CLASS="FILENAME"
+>conf/pykota.conf.sample</TT
+> for examples.
+      </P
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1642.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="a1671.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>mailandpopup.sh</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1603.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>GNU General Public License</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

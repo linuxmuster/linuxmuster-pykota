@@ -1,0 +1,12 @@
+linuxmuster-pk (0.1.1-0) unstable; urgency=low
+   
+   * added sync-users
+   
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Tue, 7 Oct 2008 19:50:00 +0100
+
+linuxmuster-pk (0.1.0-0) unstable; urgency=low
+   
+   * initial package
+   
+ -- Frank Schiebel <schiebel@aeg-reutlingen.de>  Sun, 2 Mar 2008 19:50:00 +0100
+
