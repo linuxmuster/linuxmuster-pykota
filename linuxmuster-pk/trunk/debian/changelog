@@ -1,3 +1,11 @@
+linuxmuster-pk (0.2.0-3) unstable; urgency=low
+
+   * Fixed position of pg_hba.conf modification in order to provide 
+     a more flexible handling (old Version depended on moodle entrys that came
+     with a recent linuxmuster-base)
+
+ -- Frank Schiebel <frank@linuxmuster.net>  Tue, 18 Nov 2008 16:32:31 +0100
+
 linuxmuster-pk (0.2.0-2) unstable; urgency=low
 
    * Fixed logical error concerning default quota in linuxmuster-pk

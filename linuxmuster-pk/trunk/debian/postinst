@@ -38,7 +38,7 @@ su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
 
 # modifying pg_hba.conf if necessary
 sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
-sed -i "s/\(host\s*moodle\s*moodle\s*127\.0\.0\.1\s*255.255.255.255\s*password\)/\1\n${PGHBAINSERT}/" $PGHBACONF 
+sed -i "s/\(#\s*reject\s*all\s*other\s*connection\s*attempts\)/${PGHBAINSERT}\n\1/" $PGHBACONF 
 
 # Getting config from template
 cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
