@@ -16,6 +16,7 @@ host   pykota           pykotaadmin  127.0.0.1      255.255.255.255      passwor
 host   pykota           all          127.0.0.1      255.255.255.255      reject\n\
 # linuxmuster-pykota-end"
 RESTARTPGSQL="/etc/init.d/postgresql-8.1 restart"
+RESTARTCUPS="/etc/init.d/cupsys restart"
 
 # If pykota db doesnt exist in psql, create db from template
 # template readable?
@@ -39,6 +40,9 @@ su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
 sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
 sed -i "s/\(host\s*moodle\s*moodle\s*127\.0\.0\.1\s*255.255.255.255\s*password\)/\1\n${PGHBAINSERT}/" $PGHBACONF 
 
+# Getting config from template
+cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
+
 # Setting passwords in config and DB
 echo "(Re)setting pykota passwords in config files and DB..."
 sed -i "s/\(storageuserpw\).*/\1:${READONLYPW}/" $READONLYCONF
@@ -47,32 +51,10 @@ psql -U postgres -c "ALTER USER pykotaadmin PASSWORD '${READWRITEPW}';" > /dev/n
 psql -U postgres -c "ALTER USER pykotauser PASSWORD '${READONLYPW}';" > /dev/null 2>&1
 echo "   done."
 
-#restarting postgresql
+# restarting postgresql
 $RESTARTPGSQL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# restarting cups
+$RESTARTCUPS
 
 
 

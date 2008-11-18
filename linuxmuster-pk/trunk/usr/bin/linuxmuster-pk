@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl 
 
 # linuxmuster-pk
 # Wrapper script for pykota tasks
@@ -9,20 +9,14 @@
 # Author: Frank Schiebel <schiebel@rheinstrasse.net>
 #
 
+use strict;
+use vars qw(%balance $ROCONFIG);
 #
 # Globals
 #
 
-use DBI;
-use Sophomorix::SophomorixConfig;
-use Sophomorix::SophomorixBase;
-use Sophomorix::SophomorixPgLdap qw(check_connections get_print_data);
-
-my $setbalance;
 my $opt_h;
-my $opt_initdb;
-my $opt_deletedb;
-my $opt_sync_users;
+my $opt_autopykota;
 
 #
 # Command line options processing
@@ -31,13 +25,10 @@ sub init()
 {
 	use Getopt::Long;
 	GetOptions( "h"     =>  \$opt_h,
-		    "init-db" => \$opt_initdb,
-		    "delete-db" => \$opt_deletedb,
-		    "sync-users" => \$opt_sync_users
+		    "autopykota=s" => \$opt_autopykota
 		    );
 	
 	usage() if $opt_h;
-	usage() if ($opt_initdb && $opt_deletedb);
 	conf_read();
 }
 
@@ -53,10 +44,6 @@ sub usage()
 
 init();
 
-db_init() if $opt_initdb;
-db_drop() if $opt_deletedb;
-sync_users() if $opt_sync_users;
-
 #
 # conf_read
 # + reads configuration file
@@ -64,110 +51,29 @@ sync_users() if $opt_sync_users;
 sub conf_read {
   do "/etc/linuxmuster/pykota.conf";
 }
-
-
-#
-# sync_users
-# + sync pykota db with ouput of sophomorix-print
-# + adds users with default values
-#
-
-sub sync_users {
- my @print_data = &get_print_data(); 
- foreach $line (@print_data) {
-   my @fields = split(";", $line);
-   my $group  = $fields[0]; 
-   my $user  =  $fields[2]; 
-   $setbalance = $balance{"students"};
-   if (defined $balance{"$group"} ) {
-         $setbalance = $balance{"$group"};
-   } 
-
-   my $result = system("$PKUSERS_COMMAND --list $user > /dev/null 2>&1");
-
-   if ( $result ) {
-   	print "$user nicht in pykota-DB. ";
-	system("$PKUSERS_COMMAND --limitby balance --balance $setbalance --add $user");
-	system("$EDPYKOTA_COMMAND --add $user");
-   }
-   }
-  
+if ($opt_autopykota) {
+  autopykota($opt_autopykota);
 }
 
 
-
+# 
+# gets initial balance for a specified user
+# on pykota account creation via autopykota
 #
-# db_init
-# + Init DB pykota on fresh install
-#
-sub db_init {
-   
-   if ( ! -r $PGSQLTEMPLATE ) { print "Cannot read $PGSQLTEMPLATE, exiting!\n"; exit 1; }
-   if ( `su - postgres -c "psql -l | grep pykota" ` ) { print "DB pykota exists, exiting!\n"; exit 1; } 
-   # Template readable, DB doesnt exist: Installing fresh DB 
-   if (`su - postgres -c "psql -f $PGSQLTEMPLATE template1"`) { print "DB pykota sccessfully installed!\n"; }
-
-   exit;
+sub autopykota {
+  my $username = @_[0];
+  my $max = 0;
+  my $groups = `groups $username`;
+  $groups =~ s/.*:(.*)/$1/g;
+  my @groups = split " ", $groups;
+  foreach my $group (@groups) {
+    chomp($group);
+    if($balance{"$group"}>$max ){  
+      $max = $balance{"$group"};
+    }
+  }
+  print "$max\n";
 }
-
-#
-# db_drop
-# + Drop DB pykota
-#
-sub db_drop {
-   if ( ! `su - postgres -c "psql -l | grep pykota" ` ) { print "DB pykota doesnt exist, exiting!\n"; exit 1; } 
-   `su - postgres -c "psql -d template1 -c 'DROP DATABASE pykota;'"`;
-   print "Dropped DB pykota.\n";
-   exit;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

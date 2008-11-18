@@ -1,13 +1,21 @@
-linuxmuster-pk (0.2.0-0) unstable; urgency=low
+linuxmuster-pk (0.2.0-1) unstable; urgency=low
 
    * Moved configuration operations to postinstall script:
       - Installing empty postgres DB for pykota if no DB exists
       - Modifying pg_hba.conf to grant aces to pykota users
       - Setting random passwords for pykota users in Db and /etc/pykota
       - restarting postgresql
+      - restarting cups
    * changed linuxmuster-pk script:
       - removed configuration operations
-      - removed code forsync users
+      - removed code for "sync users"
+      - linuxmuster-pk --autopykota reads max quota for a given user depending
+        on his groups. 
+   * Pykota account creation now switched to autopykota, initial balance comes
+     from linuxmuster-pk --autopykota, quotas predefined in
+     /etc/linuxmuster/pykota
+   * /etc/pykota/pykota.conf now gets copied over from
+     /var/lib/linuxmuster-pk/pykota.conf.template
 
  -- Frank Schiebel <frank@linuxmuster.net>  Tue, 18 Nov 2008 11:32:19 +0100
 
