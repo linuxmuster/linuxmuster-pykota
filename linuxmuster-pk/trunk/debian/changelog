@@ -1,3 +1,16 @@
+linuxmuster-pk (0.2.0-0) unstable; urgency=low
+
+   * Moved configuration operations to postinstall script:
+      - Installing empty postgres DB for pykota if no DB exists
+      - Modifying pg_hba.conf to grant aces to pykota users
+      - Setting random passwords for pykota users in Db and /etc/pykota
+      - restarting postgresql
+   * changed linuxmuster-pk script:
+      - removed configuration operations
+      - removed code forsync users
+
+ -- Frank Schiebel <frank@linuxmuster.net>  Tue, 18 Nov 2008 11:32:19 +0100
+
 linuxmuster-pk (0.1.1-0) unstable; urgency=low
    
    * added sync-users

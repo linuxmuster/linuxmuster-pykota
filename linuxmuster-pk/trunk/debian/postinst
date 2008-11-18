@@ -1,1 +1,101 @@
 #!/bin/sh -e
+
+# postgres DB template
+PGSQLTEMPLATE=/usr/share/pykota/postgresql/pykota-postgresql.sql
+# generated password for readonly user
+READONLYPW=`pwgen -n 15 -s`
+READONLYCONF=/etc/pykota/pykota.conf
+# generated password for readwrite user
+READWRITEPW=`pwgen -n 15 -s`
+READWRITECONF=/etc/pykota/pykotadmin.conf
+# pg_hba.conf to modify
+PGHBACONF=/etc/postgresql/8.1/main/pg_hba.conf
+PGHBAINSERT="# linuxmuster-pykota-begin\n\
+host   pykota           pykotauser   127.0.0.1      255.255.255.255      password\n\
+host   pykota           pykotaadmin  127.0.0.1      255.255.255.255      password\n\
+host   pykota           all          127.0.0.1      255.255.255.255      reject\n\
+# linuxmuster-pykota-end"
+RESTARTPGSQL="/etc/init.d/postgresql-8.1 restart"
+
+# If pykota db doesnt exist in psql, create db from template
+# template readable?
+if [ ! -r $PGSQLTEMPLATE ]; then
+   echo "Cannot read $PGSQLTEMPLATE, exiting!"
+   exit 1
+fi
+# Typo in config?
+if [ ! -r $PGHBACONF ]; then
+   echo "Cannot read $PGHBACONF, exiting!"
+   exit 1
+fi
+
+# Db exists? If not, install it!
+su - postgres -c "psql -l | grep pykota" > /dev/null && echo "Pykota DB exists, will not touch it" 
+su - postgres -c "psql -l | grep pykota" > /dev/null || echo "No pykota DB found, installing empty DB" 
+su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
+   su - postgres -c "psql -f $PGSQLTEMPLATE template1" > /dev/null 2>&1
+
+# modifying pg_hba.conf if necessary
+sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
+sed -i "s/\(host\s*moodle\s*moodle\s*127\.0\.0\.1\s*255.255.255.255\s*password\)/\1\n${PGHBAINSERT}/" $PGHBACONF 
+
+# Setting passwords in config and DB
+echo "(Re)setting pykota passwords in config files and DB..."
+sed -i "s/\(storageuserpw\).*/\1:${READONLYPW}/" $READONLYCONF
+sed -i "s/\(storageadminpw\).*/\1:${READWRITEPW}/" $READWRITECONF
+psql -U postgres -c "ALTER USER pykotaadmin PASSWORD '${READWRITEPW}';" > /dev/null 2>&1
+psql -U postgres -c "ALTER USER pykotauser PASSWORD '${READONLYPW}';" > /dev/null 2>&1
+echo "   done."
+
+#restarting postgresql
+$RESTARTPGSQL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
