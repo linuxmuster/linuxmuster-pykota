@@ -1,3 +1,10 @@
+linuxmuster-pk (0.2.0-2) unstable; urgency=low
+
+   * Fixed logical error concerning default quota in linuxmuster-pk
+   * Modified /etc/linuxmuster/pykota.conf to fit new linuxmuster-pk better
+
+ -- Frank Schiebel <frank@linuxmuster.net>  Tue, 18 Nov 2008 15:19:15 +0100
+
 linuxmuster-pk (0.2.0-1) unstable; urgency=low
 
    * Moved configuration operations to postinstall script:

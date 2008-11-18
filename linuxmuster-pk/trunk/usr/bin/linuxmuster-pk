@@ -62,15 +62,18 @@ if ($opt_autopykota) {
 #
 sub autopykota {
   my $username = @_[0];
-  my $max = 0;
+  my $max = -1;
   my $groups = `groups $username`;
   $groups =~ s/.*:(.*)/$1/g;
   my @groups = split " ", $groups;
   foreach my $group (@groups) {
     chomp($group);
-    if($balance{"$group"}>$max ){  
+    if( ($balance{"$group"} > $max) && ($balance{"$group"} > 0) ){  
       $max = $balance{"$group"};
     }
+  }
+  if ($max == -1) {
+    $max=$balance{"students"};
   }
   print "$max\n";
 }
