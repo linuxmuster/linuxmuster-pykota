@@ -1,3 +1,12 @@
+linuxmuster-pk (0.2.1-0) unstable; urgency=low
+    
+    * Added pykoticon for windows. This gets installed to
+      /home/samba/progs/PykotIcon and shows up as K:/PykotIcon/pykoticon.vbs
+      on Windows clients
+
+ -- Frank Schiebel <frank@linuxmuster.net>  Thu, 20 Nov 2008 18:53:54 +0100
+
+
 linuxmuster-pk (0.2.0-3) unstable; urgency=low
 
    * Fixed position of pg_hba.conf modification in order to provide 

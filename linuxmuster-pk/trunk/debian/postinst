@@ -1,22 +1,34 @@
 #!/bin/sh -e
 
+
+# Import network settings
+. /var/lib/linuxmuster/network.settings
 # postgres DB template
 PGSQLTEMPLATE=/usr/share/pykota/postgresql/pykota-postgresql.sql
 # generated password for readonly user
 READONLYPW=`pwgen -n 15 -s`
+# pykota main config file
 READONLYCONF=/etc/pykota/pykota.conf
 # generated password for readwrite user
 READWRITEPW=`pwgen -n 15 -s`
+# Administrator config file
 READWRITECONF=/etc/pykota/pykotadmin.conf
 # pg_hba.conf to modify
 PGHBACONF=/etc/postgresql/8.1/main/pg_hba.conf
+# Text to insert in pg_hba.conf
 PGHBAINSERT="# linuxmuster-pykota-begin\n\
 host   pykota           pykotauser   127.0.0.1      255.255.255.255      password\n\
 host   pykota           pykotaadmin  127.0.0.1      255.255.255.255      password\n\
 host   pykota           all          127.0.0.1      255.255.255.255      reject\n\
 # linuxmuster-pykota-end"
+# Startscript for pykoticon on samba/progs/
+PYCOTICONVBS="/home/samba/progs/PykotIcon/pykoticon.vbs"
+# Script to restart postgres
 RESTARTPGSQL="/etc/init.d/postgresql-8.1 restart"
+# Script to restart cups
 RESTARTCUPS="/etc/init.d/cupsys restart"
+
+# Actions start here -------------------------------------
 
 # If pykota db doesnt exist in psql, create db from template
 # template readable?
@@ -39,6 +51,10 @@ su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
 # modifying pg_hba.conf if necessary
 sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
 sed -i "s/\(#\s*reject\s*all\s*other\s*connection\s*attempts\)/${PGHBAINSERT}\n\1/" $PGHBACONF 
+
+# modifying pykoticon start script
+sed -i "s/\(.*--port 7654 \).*\(\".*\)/\1 $serverip\2/" $PYCOTICONVBS
+
 
 # Getting config from template
 cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
