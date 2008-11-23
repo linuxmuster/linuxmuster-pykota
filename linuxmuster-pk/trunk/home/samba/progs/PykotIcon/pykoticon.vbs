@@ -23,4 +23,4 @@
 ' define another TCP port to listen to.
 '
 set Wshshell= WScript.createobject("wscript.shell")
-retcode = Wshshell.run ("%comspec% /C pykoticon.exe --port 7654  nordine.ateur", 0, FALSE)
+retcode = Wshshell.run ("%comspec% /C K:\PykotIcon\pykoticon.exe --port 7654  nordine.ateur", 0, FALSE)

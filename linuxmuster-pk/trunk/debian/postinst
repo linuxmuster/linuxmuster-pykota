@@ -65,7 +65,7 @@ sed -i "s/\(.*--port 7654 \).*\(\".*\)/\1 $serverip\2/" $PYCOTICONVBS
 sed -i "/rem linuxmuster-pykota-begin/,/rem linuxmuster-pykota-end/ d" $COMMONBAT
 sed -i "s/\(:winnt_ende\)/${COMMONBATINSERT}\r\n\1/" $COMMONBAT
 
-# Getting config from template
+# Getting config from template 
 cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
 
 # Setting passwords in config and DB

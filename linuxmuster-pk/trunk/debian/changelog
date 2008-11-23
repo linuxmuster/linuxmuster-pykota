@@ -1,6 +1,10 @@
-linuxmuster-pk (0.2.2-0) unstable; urgency=low
+linuxmuster-pk (0.2.2-1) unstable; urgency=low
     
     * Automatic edition of common.bat to start pykoticon on Win Clients
+    * Changed path to pykoticon.exe in pykoticon.vbs
+    * Configured user-notification via pykoticon in pykota.conf.template
+    * Added samples for user confirmation via pykoticon in
+      pykota.conf.template
 
  -- Frank Schiebel <frank@linuxmuster.net>  Sun, 23 Nov 2008 16:41:24 +0100
 

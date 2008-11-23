@@ -1,4 +1,5 @@
 # PyKota linuxmuster config-file
+# COPIED IN PLACE BY LINUXMUSTER-PK DO NOT REMOVE THIS LINE!
 #
 #
 # File format :
@@ -74,7 +75,7 @@ storageuser : pykotauser
 
 # In the line below change the password's value if needed.
 #
-storageuserpw:0j73ibgiiz2fvyz
+storageuserpw:9e7fwmy7k07whg7
 
 #############################################################
 # END of database specific directives                       #
@@ -343,9 +344,18 @@ onbackenderror : nocharge
 # If both are defined, the printer option has priority.
 #
 # examples :
-#
-# askconfirmation : /usr/bin/pknotify --destination $PYKOTAJOBORIGINATINGHOSTNAME:7654 --timeout 120 --confirm "Hello $PYKOTAUSERNAME.\nPrint job $PYKOTAJOBID send to printer $PYKOTAPRINTERNAME is $PYKOTAPRECOMPUTEDJOBSIZE pages long\nand will cost you $PYKOTAPRECOMPUTEDJOBPRICE credits.\n\nYou currently have $PYKOTABALANCE credits.\n\nDo you really want to print ?"
 
+
+# LINUXMUSTER Beispiel 1
+# Bei realer Abbuchung der Kosten vom Benutzerkonto kann folgende Rückfrage erfolgen:
+
+#askconfirmation : /usr/bin/pknotify --destination $PYKOTAJOBORIGINATINGHOSTNAME:7654 --timeout 120 --confirm "Hallo $PYKOTAUSERNAME.\nIhr Druckauftrag mit der ID $PYKOTAJOBID für den Drucker $PYKOTAPRINTERNAME ist $PYKOTAPRECOMPUTEDJOBSIZE Seiten lang\nund wird $PYKOTAPRECOMPUTEDJOBPRICE Guthabeneinheiten kosten.\n\nDerzeit verfügen Sie über $PYKOTABALANCE Guthabeneinheiten.\n\nWollen Sie wirklich drucken?"
+
+# LINUXMUSTER Beispiel 2
+# Abnicken lassen um die Kosten ins Bewusstsein zu rücken. Damit nicht abgebucht wird, müssen die Drucker im Passthrough
+# Modus betrieben werden!
+
+#askconfirmation : /usr/bin/pknotify --destination $PYKOTAJOBORIGINATINGHOSTNAME:7654 --timeout 120 --confirm "Hallo $PYKOTAUSERNAME.\nIhr Druckauftrag mit der ID $PYKOTAJOBID für den Drucker $PYKOTAPRINTERNAME ist $PYKOTAPRECOMPUTEDJOBSIZE Seiten lang\nund verursacht Kosten in Höhe von $PYKOTAPRECOMPUTEDJOBPRICE EUR.\n\nWollen Sie wirklich drucken?"
 
 
 # What should we do when we print and the billing code used is
@@ -661,8 +671,8 @@ adminmail: root@localhost
 #        somewhere (e.g. >/dev/null) so that there's no perturbation to the 
 #        underlying layer (filter or backend)
 #
-mailto : both
-
+#mailto : both
+mailto: external(/usr/bin/pknotify --destination $PYKOTAJOBORIGINATINGHOSTNAME:7654 --timeout 2 -n "%(message)s")
 
 
 # The value of the zero for account balance limitations.
@@ -697,7 +707,7 @@ gracedelay : 7
 # If unset, default poor man's threshold is 1.0.
 # This option can only appear in the global section
 #
-poorman : 1.0
+poorman : 2.0
 
 
 
@@ -705,8 +715,8 @@ poorman : 1.0
 # The warning message that is sent if the "poorman" value is reached
 # Again this must appear in the global section
 #
-poorwarn : Your Print Quota account balance is low. 
- Soon you'll not be allowed to print anymore.
+poorwarn : Das Guthaben auf Ihrem Druckkontingent ist gering.
+ Demnächst werden Sie nicht mehr drucken können.
 
 
 
@@ -714,10 +724,10 @@ poorwarn : Your Print Quota account balance is low.
 # The warning message that is sent if the soft quota limit is reached
 # May appear either globally or on a per-printer basis
 #
-softwarn: Your Print Quota Soft Limit is reached.
- This means that you may still be allowed to print for some
- time, but you must contact your administrator to purchase 
- more print quota.
+softwarn: Ihr Druckkontingent ist aufgebraucht (Soft Limit). 
+ Das bedeutet, dass Sie möglicherweise noch eine Zeit lang 
+ drucken können. Sie sollten aber möglichst bald mit Ihrem 
+ Administrator Kontakt aufnehmen, um Ihr Kontingent aufzuladen.
 
 
 
@@ -725,10 +735,10 @@ softwarn: Your Print Quota Soft Limit is reached.
 # The error message that is sent if the hard quota limit is reached
 # May appear either globally or on a per-printer basis
 #
-hardwarn: Your Print Quota Hard Limit is reached.
- This means that you are not allowed to print anymore.
- Please contact your administrator at root@localhost
- as soon as possible to solve the problem.
+hardwarn: Ihr Druckkontingent ist vollständig aufgebraucht.
+ Das bedeutet, dass Sie nicht mehr drucken können.
+ Sie müssen mit Ihrem Administrator Kontakt aufnehmen, um Ihr
+ Kontingent aufzuladen.
 
 
 
