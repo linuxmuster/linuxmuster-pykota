@@ -21,6 +21,12 @@ host   pykota           pykotauser   127.0.0.1      255.255.255.255      passwor
 host   pykota           pykotaadmin  127.0.0.1      255.255.255.255      password\n\
 host   pykota           all          127.0.0.1      255.255.255.255      reject\n\
 # linuxmuster-pykota-end"
+# common.bat to modify
+COMMONBAT=/home/samba/netlogon/common.bat
+# Text to insert in common.bat (DOS Line endings!)
+COMMONBATINSERT="rem linuxmuster-pykota-begin\r\n\
+if exist K:\\\PykotIcon\\\pykoticon.vbs call K:\\\PykotIcon\\\pykoticon.vbs\r\n\
+rem linuxmuster-pykota-end"
 # Startscript for pykoticon on samba/progs/
 PYCOTICONVBS="/home/samba/progs/PykotIcon/pykoticon.vbs"
 # Script to restart postgres
@@ -55,6 +61,9 @@ sed -i "s/\(#\s*reject\s*all\s*other\s*connection\s*attempts\)/${PGHBAINSERT}\n\
 # modifying pykoticon start script
 sed -i "s/\(.*--port 7654 \).*\(\".*\)/\1 $serverip\2/" $PYCOTICONVBS
 
+# modifying common.bat logon script
+sed -i "/rem linuxmuster-pykota-begin/,/rem linuxmuster-pykota-end/ d" $COMMONBAT
+sed -i "s/\(:winnt_ende\)/${COMMONBATINSERT}\r\n\1/" $COMMONBAT
 
 # Getting config from template
 cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF

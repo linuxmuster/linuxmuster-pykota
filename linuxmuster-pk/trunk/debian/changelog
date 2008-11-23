@@ -1,3 +1,9 @@
+linuxmuster-pk (0.2.2-0) unstable; urgency=low
+    
+    * Automatic edition of common.bat to start pykoticon on Win Clients
+
+ -- Frank Schiebel <frank@linuxmuster.net>  Sun, 23 Nov 2008 16:41:24 +0100
+
 linuxmuster-pk (0.2.1-0) unstable; urgency=low
     
     * Added pykoticon for windows. This gets installed to
