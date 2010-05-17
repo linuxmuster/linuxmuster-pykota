@@ -1,4 +1,0 @@
-# Configuration for print quota scripts
-#
-# Set to "true" if warnpykota should be run in cron.daily
-run_warnpykota="false"
