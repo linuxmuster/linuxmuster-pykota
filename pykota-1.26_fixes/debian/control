@@ -1,7 +1,7 @@
 Source: pykota
 Section: text
 Priority: extra
-Maintainer: Jerome Alet <alet@librelogiciel.com>
+Maintainer: Frank Schiebel <frank@linuxmuster.net>, Jerome Alet <alet@librelogiciel.com>
 Build-Depends-Indep: debhelper (>= 4.0.0), python, docbook-utils, python-dev
 Standards-Version: 3.6.1
 XS-Vcs-Svn: svn://svn.librelogiciel.com/pykota
@@ -9,14 +9,14 @@ XS-Vcs-Browser: http://svn.librelogiciel.com/cgi-bin/viewcvs.cgi/pykota/
 
 Package: pykota
 Architecture: all
-Depends: python, python-egenix-mxdatetime, cupsys,  python-pygresql | python-ldap | python-pysqlite2 | python-mysqldb, jaxml | python-jaxml, python-osd, python-reportlab, python-pysnmp4, python-imaging 
+Depends: python, python-egenix-mxdatetime, cupsys,  python-pygresql | python-ldap | python-pysqlite2 | python-mysqldb, jaxml | python-jaxml, python-osd, python-reportlab, python-pysnmp4, python-imaging, pkpgcounter, pkpipplib 
 Recommends: qa-assistant, snmp, netatalk, python-psyco, npadmin, python-pam, python-chardet
 Description: Print Quota/Accounting system for CUPS
  PyKota is a full featured, internationalized, centralized and extensible 
  Print Quota system for CUPS. It supports both PostgreSQL, MySQL, SQLite and 
- OpenLDAP (or other LDAP servers) as the quota database backend. 
+ OpenLDAP (or other LDAP servers) as the quota database backend
  .
- One installed, type 'pksetup debian' to configure PyKota.
+ This package is build an modified for use in linux-musterloesung 
  .
  This software features most of what you might expect from a modern Print 
  Quota and Accounting Solution. However it can be extended at will 
