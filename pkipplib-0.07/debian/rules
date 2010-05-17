@@ -5,18 +5,15 @@
 # The versions of python currently supported
 PYTHON=$(shell pyversions -r)
 
-include /usr/share/quilt/quilt.make
-
 build: build-stamp
 
-build-stamp: patch
+build-stamp: 
 	dh_testdir
 	$(PYTHON) setup.py build
 	touch $@
 
-clean: unpatch
+clean: 
 	dh_testdir
-	dh_testroot
 	rm -f *-stamp
 	rm -rf compile build
 	./clean.sh
@@ -29,8 +26,6 @@ install-$(PYTHON):
 	dh_testroot
 	$(PYTHON) setup.py install --root `pwd`/debian/pkipplib/
 	find ./debian/pkipplib/usr/lib -name '*\.py' | xargs sed -i -e '1 s|^#\!.*python.*||'
-#	sed -i -e '1 s|^#\!.*python.*|#!/usr/bin/python|' ./debian/pkipplib/usr/bin/pkipplib
-#	rm ./debian/pkipplib/usr/share/doc/pkipplib/COPYING
 
 # Build architecture-independent files here.
 # Pass to all debhelper commands in this target to reduce clutter.

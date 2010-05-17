@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: ZEN Linux - Developer Team for linux-musterloesung 
 Uploaders: Frank Schiebel <frank@linuxmuster.net>, Jerome Alet <alet@librelogiciel.com>
 Build-Depends-Indep: python, python-central (>= 0.5), python-imaging
-Build-Depends: debhelper (>= 5.0.37.3), quilt
+Build-Depends: debhelper (>= 5.0.37.3)
 Standards-Version: 3.8.0
 XS-Python-Version: current
 Homepage: http://www.pykota.com/software/pkpgcounter
