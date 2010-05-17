@@ -14,7 +14,7 @@ READWRITEPW=`pwgen -n 15 -s`
 # Administrator config file
 READWRITECONF=/etc/pykota/pykotadmin.conf
 # pg_hba.conf to modify
-PGHBACONF=/etc/postgresql/8.1/main/pg_hba.conf
+PGHBACONF=/etc/postgresql/8.3/main/pg_hba.conf
 # Text to insert in pg_hba.conf
 PGHBAINSERT="# linuxmuster-pykota-begin\n\
 host   pykota           pykotauser   127.0.0.1      255.255.255.255      password\n\
@@ -30,9 +30,9 @@ rem linuxmuster-pykota-end"
 # Startscript for pykoticon on samba/progs/
 PYCOTICONVBS="/home/samba/progs/PykotIcon/pykoticon.vbs"
 # Script to restart postgres
-RESTARTPGSQL="/etc/init.d/postgresql-8.1 restart"
+RESTARTPGSQL="/etc/init.d/postgresql-8.3 restart"
 # Script to restart cups
-RESTARTCUPS="/etc/init.d/cupsys restart"
+RESTARTCUPS="/etc/init.d/cups restart"
 
 # Actions start here -------------------------------------
 
