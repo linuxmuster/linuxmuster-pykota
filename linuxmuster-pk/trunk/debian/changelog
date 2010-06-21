@@ -1,8 +1,8 @@
-linuxmuster-pk (0.2.2-lenny1) unstable; urgency=low
+linuxmuster-pk (0.2.2-lenny2) unstable; urgency=low
     
     * modified deps to fit lenny packages
 
- -- Frank Schiebel <frank@linuxmuster.net>  Mon, 17 May 2010 21:08:00 +0100
+ -- Frank Schiebel <frank@linuxmuster.net>  Mon, 21 Jun 2010 21:08:00 +0100
 
 linuxmuster-pk (0.2.2-1) unstable; urgency=low
     
