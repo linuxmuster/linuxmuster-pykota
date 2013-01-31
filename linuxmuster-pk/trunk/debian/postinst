@@ -1,108 +1,126 @@
-#!/bin/sh -e
+#!/bin/bash
+#
+# postinst script for linuxmuster-pk
+# frank@linuxmuster.net
+# thomas@linuxmuster.net (minor changes)
+# 31.01.2013
+# GPL v3
+#
 
+# see: dh_installdeb(1)
 
-# Import network settings
-. /var/lib/linuxmuster/network.settings
-# postgres DB template
-PGSQLTEMPLATE=/usr/share/pykota/postgresql/pykota-postgresql.sql
-# generated password for readonly user
-READONLYPW=`pwgen -n 15 -s`
-# pykota main config file
-READONLYCONF=/etc/pykota/pykota.conf
-# generated password for readwrite user
-READWRITEPW=`pwgen -n 15 -s`
-# Administrator config file
-READWRITECONF=/etc/pykota/pykotadmin.conf
-# pg_hba.conf to modify
-PGHBACONF=/etc/postgresql/8.3/main/pg_hba.conf
-# Text to insert in pg_hba.conf
-PGHBAINSERT="# linuxmuster-pykota-begin\n\
+set -e
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+
+case "$1" in
+
+ configure)
+
+  # Import network settings
+  . /var/lib/linuxmuster/network.settings
+  # postgres DB template
+  PGSQLTEMPLATE=/usr/share/pykota/postgresql/pykota-postgresql.sql
+  # generated password for readonly user
+  READONLYPW=`pwgen -n 15 -s`
+  # pykota main config file
+  READONLYCONF=/etc/pykota/pykota.conf
+  # generated password for readwrite user
+  READWRITEPW=`pwgen -n 15 -s`
+  # Administrator config file
+  READWRITECONF=/etc/pykota/pykotadmin.conf
+  # pg_hba.conf to modify
+  PGHBACONF=/etc/postgresql/9.1/main/pg_hba.conf
+  # Text to insert in pg_hba.conf
+  PGHBAINSERT="# linuxmuster-pykota-begin\n\
 host   pykota           pykotauser   127.0.0.1      255.255.255.255      password\n\
 host   pykota           pykotaadmin  127.0.0.1      255.255.255.255      password\n\
 host   pykota           all          127.0.0.1      255.255.255.255      reject\n\
 # linuxmuster-pykota-end"
-# common.bat to modify
-COMMONBAT=/home/samba/netlogon/common.bat
-# Text to insert in common.bat (DOS Line endings!)
-COMMONBATINSERT="rem linuxmuster-pykota-begin\r\n\
+  # common.bat to modify
+  COMMONBAT=/home/samba/netlogon/common.bat
+  # Text to insert in common.bat (DOS Line endings!)
+  COMMONBATINSERT="rem linuxmuster-pykota-begin\r\n\
 if exist K:\\\PykotIcon\\\pykoticon.vbs call K:\\\PykotIcon\\\pykoticon.vbs\r\n\
 rem linuxmuster-pykota-end"
-# Startscript for pykoticon on samba/progs/
-PYCOTICONVBS="/home/samba/progs/PykotIcon/pykoticon.vbs"
-# Script to restart postgres
-RESTARTPGSQL="/etc/init.d/postgresql-8.3 restart"
-# Script to restart cups
-RESTARTCUPS="/etc/init.d/cups restart"
+  # Startscript for pykoticon on samba/progs/
+  PYCOTICONVBS="/home/samba/progs/PykotIcon/pykoticon.vbs"
+  # Script to restart postgres
+  RESTARTPGSQL="/etc/init.d/postgresql restart"
+  # Script to restart cups
+  RESTARTCUPS="restart cups"
 
-# Actions start here -------------------------------------
+  # Actions start here -------------------------------------
 
-# If pykota db doesnt exist in psql, create db from template
-# template readable?
-if [ ! -r $PGSQLTEMPLATE ]; then
-   echo "Cannot read $PGSQLTEMPLATE, exiting!"
-   exit 1
-fi
-# Typo in config?
-if [ ! -r $PGHBACONF ]; then
-   echo "Cannot read $PGHBACONF, exiting!"
-   exit 1
-fi
+  # If pykota db doesnt exist in psql, create db from template
+  # template readable?
+  if [ ! -r $PGSQLTEMPLATE ]; then
+     echo "Cannot read $PGSQLTEMPLATE, exiting!"
+     exit 1
+  fi
+  # Typo in config?
+  if [ ! -r $PGHBACONF ]; then
+     echo "Cannot read $PGHBACONF, exiting!"
+     exit 1
+  fi
 
-# Db exists? If not, install it!
-su - postgres -c "psql -l | grep pykota" > /dev/null && echo "Pykota DB exists, will not touch it" 
-su - postgres -c "psql -l | grep pykota" > /dev/null || echo "No pykota DB found, installing empty DB" 
-su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
-   su - postgres -c "psql -f $PGSQLTEMPLATE template1" > /dev/null 2>&1
+  # Db exists? If not, install it!
+  su - postgres -c "psql -l | grep pykota" > /dev/null && echo "Pykota DB exists, will not touch it" 
+  su - postgres -c "psql -l | grep pykota" > /dev/null || echo "No pykota DB found, installing empty DB" 
+  su - postgres -c "psql -l | grep pykota" > /dev/null 2>&1 || \
+  su - postgres -c "psql -f $PGSQLTEMPLATE template1" > /dev/null 2>&1
 
-# modifying pg_hba.conf if necessary
-sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
-sed -i "s/\(#\s*reject\s*all\s*other\s*connection\s*attempts\)/${PGHBAINSERT}\n\1/" $PGHBACONF 
+  # modifying pg_hba.conf if necessary
+  sed -i "/# linuxmuster-pykota-begin/,/# linuxmuster-pykota-end/ d" $PGHBACONF
+  sed -i "s/\(#\s*reject\s*all\s*other\s*connection\s*attempts\)/${PGHBAINSERT}\n\1/" $PGHBACONF 
 
-# modifying pykoticon start script
-sed -i "s/\(.*--port 7654 \).*\(\".*\)/\1 $serverip\2/" $PYCOTICONVBS
+  # modifying pykoticon start script
+  sed -i "s/\(.*--port 7654 \).*\(\".*\)/\1 $serverip\2/" $PYCOTICONVBS
 
-# modifying common.bat logon script
-sed -i "/rem linuxmuster-pykota-begin/,/rem linuxmuster-pykota-end/ d" $COMMONBAT
-sed -i "s/\(:winnt_ende\)/${COMMONBATINSERT}\r\n\1/" $COMMONBAT
+  # modifying common.bat logon script
+  sed -i "/rem linuxmuster-pykota-begin/,/rem linuxmuster-pykota-end/ d" $COMMONBAT
+  sed -i "s/\(:winnt_ende\)/${COMMONBATINSERT}\r\n\1/" $COMMONBAT
 
-# Getting config from template 
-cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
+  # Getting config from template 
+  cp /var/lib/linuxmuster-pk/pykota.conf.template $READONLYCONF
 
-# Setting passwords in config and DB
-echo "(Re)setting pykota passwords in config files and DB..."
-sed -i "s/\(storageuserpw\).*/\1:${READONLYPW}/" $READONLYCONF
-sed -i "s/\(storageadminpw\).*/\1:${READWRITEPW}/" $READWRITECONF
-psql -U postgres -c "ALTER USER pykotaadmin PASSWORD '${READWRITEPW}';" > /dev/null 2>&1
-psql -U postgres -c "ALTER USER pykotauser PASSWORD '${READONLYPW}';" > /dev/null 2>&1
-echo "   done."
+  # Setting passwords in config and DB
+  echo "(Re)setting pykota passwords in config files and DB..."
+  sed -i "s/\(storageuserpw\).*/\1:${READONLYPW}/" $READONLYCONF
+  sed -i "s/\(storageadminpw\).*/\1:${READWRITEPW}/" $READWRITECONF
+  psql -U postgres -c "ALTER USER pykotaadmin PASSWORD '${READWRITEPW}';" > /dev/null 2>&1
+  psql -U postgres -c "ALTER USER pykotauser PASSWORD '${READONLYPW}';" > /dev/null 2>&1
+  echo "   done."
 
-# restarting postgresql
-$RESTARTPGSQL
-# restarting cups
-$RESTARTCUPS
+  # restarting postgresql
+  $RESTARTPGSQL
+  # restarting cups
+  $RESTARTCUPS
+ ;;
 
+ abort-upgrade|abort-remove|abort-deconfigure)
+ ;;
 
+ *)
+  echo "postinst called with unknown argument \`$1'" >&2
+  exit 1
+ ;;
 
+esac
 
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
 
+#DEBHELPER#
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+exit 0

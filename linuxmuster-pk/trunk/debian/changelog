@@ -1,3 +1,9 @@
+linuxmuster-pk (0.2.2-0ubuntu2) precise; urgency=low
+    
+    * precise build
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Thu, 31 Jan 2013 19:53:34 +0100
+
 linuxmuster-pk (0.2.2-lenny2) unstable; urgency=low
     
     * modified deps to fit lenny packages

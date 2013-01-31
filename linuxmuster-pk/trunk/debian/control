@@ -9,7 +9,7 @@ Package: linuxmuster-pk
 Section: unknown
 Priority: optional
 Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
-Architecture: i386
+Architecture: all
 Depends: pykota, pkipplib, pkpgcounter
 Description: This package provides some wrapper tools for pykota  
 

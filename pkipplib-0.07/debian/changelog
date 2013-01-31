@@ -1,3 +1,9 @@
+pkipplib (0.07-0ubuntu1) precise; urgency=low
+
+  * precise build.
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Thu, 31 Jan 2013 19:12:13 +0100
+
 pkipplib (0.07-lml-lenny1) unstable; urgency=low
 
   * Initial debian package for linux-musterloesung

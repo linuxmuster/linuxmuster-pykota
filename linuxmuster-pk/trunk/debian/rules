@@ -10,14 +10,14 @@
 #export DH_VERBOSE=1
 
 # This is the debhelper compatibility version to use.
-export DH_COMPAT=4
+export DH_COMPAT=5
 
-ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -g
-endif
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-	INSTALL_PROGRAM += -s
-endif
+#ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+#	CFLAGS += -g
+#endif
+#ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+#	INSTALL_PROGRAM += -s
+#endif
 
 configure: configure-stamp
 configure-stamp:
@@ -64,7 +64,7 @@ install: DH_OPTIONS=
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+	dh_prep
 	dh_installdirs
 
 	# Add here commands to install the package.
@@ -100,32 +100,8 @@ binary-indep: build install
 	dh_builddeb
 
 # Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_installdirs
-	dh_installdebconf
-	dh_installdocs
-#	dh_installexamples -a
-#	dh_installmenu -a
-#	dh_installlogrotate -a
-#	dh_installemacsen -a
-#	dh_installpam -a
-#	dh_installmime -a
-#	dh_installinit -a
-#	dh_installcron -a
-#	dh_installman -a
-#	dh_installinfo -a
-#	dh_undocumented -a
-	dh_installchangelogs
-	dh_link
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-#	dh_perl -a
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+binary-arch: install
+# We have nothing to do by default.
 
 
 binary: binary-indep binary-arch

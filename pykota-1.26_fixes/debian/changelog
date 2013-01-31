@@ -1,3 +1,9 @@
+pykota (1.26-fixes-0ubuntu1) precise; urgency=low
+
+  * precise build.
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Thu, 31 Jan 2013 19:28:48 +0100
+
 pykota (1.26-fixes-lml-lenny1) unstable; urgency=low
   
   * Lenny version for linux-musterloesung created, base: pykota 1.26_fixes

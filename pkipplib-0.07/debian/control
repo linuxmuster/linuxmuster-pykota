@@ -12,7 +12,7 @@ Homepage: http://www.pykota.com/software/pkpgcounter
 Package: pkipplib
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, python-imaging (>= 1.1.2-3.2), ghostscript
-Recommends: python-psyco [i386 hurd-i386 netbsd-i386 kfreebsd-i386]
+Recommends: python-psyco
 XB-Python-Version: ${python:Versions}
 Description: Helper lib for pykota print accounting solution. deb-Package for linux-musterloesung
 

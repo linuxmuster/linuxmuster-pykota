@@ -24,7 +24,8 @@ install: build install-$(PYTHON)
 install-$(PYTHON):
 	dh_testdir
 	dh_testroot
-	$(PYTHON) setup.py install --root `pwd`/debian/pkipplib/
+	mkdir -p debian/pkipplib/usr/lib
+	$(PYTHON) setup.py install --prefix /usr --root `pwd`/debian/pkipplib/
 	find ./debian/pkipplib/usr/lib -name '*\.py' | xargs sed -i -e '1 s|^#\!.*python.*||'
 
 # Build architecture-independent files here.
