@@ -1,3 +1,9 @@
+pykota (1.26-fixes-0ubuntu4) precise; urgency=low
+
+  * added python2.7 to depends.
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Sun, 03 Feb 2013 22:48:04 +0100
+
 pykota (1.26-fixes-0ubuntu3) precise; urgency=low
 
   * added apparmor profile for backend (closes #70).
