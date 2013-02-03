@@ -36,8 +36,11 @@ install: build
 	dh_clean -k
 	dh_installdirs
 
-	/usr/bin/python setup.py install --prefix=`pwd`/debian/tmp/usr --no-compile
+	/usr/bin/python setup.py install --prefix=$(CURDIR)/debian/tmp/usr --no-compile --install-lib=$(CURDIR)/debian/tmp/usr/lib/python2.7/dist-packages
 
+	mkdir -p $(CURDIR)/debian/tmp/etc/apparmor.d
+	install -m 644 debian/apparmor $(CURDIR)/debian/tmp/etc/apparmor.d/usr.share.pykota.cupspykota
+	
 	install -m 644 conf/pykota.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykota.conf
 	install -m 640 conf/pykotadmin.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykotadmin.conf
 	install -m 644 debian/printquota.default $(CURDIR)/debian/tmp/etc/default/printquota

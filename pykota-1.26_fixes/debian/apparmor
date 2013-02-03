@@ -1,0 +1,38 @@
+#include <tunables/global>
+
+/usr/share/pykota/cupspykota {
+  #include <abstractions/base>
+  #include <abstractions/fonts>
+  #include <abstractions/nameservice>
+  #include <abstractions/user-tmp>
+
+  capability chown,
+  capability fowner,
+  capability fsetid,
+  capability setgid,
+  capability setuid,
+
+  # unfortunate, but required for when $HOME is 700
+  capability dac_override,
+  capability dac_read_search,
+
+  /bin/dash ixr,
+  /bin/bash ixr,
+  /bin/cp ixr,
+  /etc/pykota/** r,
+  /etc/papersize r,
+  /etc/cups/cups-pdf.conf r,
+  @{HOME}/PDF/ rw,
+  @{HOME}/PDF/* rw,
+  /usr/bin/env ixr,
+  /usr/bin/gs ixr,
+  /usr/bin/python2.7 ixr,
+  /usr/share/pykota/cupspykota mr,
+  /usr/lib/ghostscript/** mr,
+  /usr/include/python2.7/** mr,
+  /usr/lib/python2.7/** mr,
+  /usr/share/** r,
+  /var/log/cups/cups-pdf_log w,
+  /var/spool/cups/** rw,
+  /var/spool/cups-pdf/** rw,
+}
