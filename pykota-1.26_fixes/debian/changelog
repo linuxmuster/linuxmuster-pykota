@@ -1,3 +1,9 @@
+pykota (1.26-fixes-0ubuntu6) precise; urgency=low
+
+  * putting apparmor profile into complain mode to make it work for now. 
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Mon, 04 Feb 2013 18:23:39 +0100
+
 pykota (1.26-fixes-0ubuntu5) precise; urgency=low
 
   * moved cupspykota backend to /usr/lib/cups/backend.

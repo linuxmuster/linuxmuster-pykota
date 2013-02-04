@@ -45,8 +45,9 @@ install: build
 	rm -f $(CURDIR)/debian/tmp/usr/share/pykota/cupspykota
 	
 	# apparmor profile
-	mkdir -p $(CURDIR)/debian/tmp/etc/apparmor.d
+	mkdir -p $(CURDIR)/debian/tmp/etc/apparmor.d/force-complain
 	install -m 644 debian/apparmor $(CURDIR)/debian/tmp/etc/apparmor.d/usr.lib.cups.backend.cupspykota
+	ln -s /etc/apparmor.d/usr.lib.cups.backend.cupspykota $(CURDIR)/debian/tmp/etc/apparmor.d/force-complain/usr.lib.cups.backend.cupspykota
 	
 	install -m 644 conf/pykota.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykota.conf
 	install -m 640 conf/pykotadmin.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykotadmin.conf
