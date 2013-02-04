@@ -1,3 +1,11 @@
+pykota (1.26-fixes-0ubuntu5) precise; urgency=low
+
+  * moved cupspykota backend to /usr/lib/cups/backend.
+  * updated apparmor profile.
+  * debian/postinst: removed obsolete stuff. 
+
+ -- Thomas Schmitt <thomas@linuxmuster.net>  Mon, 04 Feb 2013 16:21:16 +0100
+
 pykota (1.26-fixes-0ubuntu4) precise; urgency=low
 
   * added python2.7 to depends.

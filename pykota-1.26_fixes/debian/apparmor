@@ -1,38 +1,32 @@
+# apparmor profile for cupspykota
+# thomas@linuxmuster.net
+# 04.02.2013
+#
+
 #include <tunables/global>
 
-/usr/share/pykota/cupspykota {
+/usr/lib/cups/backend/cupspykota {
+  #include <abstractions/apache2-common>
   #include <abstractions/base>
-  #include <abstractions/fonts>
-  #include <abstractions/nameservice>
-  #include <abstractions/user-tmp>
 
   capability chown,
-  capability fowner,
-  capability fsetid,
+  capability dac_override,
   capability setgid,
   capability setuid,
 
-  # unfortunate, but required for when $HOME is 700
-  capability dac_override,
-  capability dac_read_search,
-
-  /bin/dash ixr,
-  /bin/bash ixr,
-  /bin/cp ixr,
-  /etc/pykota/** r,
-  /etc/papersize r,
+  /etc/pykota/* r,
   /etc/cups/cups-pdf.conf r,
   @{HOME}/PDF/ rw,
   @{HOME}/PDF/* rw,
-  /usr/bin/env ixr,
-  /usr/bin/gs ixr,
-  /usr/bin/python2.7 ixr,
-  /usr/share/pykota/cupspykota mr,
-  /usr/lib/ghostscript/** mr,
+  /proc/*/mounts r,
+  /usr/bin/env ix,
+  /usr/bin/python2.7 ix,
   /usr/include/python2.7/** mr,
+  /usr/lib/cups/backend/* rix,
   /usr/lib/python2.7/** mr,
-  /usr/share/** r,
+  /usr/share/pykota/* rix,
+  /usr/share/pyshared/** r,
   /var/log/cups/cups-pdf_log w,
+  /var/spool/cups-pdf/** w,
   /var/spool/cups/** rw,
-  /var/spool/cups-pdf/** rw,
 }

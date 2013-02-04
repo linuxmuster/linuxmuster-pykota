@@ -38,8 +38,15 @@ install: build
 
 	/usr/bin/python setup.py install --prefix=$(CURDIR)/debian/tmp/usr --no-compile --install-lib=$(CURDIR)/debian/tmp/usr/lib/python2.7/dist-packages
 
+	# move cupspykota
+	mkdir -p $(CURDIR)/debian/tmp/usr/lib/cups/backend
+	rm -f $(CURDIR)/debian/tmp/usr/lib/cups/backend/cupspykota
+	install -m 700 $(CURDIR)/debian/tmp/usr/share/pykota/cupspykota $(CURDIR)/debian/tmp/usr/lib/cups/backend/cupspykota
+	rm -f $(CURDIR)/debian/tmp/usr/share/pykota/cupspykota
+	
+	# apparmor profile
 	mkdir -p $(CURDIR)/debian/tmp/etc/apparmor.d
-	install -m 644 debian/apparmor $(CURDIR)/debian/tmp/etc/apparmor.d/usr.share.pykota.cupspykota
+	install -m 644 debian/apparmor $(CURDIR)/debian/tmp/etc/apparmor.d/usr.lib.cups.backend.cupspykota
 	
 	install -m 644 conf/pykota.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykota.conf
 	install -m 640 conf/pykotadmin.conf.sample $(CURDIR)/debian/tmp/etc/pykota/pykotadmin.conf
