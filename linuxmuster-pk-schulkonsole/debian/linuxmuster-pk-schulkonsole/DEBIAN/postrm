@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# fschuett@gymhim.de 02.11.2015
+# GPLv3
+#
+
+set -e
+
+# configure schulkonsole
+SSCRIPTS=/usr/share/schulkonsole/scripts
+[ -x "$SSCRIPTS/make-menus.sh" ] && "$SSCRIPTS/make-menus.sh"
+[ -x "$SSCRIPTS/update-permissions.sh" ] && "$SSCRIPTS/update-permissions.sh"
+
+

@@ -1,0 +1,54 @@
+<title><gettext>Schulkonsole</gettext> - <gettext>Quota</gettext> - <gettext>Klassen</gettext></title>
+<p><gettext>Hier k&ouml;nnen Sie die Druckquota f&uuml;r alle Sch&uuml;ler/innen einer Klasse &auml;ndern. Die
+Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert ge&auml;ndert werden.</gettext></p>
+<p><gettext>Beim "Neu-Setzen" wird zus&auml;tzlich der bisherige Verbrauch gel&ouml;scht.</gettext></p>
+<p><gettext>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</gettext></p>
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Klassen') %]</h2>
+
+
+[% IF classes %]
+
+<form method="post">
+
+[% odd=0 %]
+<table id="quotasclasses" class="liste">
+<tr>
+<th>[% loc('Klasse') %]</th>
+<th>[% loc('Kontingent setzen oder &auml;ndern') %]</th>
+<th>[% loc('Auswahl') %]</th>
+</tr>
+
+[% FOREACH classes %]
+[% IF odd %][% odd=0 %]<tr class="odd">
+[% ELSE %][% odd=1 %]<tr class="even">[% END %]
+<td>[% classes.name %]</td>
+
+<td><input size="6" maxlength="5" name"[% classes.name %]_classdruckquota" value"[% classes.druckquota %]"></td>
+
+<td><input type="checkbox" name"[% classes.name %];select"></td>
+</tr>
+[% END %]
+
+<th colspan="3"> </th>
+<tr class="quickselection">
+<td colspan="2">[% loc('Schnellauswahl') %]</td>
+<td colspan="2"><input type="button" value="[% loc('An') %]" name="select" onClick="check_uncheck(this)"></td>
+</tr>
+<th colspan="3"> </th>
+
+</table>
+
+<ul>
+<li><input type="submit" name="acceptclasses" value="[% loc('&Auml;nderungen &uuml;bernehmen') %]"></li>
+<li><input type="submit" name="resetclasses" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
+<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+<li><input type="submit" name="deleteclasses" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
+</ul>
+
+</form>
+
+[% ELSE %]
+<p>[% loc('Es gibt keine Klassen.') %]</p>
+[% END %]
+

@@ -1,0 +1,57 @@
+<title>[% loc('Schulkonsole') %] - [% loc('Druck-Quota') %] - [% loc('Lehrer') %]</title>
+<p>[% loc('Hier k&ouml;nnen Sie die Druckquota f&uuml;r Lehrer/innen &auml;ndern. Die
+Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert ge&auml;ndert werden.') %]</p>
+<p>[% loc('Beim "Neu-Setzen" wird zus&auml;tzlich der bisherige Verbrauch gel&ouml;scht.') %]</p>
+<p>[% loc('Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.') %]</p>
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Lehrer') %]</h2>
+
+
+[% IF teachers %]
+
+<form method="post">
+
+<table id="quotasteachers" class="liste">
+<tr>
+<th>[% loc('Login') %]</th>
+<th>[% loc('Name') %]</th>
+<th>[% loc('Gesamtes Kontingent') %]</th>
+<th>[% loc('Restliches Kontingent') %]</th>
+<th>[% loc('Kontingent setzen oder &auml;ndern') %]</th>
+<th>[% loc('Auswahl') %]</th>
+</tr>
+
+[% FOREACH teachers %]
+[% IF odd %][% odd=0 %]<tr class="odd">
+[% ELSE %][% odd=1 %]<tr class="even">[% END %]
+<td>[% teachers.login %]</td>
+<td>[% teachers.firstname %] [% teachers.surname %]</td>
+<td><!--#echo var="teachers{maxbalance}"--></td>
+<td><!--#echo var="teachers{balance}"--></td>
+<td><input size="6" maxlength="5" name"[% teachers.login %]_teachernewbalance" value"[% teachers.newbalance %]"></td>
+<td><input type="checkbox" name"[% teachers.login %];select"></td>
+</tr>
+[% END %]
+<th colspan="6"> </th>
+<tr class="quickselection">
+<td colspan="5">[% loc('Schnellauswahl') %]</td>
+<td colspan="5"><input type="button" value="[% loc('An') %]" name="select" onClick="check_uncheck(this)"></td>
+</tr>
+<th colspan="6"> </th>
+</table>
+
+<ul>
+<li><input type="submit" name="acceptteachers" value="[% loc('&Auml;nderungen &uuml;bernehmen') %]"></li>
+<li><input type="submit" name="resetteachers" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
+<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+<li><input type="submit" name="deleteteachers" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
+</ul>
+
+</form>
+
+<!--#else-->
+<p>[% loc('Es gibt keine Lehrer.') %]</p>
+[% END %]
+
+
+

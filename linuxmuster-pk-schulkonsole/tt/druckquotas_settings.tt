@@ -1,0 +1,90 @@
+[% page = {
+      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Einstellungen'),
+      menu     => 1,
+      info     => loc('Hier können Sie die Einstellungen zu pykota ändern.</p><p>Bei den Standardeinstellungen der Gruppen können Sie festlegen, welche Quota einem Benutzer zugeordnet wird, wenn er das erste mal druckt. Maßgebend ist die höchste Quota eines seiner Gruppen. Auf Benutzer, die bereits gedruckt haben, hat dies jedoch keine Auswirkung.</p><p>Durch Aktivierung einer askconfirmation-Option erhält der Benutzer bei jedem Druckjob in einem Fenster die Aufforderung den Job zu bestätigen.</p>'),
+   }
+%]
+
+<h2>[% loc('Druck-Quota') %]</h2>
+
+<p>[% loc('Standardeinstellungen der Gruppen:') %]</p>
+
+<form method="post">
+
+<br>
+
+[% IF standards %]
+
+
+  <table id="quotasclasses" class="liste">
+  <tr>
+  <th>Gruppe</th>
+  <th>Aktuelle Druck-Quota</th>
+  <th>Neue Druck-Quota</th>
+  <th>Auswahl</th>
+  </tr>
+  [% lfdnr = 1 %]
+  [% FOREACH s IN standards %]
+	<tr class="[% IF lfdnr % 2 == 1 %]odd[% ELSE %]even[% END %]">
+    <td>[% s.gruppe %]</td>
+    <td>[% s.balance %]</td>
+    <td><input size="6" maxlength="5" name"[% s.gruppe %]_gruppenewbalance" value"[% s.newbalance %]"></td>
+    [% IF s.checkbox %]
+      <td><input type="checkbox" name"[% s.gruppe %];select"></td>
+    [% END %]
+    [% lfdnr = lfdnr + 1 %]</tr>
+  [% END %]
+  <tr><th colspan="4"> </th></tr>
+  </table>
+  <ul>
+  <li><input type="submit" name="acceptstandards" value="[% loc('Änderungen übernehmen') %]"></li>
+  <li><input type="submit" name="deletestandards" value="[% loc('Auswahl löschen') %]"></li>
+  </ul>
+
+
+[% END %]
+
+<br>
+Gruppe:<input size="10" maxlength="10" name="newgroup" value="[% loc('') %]">
+&nbsp;&nbsp;
+Druck-Quota:<input size="10" maxlength="10" name="newgroupbalance" value="[% loc('') %]">
+
+<input type="submit" name="addstandard" value="[% loc('Gruppe aufnehmen') %]">
+
+<hr>
+<br>
+<p>[% loc('Aktuelle Einstellungen für "askconfirmation":<br>(ggf. noch den PASSTHROUGH-Modus der Drucker anpassen)') %]</p>
+
+<br>
+
+[% IF askconfirmation %]
+
+
+  <table class="liste">
+  <tr>
+  <th>Nummer&nbsp;&nbsp;</th>
+  <th>pknotify - Text</th>
+  <th>Status</th>
+  </tr>
+  [% lfdnr = 1 %]
+  [% FOREACH ac IN askconfirmation %]
+	<tr class="[% IF lfdnr % 2 == 1 %]odd[% ELSE %]even[% END %]">
+    <td align="center" >[% ac.nummer %]</td>
+    <td>[% ac.text %]</td>
+    <td>[% ac.typ %]</td>
+    [% lfdnr = lfdnr + 1 %]</tr>
+  [% END %]
+  <tr>
+  <th colspan="2"> </th>
+  </tr>
+  </table>
+  <br>
+  Welche Nummer soll aktiviert werden ( 0 - keine):<input size="3" maxlength="3" name="newaktiv" value="[% loc('') %]">
+  <input type="submit" name="setaktiv" value="[% loc('Übernehmen') %]">
+
+[% END %]
+
+<br>
+
+</form>
+

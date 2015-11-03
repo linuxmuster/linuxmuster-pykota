@@ -1,0 +1,49 @@
+<title><gettext>Schulkonsole</gettext> - <gettext>Druck-Quota</gettext> - <gettext>Sonderquota</gettext></title>
+<p><gettext>Hier k&ouml;nnen Sie die Druckquota eines Benutzers &auml;ndern. Die
+Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert ge&auml;ndert werden.</gettext></p>
+<p><gettext>Beim "Neu-Setzen" wird zus&auml;tzlich der bisherige Verbrauch gel&ouml;scht.</gettext></p>
+<p><gettext>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</gettext></p>
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Sonderquota') %]</h2>
+<br>
+
+<form method="post">
+
+<hr>
+<br>
+<br>Benutzername:     <input size="14" maxlength="14" name="benutzer" value="[% loc('') %]">
+<input type="submit" name="showbalance" value="[% loc('Kontingent des Benutzers anzeigen') %]">
+
+[% IF benutzer %]
+<br><br>
+<table id="quotasbenutzer" class="liste">
+<tr>
+<th>[% loc('Login') %]</th>
+<th>[% loc('Gesamtes Kontingent') %]</th>
+<th>[% loc('Restliches Kontingent') %]</th>
+</tr>
+
+[% FOREACH benutzer %]
+[% IF odd %][% odd=0 %]<tr class="odd">
+[% ELSE %][% odd=1 %]<tr class="even">[% END %]
+<td>[% benutzer.login %]</td>
+<td><!--#echo var="benutzer{maxbalance}"--></td>
+<td><!--#echo var="benutzer{balance}"--></td>
+</tr>
+[% END %]
+</tr>
+<th colspan="6"> </th>
+</table>
+
+<!--#else-->
+<br>
+[% END %]
+
+<br>Neues Kontingent: <input size="10" maxlength="10" name="newbalance" value="[% loc('') %]">
+<input type="submit" name="setbalance" value="[% loc('Kontingent des Benutzers &auml;ndern') %]">
+<input type="submit" name="resetbalance" value="[% loc('Kontingent neu setzen') %]">
+
+<br>
+</form>
+
+

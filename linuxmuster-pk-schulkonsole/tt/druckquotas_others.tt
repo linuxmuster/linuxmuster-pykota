@@ -1,0 +1,47 @@
+[% page = {
+      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Sonderquota'),
+      menu     => 1,
+      info     => loc('<p>Hier können Sie die Druckquota eines Benutzers ändern. Die Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert geändert werden.</p><p>Beim "Neu-Setzen" wird zusätzlich der bisherige Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</p>'),
+	}
+%]
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Sonderquota') %]</h2>
+<br>
+
+<form method="post">
+
+<hr>
+<br>
+<br>Benutzername:     <input size="14" maxlength="14" name="benutzer" value="[% loc('') %]">
+<input type="submit" name="showbalance" value="[% loc('Kontingent des Benutzers anzeigen') %]">
+
+[% IF benutzer %]
+	<br><br>
+	<table id="quotasbenutzer" class="liste">
+	<tr>
+	<th>[% loc('Login') %]</th>
+	<th>[% loc('Gesamtes Kontingent') %]</th>
+	<th>[% loc('Restliches Kontingent') %]</th>
+	</tr>
+	[% lfdnr = 1 %]	
+	[% FOREACH b IN benutzer %]
+	<tr class="[% IF lfdnr % 2 == 1 %]odd[% ELSE %]even[% END %]">
+	<td>[% b.login %]</td>
+	<td>[% b.maxbalance %]</td>
+	<td>[% b.balance %]</td>
+	[% lfdnr = lfdnr + 1 %]</tr>
+	[% END %]
+	</tr>
+	<th colspan="6"> </th>
+	</table>
+	
+[% END %]
+
+<br>Neues Kontingent: <input size="10" maxlength="10" name="newbalance" value="[% loc('') %]">
+<input type="submit" name="setbalance" value="[% loc('Kontingent des Benutzers ändern') %]">
+<input type="submit" name="resetbalance" value="[% loc('Kontingent neu setzen') %]">
+
+<br>
+</form>
+
+

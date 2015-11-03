@@ -1,0 +1,57 @@
+[% page = {
+      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Lehrer'),
+      menu     => 1,
+      info     => loc('Hier können Sie die Druckquota für Lehrer/innen ändern. Die Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert ge&auml;ndert werden.</p><p>Beim "Neu-Setzen" wird zusätzlich der bisherige Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</p>'),
+   }
+%]      
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Lehrer') %]</h2>
+
+
+[% IF teachers %]
+
+	<form method="post">
+	
+	<table id="quotasteachers" class="liste">
+	<tr>
+	<th>[% loc('Login') %]</th>
+	<th>[% loc('Name') %]</th>
+	<th>[% loc('Gesamtes Kontingent') %]</th>
+	<th>[% loc('Restliches Kontingent') %]</th>
+	<th>[% loc('Kontingent setzen oder &auml;ndern') %]</th>
+	<th>[% loc('Auswahl') %]</th>
+	</tr>
+	[% lfdnr = 1 %]
+	[% FOREACH t IN teachers %]
+	<tr class="[% IF lfdnr % 2 == 1 %]odd[% ELSE %]even[% END %]">
+	<td>[% t.login %]</td>
+	<td>[% t.firstname %] [% t.surname %]</td>
+	<td>[% t.maxbalance %]</td>
+	<td>[% t.balance %]</td>
+	<td><input size="6" maxlength="5" name"[% t.login %]_teachernewbalance" value"[% t.newbalance %]"></td>
+	<td><input type="checkbox" name"[% t.login %];select"></td>
+	[% lfdnr = lfdnr + 1 %]</tr>
+	[% END %]
+	<th colspan="6"> </th>
+	<tr class="quickselection">
+	<td colspan="5">[% loc('Schnellauswahl') %]</td>
+	<td colspan="5"><input type="button" value="[% loc('An') %]" name="select" onClick="check_uncheck(this)"></td>
+	</tr>
+	<th colspan="6"> </th>
+	</table>
+	
+	<ul>
+	<li><input type="submit" name="acceptteachers" value="[% loc('Änderungen übernehmen') %]"></li>
+	<li><input type="submit" name="resetteachers" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
+	<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+	<li><input type="submit" name="deleteteachers" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
+	</ul>
+	
+	</form>
+	
+[% ELSE %]
+	<p>[% loc('Es gibt keine Lehrer.') %]</p>
+[% END %]
+
+
+

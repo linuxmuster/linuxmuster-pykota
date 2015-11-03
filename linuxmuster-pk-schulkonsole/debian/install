@@ -1,0 +1,6 @@
+cgi-bin/*	/usr/lib/schulkonsole/cgi-bin
+menus.d/*	/usr/lib/schulkonsole/menus.d
+permissions.d/*	/usr/lib/schulkonsole/permissions.d
+tt/*		/usr/share/schulkonsole/shtml
+bin/*		/usr/lib/schulkonsole/bin
+lib/*		/usr/share/schulkonsole/Schulkonsole
