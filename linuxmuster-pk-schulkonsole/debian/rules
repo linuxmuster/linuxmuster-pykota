@@ -32,7 +32,7 @@ build-arch-stamp:
 	dh_testdir
 
 	# Add here command to compile/build the package.
-	#$(MAKE)
+	(cd src; $(MAKE))
 
 	touch build-arch-stamp
 

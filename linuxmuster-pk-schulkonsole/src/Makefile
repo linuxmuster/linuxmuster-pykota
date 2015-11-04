@@ -1,3 +1,5 @@
+all: install clean
+
 compile:
 	x86_64-linux-gnu-gcc -DENABLE_NLS=1 -DHAVE_GETTEXT=1 -DHAVE_DCGETTEXT=1 -DHAVE_CATGETS=1 -DENABLE_NLS=1 \
 	-DHAVE_LC_MESSAGES=1 -DHAVE_STPCPY=1 -I.   -D_FORTIFY_SOURCE=2 \
@@ -15,8 +17,6 @@ install: link
 	mkdir -p ../bin
 	mv wrapper-druckquotas ../bin
 	cp wrapper-druckquotas.pl ../bin
-
-all: install clean
 
 clean:
 	rm -f wrapper-druckquotas.o wrapper-druckquotas.d
