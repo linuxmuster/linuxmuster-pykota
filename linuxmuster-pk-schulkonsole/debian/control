@@ -1,14 +1,14 @@
 Source: linuxmuster-pk-schulkonsole
 Section: debian-linuxmuster
 Priority: optional
-Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
+Maintainer: Frank Schütte <fschuett@gymhim.de>
 Build-Depends: debhelper (>= 4.0.0)
 Standards-Version: 3.6.0
 
 Package: linuxmuster-pk-schulkonsole
 Section: unknown
 Priority: optional
-Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
+Maintainer: Frank Schütte <fschuett@gymhim.de>
 Architecture: all
 Depends: pykota, pkipplib, pkpgcounter, linuxmuster-schulkonsole
 Description: This package provides schulkonsole plugin for pykota wrapper.
