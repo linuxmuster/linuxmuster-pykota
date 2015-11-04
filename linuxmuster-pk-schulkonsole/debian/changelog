@@ -1,6 +1,6 @@
 linuxmuster-pk-schulkonsole (0.1.0-0) babo-testing; urgency=low
-   
   * initial package
   * Fix pages to display correctly
+  * Create Error::Druckquotas, DruckquotasConfig, create and use wrapper_druckquotas for security
 
- -- Frank Schütte <fschuett@gymhim.de>  Tue, 03 Nov 2015 17:46:45 +0100
+ -- Frank Schütte <fschuett@gymhim.de>  Wed, 04 Nov 2015 20:42:37 +0100

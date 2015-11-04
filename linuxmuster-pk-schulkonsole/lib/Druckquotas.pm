@@ -1,9 +1,12 @@
 use strict;
+use CGI::Inspect;
 use utf8;
 use IPC::Open3;
 use POSIX 'sys_wait_h';
 use Schulkonsole::Error;
+use Schulkonsole::Error::Druckquotas;
 use Schulkonsole::Config;
+use Schulkonsole::DruckquotasConfig;
 
 package Schulkonsole::Druckquotas;
 
@@ -33,7 +36,7 @@ $VERSION = 0.2;
 	read_linuxmuster_pykota_conf_file
 	get_linuxmuster_pykota_conf
 	get_balance
-	gwt_balancelist
+	get_balancelist
 	set_balance
 	reset_balance
 	delete_balance
@@ -48,20 +51,23 @@ $VERSION = 0.2;
 	set_aktiv
 );
 
-#
-# Konstanten nach Schulkonsole::Config verschieben
-#
-my $wrapper = "sudo /usr/lib/schulkonsole/bin/druckquotas.pl";
-my $linuxmuster_pykota_conf_filename = "/etc/linuxmuster/pykota.conf";
-my $pykota_conf_filename = "/etc/pykota/pykota.conf";
-
-
 sub set_balance {
 	my $id = shift;
 	my $password = shift;
 	my $balance = shift;
 	my @benutzer_array = @_;
-	qx($wrapper $id $password balance $balance @benutzer_array);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "3\n$balance\n", join("\n", @benutzer_array), "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
 }
 
 sub reset_balance {
@@ -69,21 +75,58 @@ sub reset_balance {
 	my $password = shift;
 	my $balance = shift;
 	my @benutzer_array = @_;
-	qx($wrapper $id $password reset $balance @benutzer_array);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "4\n$balance\n", join("\n", @benutzer_array), "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
 }
 
 sub delete_balance {
 	my $id = shift;
 	my $password = shift;
 	my @benutzer_array = @_;
-	qx($wrapper $id $password delete @benutzer_array);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "2\n", join("\n", @benutzer_array), "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
 }
 
 sub get_balance {
 	my $id = shift;
 	my $password = shift;
 	my $login = shift;
-	(my $maxmb, my $mb) = split (/ /, qx($wrapper $id $password list $login));
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTASHOWAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "$login\n", "\n\n";
+	close SCRIPTOUT;
+
+	my $maxmb,
+	my $mb;
+	while (<SCRIPTIN>) {
+		($maxmb,$mb) = split(/ /, $_);
+	}
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
 	return ($maxmb, $mb);
 }
 
@@ -91,29 +134,81 @@ sub get_balancelist {
 	my $id = shift;
 	my $password = shift;
 	my @login_array = @_;
-	my @userlist = split (/ /, qx($wrapper $id $password userlist @login_array));
-	return (@userlist);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "1\n", join("\n", @login_array), "\n\n";
+	close SCRIPTOUT;
+
+	my @re;
+	while (<SCRIPTIN>) {
+		s/\R//g;
+		last if /^$/;
+		push @re, $_;
+	}
+			
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
+	return @re;
 }
 
 sub get_printers {
 	my $id = shift;
 	my $password = shift;
-	my @printers = split (/ /, qx($wrapper $id $password printers));
-	return (@printers);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAPRINTERAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "0\n", "\n\n";
+	close SCRIPTOUT;
+
+	my @re;
+	while (<SCRIPTIN>) {
+		s/\R//g;
+		last if /^$/;
+		push @re, $_;
+	}
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	
+	return @re;
 }
 
 sub add_printer {
 	my $id = shift;
 	my $password = shift;
 	my $printer = shift;
-	qx($wrapper $id $password printeradd $printer);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAPRINTERAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "1\n$printer\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub delete_printer {
 	my $id = shift;
 	my $password = shift;
 	my $printer = shift;
-	qx($wrapper $id $password printerdelete $printer);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAPRINTERAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "2\n$printer\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub charge_printer {
@@ -121,7 +216,17 @@ sub charge_printer {
 	my $password = shift;
 	my $value = shift;
 	my $printer = shift;
-	qx($wrapper $id $password charge $value $printer);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAPRINTERAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "3\n$value\n$printer\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub passthrough_printer {
@@ -129,13 +234,23 @@ sub passthrough_printer {
 	my $password = shift;
 	my $value = shift;
 	my $printer = shift;
-	qx($wrapper $id $password passthrough $value $printer);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTAPRINTERAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "4\n$value\n$printer\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub get_linuxmuster_pykota_conf {
 	my $id = shift;
 	my $password = shift;
-	do "$linuxmuster_pykota_conf_filename";
+	do "$Schulkonsole::DruckquotasConfig::_linuxmuster_pykota_conf_file";
 	return (%balance);
 }
 
@@ -143,7 +258,7 @@ sub read_linuxmuster_pykota_conf_file {
 	my $id = shift;
 	my $password = shift;
 	my @lines;
-	if (open PYKOTACONF , $linuxmuster_pykota_conf_filename) {
+	if (open PYKOTACONF , $Schulkonsole::DruckquotasConfig::_linuxmuster_pykota_conf_file) {
 		while (my $line = <PYKOTACONF> ){
 			push (@lines, $line);
 			}
@@ -155,45 +270,86 @@ sub read_linuxmuster_pykota_conf_file {
 sub read_pykota_conf_file {
 	my $id = shift;
 	my $password = shift;
-	my $output = qx($wrapper $id $password readpykotafile);
-	my @lines = split (/\n/, $output);
+	my @lines;
+	if (open PYKOTACONF , $Schulkonsole::DruckquotasConfig::_pykota_conf_file) {
+		while (my $line = <PYKOTACONF> ){
+			push @lines, $line;
+		}
+		close PYKOTACONF;
+	}
 	return (@lines);
 }
 
 sub add_standard {
 	my $id = shift;
 	my $password = shift;
-	my $gruppe = shift;
+	my $group = shift;
 	my $value = shift;
-	qx ($wrapper $id $password addstandard $gruppe $value);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTADEFAULTSAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "1\n$group\n$value\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub delete_standard {
 	my $id = shift;
 	my $password = shift;
-	my $gruppe = shift;
-	qx ($wrapper $id $password deletestandard $gruppe);
+	my $group = shift;
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTADEFAULTSAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "2\n$group\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub modify_standard {
 	my $id = shift;
 	my $password = shift;
-	my $gruppe = shift;
+	my $group = shift;
 	my $value = shift;
-	qx ($wrapper $id $password modifystandard $gruppe $value);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTADEFAULTSAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "3\n$group\n$value\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
 sub set_aktiv {
 	my $id = shift;
 	my $password = shift;
 	my $nummer = shift;
-	qx ($wrapper $id $password setaktiv $nummer);
+
+	my $pid = start_wrapper(Schulkonsole::DruckquotasConfig::PRINTQUOTADEFAULTSAPP,
+		$id, $password,
+		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+
+	print SCRIPTOUT "$nummer\n", "\n\n";
+	close SCRIPTOUT;
+
+	buffer_input(\*SCRIPTIN);
+
+	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
 }
 
-
-##################################################
-#      ???????????????????????                   #
-##################################################
 
 my $input_buffer;
 sub buffer_input {
@@ -204,124 +360,82 @@ sub buffer_input {
 	}
 }
 
-#sub start_wrapper {
-#	my $app_id = shift;
-#	my $id = shift;
-#	my $password = shift;
-#	my $out = shift;
-#	my $in = shift;
-#	my $err = shift;
-#
-#	my $pid = IPC::Open3::open3 $out, $in, $err,
-#		$Schulkonsole::Config::_wrapper_files
-#		or die new Schulkonsole::Error(
-#			Schulkonsole::Error::WRAPPER_EXEC_FAILED,
-#			$Schulkonsole::Config::_wrapper_files, $!);
-#
-#	binmode $out, ':utf8';
-#	binmode $in, ':utf8';
-#	binmode $err, ':utf8';
-#
-#	my $re = waitpid $pid, POSIX::WNOHANG;
-#	if (   $re == $pid
-#	    or $re == -1) {
-#		my $error = ($? >> 8) - 256;
-#		if ($error < -127) {
-#			die new Schulkonsole::Error(
-#				Schulkonsole::Error::WRAPPER_EXEC_FAILED,
-#				$Schulkonsole::Config::_wrapper_files, $!);
-#		} else {
-#			die new Schulkonsole::Error(
-#				Schulkonsole::Error::WRAPPER_FILES_ERROR_BASE + $error,
-#				$Schulkonsole::Config::_wrapper_files);
-#		}
-#	}
-#
-#	print $out "$id\n$password\n$app_id\n";
-#
-#	return $pid;
-#}
-
-#sub stop_wrapper {
-#	my $pid = shift;
-#	my $out = shift;
-#	my $in = shift;
-#	my $err = shift;
-#
-#	my $re = waitpid $pid, 0;
-#	if (    ($re == $pid or $re == -1)
-#	    and $?) {
-#		my $error = ($? >> 8) - 256;
-#		if ($error < -127) {
-#			die new Schulkonsole::Error(
-#				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
-#				$Schulkonsole::Config::_wrapper_files, $!,
-#				($input_buffer ? "Output: $input_buffer" : 'No Output'));
-#		} else {
-#			die new Schulkonsole::Error(
-#				Schulkonsole::Error::WRAPPER_FILES_ERROR_BASE + $error,
-#				$Schulkonsole::Config::_wrapper_files);
-#		}
-#	}
-#
-#	if ($out) {
-#		close $out
-#			or die new Schulkonsole::Error(
-#				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_OUT,
-#				$Schulkonsole::Config::_wrapper_files, $!,
-#				($input_buffer ? "Output: $input_buffer" : 'No Output'));
-#	}
-#
-#	close $in
-#		or die new Schulkonsole::Error(
-#			Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
-#			$Schulkonsole::Config::_wrapper_files, $!,
-#			($input_buffer ? "Output: $input_buffer" : 'No Output'));
-#
-#	undef $input_buffer;
-#}
-
-
-#
-#sub read_file {
-#	my $id = shift;
-#	my $password = shift;
-#	my $file_number = shift;
-#
-#	my $pid = start_wrapper(Schulkonsole::Config::READFILEAPP,
-#		$id, $password,
-#		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
-#
-#	print SCRIPTOUT "$file_number\n";
-#
-#	my @re;
-#	while (<SCRIPTIN>) {
-#		push @re, $_;
-#	}
-#
-#
-#	stop_wrapper($pid, \*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
-#
-#
-#	return \@re;
-#}
-
-sub write_file {
+sub start_wrapper {
+	my $app_id = shift;
 	my $id = shift;
 	my $password = shift;
-	my $lines = shift;
-	my $file_number = shift;
+	my $out = shift;
+	my $in = shift;
+	my $err = shift;
 
-	my $pid = start_wrapper(Schulkonsole::Config::WRITEFILEAPP,
-		$id, $password,
-		\*SCRIPTOUT, \*SCRIPTIN, \*SCRIPTIN);
+	my $pid = IPC::Open3::open3 $out, $in, $err,
+		$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas
+		or die new Schulkonsole::Error(
+			Schulkonsole::Error::WRAPPER_EXEC_FAILED,
+			$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!);
 
-	print SCRIPTOUT "$file_number\n", join('', @$lines);
-	close SCRIPTOUT;
+	binmode $out, ':utf8';
+	binmode $in, ':utf8';
+	binmode $err, ':utf8';
 
-	buffer_input(\*SCRIPTIN);
+	my $re = waitpid $pid, POSIX::WNOHANG;
+	if (   $re == $pid
+	    or $re == -1) {
+		my $error = ($? >> 8) - 256;
+		if ($error < -127) {
+			die new Schulkonsole::Error(
+				Schulkonsole::Error::WRAPPER_EXEC_FAILED,
+				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!);
+		} else {
+			die new Schulkonsole::Error(
+				Schulkonsole::Error::Druckquotas::WRAPPER_ERROR_BASE + $error,
+				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas);
+		}
+	}
 
-	stop_wrapper($pid, undef, \*SCRIPTIN, \*SCRIPTIN);
+	print $out "$id\n$password\n$app_id\n";
+
+	return $pid;
 }
+
+sub stop_wrapper {
+	my $pid = shift;
+	my $out = shift;
+	my $in = shift;
+	my $err = shift;
+
+	my $re = waitpid $pid, 0;
+	if (    ($re == $pid or $re == -1)
+	    and $?) {
+		my $error = ($? >> 8) - 256;
+		if ($error < -127) {
+			die new Schulkonsole::Error(
+				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
+				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
+				($input_buffer ? "Output: $input_buffer" : 'No Output'));
+		} else {
+			die new Schulkonsole::Error(
+				Schulkonsole::Error::Druckquotas::WRAPPER_ERROR_BASE + $error,
+				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas);
+		}
+	}
+
+	if ($out) {
+		close $out
+			or die new Schulkonsole::Error(
+				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_OUT,
+				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
+				($input_buffer ? "Output: $input_buffer" : 'No Output'));
+	}
+
+	close $in
+		or die new Schulkonsole::Error(
+			Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
+			$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
+			($input_buffer ? "Output: $input_buffer" : 'No Output'));
+
+	undef $input_buffer;
+}
+
 
 1;

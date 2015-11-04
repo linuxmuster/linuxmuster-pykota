@@ -20,7 +20,8 @@ The HTML template is settings_druckquotas.tt.
 use strict;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
+use Schulkonsole::DruckquotasConfig;
 use Schulkonsole::Files;
 use Schulkonsole::Config;
 
@@ -55,7 +56,7 @@ my @errors;
 #############################################################
 $q->param('acceptstandards') and do {
 	my @processed_params;
-	my @lines = Schulkonsole::Druckquota::read_linuxmuster_pykota_conf_file($id, $password);
+	my @lines = Schulkonsole::Druckquotas::read_linuxmuster_pykota_conf_file($id, $password);
 	foreach my $param ($q->param) {
 		if (my ($gruppe) = $param =~ /^(.+)_gruppenewbalance$/) {
 			if ( $gruppe =~ /[\-\w]+/  ) {
@@ -80,7 +81,7 @@ $q->param('acceptstandards') and do {
 						}
 					}
 					if ($gefunden == 1) {
-							Schulkonsole::Druckquota::modify_standard($id, $password, $gruppe, $wert);
+							Schulkonsole::Druckquotas::modify_standard($id, $password, $gruppe, $wert);
 					} else {
 						push @errors, sprintf($d->get(
 						'%s: Gruppe existiert nicht.'), $gruppe);
@@ -111,7 +112,7 @@ $q->param('acceptstandards') and do {
 
 $q->param('deletestandards') and do {
 	my $gruppe;
-	my @lines = Schulkonsole::Druckquota::read_linuxmuster_pykota_conf_file($id, $password);
+	my @lines = Schulkonsole::Druckquotas::read_linuxmuster_pykota_conf_file($id, $password);
 	foreach my $param ($q->param) {
 		if ( ($gruppe) = $param =~ /^(.+);select$/) {
 			if ($gruppe =~ m/^\s*([\-\w]+)\s*$/) {
@@ -122,7 +123,7 @@ $q->param('deletestandards') and do {
 					foreach my $line (@lines) {
 						if ($line =~ m/\s*\$balance\{[\"\']?($gruppe)[\"\']?\}/i ) {
 #							splice (@lines, $linecount,1)
-							Schulkonsole::Druckquota::delete_standard($id, $password, $gruppe);
+							Schulkonsole::Druckquotas::delete_standard($id, $password, $gruppe);
 							$is_changed ++;
 							$gefunden = 1;
 						$linecount++;
@@ -166,7 +167,7 @@ $q->param('addstandard') and do {
 			push @errors, sprintf($d->get(
 			'%s: Druckquota falsch angegeben.'), $gruppe);
 		}
-		my @lines = Schulkonsole::Druckquota::read_linuxmuster_pykota_conf_file($id, $password);
+		my @lines = Schulkonsole::Druckquotas::read_linuxmuster_pykota_conf_file($id, $password);
 		my $doppelt = 0;
 		foreach my $line (@lines) {
 			if ($line =~ m/\s*\$balance\{[\"\']?($gruppe)[\"\']?\}/i ) {
@@ -176,7 +177,7 @@ $q->param('addstandard') and do {
 			}
 		}
 		if (not $doppelt) {
-			Schulkonsole::Druckquota::add_standard($id, $password, $gruppe, $value);
+			Schulkonsole::Druckquotas::add_standard($id, $password, $gruppe, $value);
 #			my $newline = '$balance{"'."$gruppe".'"}  =  '.$wert.';'."\n";
 #			push @lines, $newline;
 #			Schulkonsole::Files::_write_linuxmuster_pykota_conf_file($id, $password, \@lines);
@@ -208,7 +209,7 @@ $q->param('setaktiv') and do {
 		my @position;
 		my @text;
 		my $linecount;
-		my @lines = Schulkonsole::Druckquota::read_pykota_conf_file($id, $password);
+		my @lines = Schulkonsole::Druckquotas::read_pykota_conf_file($id, $password);
 		foreach my $line ( @lines ) {
 			if ( $line =~ m/\s*(#*)\s*(askconfirmation\s*\:\s*\/usr\/bin\/pknotify.*)/ ) {
 				$count++;
@@ -235,7 +236,7 @@ $q->param('setaktiv') and do {
 				}
 			}
 			if ($is_changed > 0 ) {
-				Schulkonsole::Druckquota::set_aktiv($id, $password, $nummer);
+				Schulkonsole::Druckquotas::set_aktiv($id, $password, $nummer);
 #				Schulkonsole::Files::_write_pykota_conf_file($id, $password, \@lines);
 			}
 		} else {
@@ -260,7 +261,7 @@ $q->param('setaktiv') and do {
 };
 
 my @standards_array;
-my %balance = Schulkonsole::Druckquota::get_linuxmuster_pykota_conf($id, $password);
+my %balance = Schulkonsole::Druckquotas::get_linuxmuster_pykota_conf($id, $password);
 foreach my $groupkey (sort keys %balance) {
 	my $wert = sprintf('%.2f',$balance{$groupkey});
 	$wert =~ tr/\,/\./;
@@ -279,7 +280,7 @@ foreach my $groupkey (sort keys %balance) {
 }
 
 my @askconfirmation_array;
-my @lines = Schulkonsole::Druckquota::read_pykota_conf_file($id, $password);
+my @lines = Schulkonsole::Druckquotas::read_pykota_conf_file($id, $password);
 my $typ;
 my $num =0;
 foreach my $zeile ( @lines ) {

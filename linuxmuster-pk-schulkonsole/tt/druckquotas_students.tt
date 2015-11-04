@@ -39,7 +39,7 @@
 		<th>[% loc('Name') %]</th>
 		<th>[% loc('Gesamtes Kontingent') %]</th>
 		<th>[% loc('Restliches Kontingent') %]</th>
-		<th>[% loc('Kontingent setzen oder &auml;ndern') %]</th>
+		<th>[% loc('Kontingent setzen oder ändern') %]</th>
 		<th>[% loc('Auswahl') %]</th>
 		</tr>
 		[% lfdnr = 1 %]
@@ -50,16 +50,14 @@
 			<td>[% s.firstname %] [% s.surname %]</td>
 			<td>[% s.maxbalance %]</td>
 			<td>[% s.balance %]</td>
-			<td><input size="6" maxlength="5" name"[% s.login %]_studentnewbalance" value"[% s.newbalance %]"></td>
-			<td><input type="checkbox" name"[% s.login %];select"></td>
+			<td><input size="6" maxlength="5" name="[% s.login %]_studentnewbalance" value="[% s.newbalance %]"></td>
+			<td><input type="checkbox" name="[% s.login %];select"></td>
 			[% lfdnr = lfdnr + 1 %]</tr>
 		[% END %]
-		<th colspan="7"> </th>
 		<tr class="quickselection">
 		<td colspan="6">[% loc('Schnellauswahl') %]</td>
 		<td><input type="button" value="[% loc('An') %]" name="select" onClick="check_uncheck(this)"></td>
 		</tr>
-		<th colspan="7"> </th>
 		</table>
 		
 		<ul>

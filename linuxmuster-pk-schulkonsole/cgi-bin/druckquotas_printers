@@ -21,7 +21,7 @@ The HTML template is druckquotas_printers.tt.
 use strict;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
 
 my $this_file = 'druckquotas_printers';
 my $textdomain = 'linuxmuster-pk';
@@ -71,7 +71,7 @@ $q->param('acceptprinters') and do {
 							$value = $value.','.$job;
 							push @processed_params, $param;
 						}
-						Schulkonsole::Druckquota::charge_printer($id, $password, $value, $printer);
+						Schulkonsole::Druckquotas::charge_printer($id, $password, $value, $printer);
 						$is_changed++;
 					}
 				}
@@ -88,7 +88,7 @@ $q->param('acceptprinters') and do {
 						push @errors, sprintf($d->get('%s: Bitte ON oder OFF angegeben'), $printer);
 				        } else {
 						push @processed_params, $param;
-						Schulkonsole::Druckquota::passthrough_printer($id, $password, $value, $printer);
+						Schulkonsole::Druckquotas::passthrough_printer($id, $password, $value, $printer);
 						$is_changed++;
 					}
 				} elsif ($q->param($param) !~ /^\s*$/) {
@@ -118,7 +118,7 @@ $q->param('deleteprinters') and do {
 		if (my ($printer) = $param =~ /^(.+);select$/) {
 			if ($printer =~ m/^\s*([\-\w]+)\s*$/) {
 				$printer = $1;
-				Schulkonsole::Druckquota::delete_printer($id, $password, $printer);
+				Schulkonsole::Druckquotas::delete_printer($id, $password, $printer);
 				$is_changed++;
 			} else {
 				push @errors, sprintf($d->get(
@@ -139,7 +139,7 @@ $q->param('addprinter') and do {
 	my @processed_params;
 	if ( $q->param('newprinter') =~ /^\s*([\-\w]+)\s*$/) {
 		my $printer = $1;
-		Schulkonsole::Druckquota::add_printer ($id, $password, $printer);;
+		Schulkonsole::Druckquotas::add_printer ($id, $password, $printer);;
 		$is_changed++;
 		push @processed_params, 'newprinter';
 	}
@@ -159,7 +159,7 @@ if ($@) {
 	$sk_session->standard_error_handling($this_file, $@);
 }
 my @printers_array;
-my @printerlist = Schulkonsole::Druckquota::get_printers($id, $password);
+my @printerlist = Schulkonsole::Druckquotas::get_printers($id, $password);
 foreach my $printer ( sort @printerlist ) {
 	(my $printer_name, my $page, my $job, my $passthrough) = split (/:/, $printer );
 	push @printers_array, {

@@ -21,9 +21,10 @@ The HTML template is druckquotas_teachers.tt.
 
 
 use strict;
+use CGI::Inspect;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
 use Schulkonsole::Sophomorix;
 
 my $this_file = 'druckquotas_teachers';
@@ -74,17 +75,21 @@ my @errors;
 				        } 
 	else {
 			if ($q->param('resetteachers')) {
-				Schulkonsole::Druckquota::reset_balance ($id, $password, $default_balance, @user_selects);
+				Schulkonsole::Druckquotas::reset_balance ($id, $password, $default_balance, @user_selects);
 			} else {
-				Schulkonsole::Druckquota::delete_balance ($id, $password, @user_selects);
+				Schulkonsole::Druckquotas::delete_balance ($id, $password, @user_selects);
 			}
 	}
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		$sk_session->set_status($d->get("Druckquotas gesetzt: $is_changed mal"), 0);
+		if($q-param('resetteachers')) {
+			$sk_session->set_status($d->get("Druckquotas gesetzt: $is_changed mal"), 0);
+		} else {
+			$sk_session->set_status($d->get("Druckquotas entfernt: $is_changed mal"), 0);			
+		}
 	} else {
-		$sk_session->set_status($d->get('Keine &Auml;nderungen.'), 1);
+		$sk_session->set_status($d->get('Keine Änderungen.'), 1);
 	}
 }; # end resetteachers
 #############################################################
@@ -100,7 +105,7 @@ $q->param('acceptteachers') and do {
 						'%s: Neue Quota muss eine Zahl ggf. mit Vorzeichen sein'), $login);
 				        } else {
 					push @processed_params, $param;
-						Schulkonsole::Druckquota::set_balance ($id, $password, $value, $login);
+						Schulkonsole::Druckquotas::set_balance ($id, $password, $value, $login);
 						$is_changed++;
 					}
 				}
@@ -114,11 +119,10 @@ $q->param('acceptteachers') and do {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
 		$sk_session->set_status($d->get(
-			"&Auml;nderungen &uuml;bernommen."), 0);
+			"Änderungen übernommen: $is_changed mal"), 0);
 		$q->delete(@processed_params);
 	} else {
-		$sk_session->set_status($d->get(
-			"Keine &Auml;nderungen. $id $password"), 1);
+		$sk_session->set_status($d->get("Keine Änderungen."), 1);
 	}
 
 
@@ -133,7 +137,7 @@ if ($@) {
 
 my $teachers = get_teachers();
 my @teachers_array;
-my @userlist = Schulkonsole::Druckquota::get_balancelist($id, $password, keys %$teachers);
+my @userlist = Schulkonsole::Druckquotas::get_balancelist($id, $password, keys %$teachers);
 	foreach my $zeile (@userlist) {
 		(my $key, my $maxmb, my $mb) = split(/:/,$zeile);
 		$$teachers{$key}{maxmb} = $maxmb;

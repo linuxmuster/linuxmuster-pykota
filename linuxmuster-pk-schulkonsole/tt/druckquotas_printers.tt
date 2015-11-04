@@ -30,14 +30,12 @@
 	<td>[% p.pagecost %]</td>
 	<td>[% p.jobcost %]</td>
 	<td>[% p.passthrough %]</td>
-	<td><input size="6" maxlength="5" name"[% p.printername %]_printernewpage" value"[% p.newpage %]"></td>
-	<td><input size="6" maxlength="5" name"[% p.printername %]_printernewjob" value"[% p.newjob %]"></td>
-	<td><input size="6" maxlength="5" name"[% p.printername %]_printernewpassthrough" value"[% p.newpassthrough %]"></td>
-	<td><input type="checkbox" name"[% p.printername %];select"></td>
+	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewpage" value="[% p.newpage %]"></td>
+	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewjob" value="[% p.newjob %]"></td>
+	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewpassthrough" value="[% p.newpassthrough %]"></td>
+	<td><input type="checkbox" name="[% p.printername %];select"></td>
 	[% lfdnr = lfdnr + 1 %]</tr>
 	[% END %]
-	
-	<th colspan="7"> </th>
 	</table>
 	
 	<ul>

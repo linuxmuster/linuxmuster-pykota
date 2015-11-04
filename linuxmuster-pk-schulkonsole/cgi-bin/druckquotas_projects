@@ -21,7 +21,7 @@ The HTML template is druckquotas_projects.tt.
 use strict;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
 use Schulkonsole::DB;
 
 my $this_file = 'druckquotas_projects';
@@ -74,9 +74,9 @@ or $q->param('deleteprojects')) and do {
 			my @schueler = keys %$project_userdatas;
 			$is_changed = $is_changed + @schueler;
 			if ($q->param('resetprojects')) {
-				Schulkonsole::Druckquota::reset_balance ($id, $password, $default_balance, @schueler);
+				Schulkonsole::Druckquotas::reset_balance ($id, $password, $default_balance, @schueler);
 			} else {
-				Schulkonsole::Druckquota::delete_balance ($id, $password, @schueler);
+				Schulkonsole::Druckquotas::delete_balance ($id, $password, @schueler);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ $q->param('acceptprojects') and do {
 				    } else {
 					my $project_userdatas = Schulkonsole::DB::project_user_members($$projectss{$gid}{gidnumber});
 					my @schueler = keys %$project_userdatas;
-					Schulkonsole::Druckquota::set_balance ($id, $password, $value, @schueler);
+					Schulkonsole::Druckquotas::set_balance ($id, $password, $value, @schueler);
 					$is_changed++;
 					push @processed_params, $param;
 					}

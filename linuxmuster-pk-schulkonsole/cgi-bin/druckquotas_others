@@ -20,7 +20,7 @@ The HTML template is druckquotas_others.tt.
 use strict;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
 
 my $this_file = 'druckquotas_others';
 my $textdomain = 'linuxmuster-pk';
@@ -62,9 +62,9 @@ my @errors;
 			$balance = $1;
 			push @benutzer_array, $benutzer;
 			if ($q->param('setbalance')) {
-				Schulkonsole::Druckquota::set_balance($id, $password, $balance, @benutzer_array);
+				Schulkonsole::Druckquotas::set_balance($id, $password, $balance, @benutzer_array);
 			} else {
-				Schulkonsole::Druckquota::reset_balance($id, $password, $balance, @benutzer_array);
+				Schulkonsole::Druckquotas::reset_balance($id, $password, $balance, @benutzer_array);
 			}
 			$is_changed++;
 			push @processed_params, 'newbalance';
@@ -88,7 +88,7 @@ my @errors;
 	my @benutzer_array;
 	if ( $q->param('benutzer') =~ /^\s*([\w]+)\s*$/) {
 		$benutzer = $1;
-		(my $maxmb, my $mb) = Schulkonsole::Druckquota::get_balance($id, $password, $benutzer);
+		(my $maxmb, my $mb) = Schulkonsole::Druckquotas::get_balance($id, $password, $benutzer);
 		push @benutzer_array, {
 			login => $benutzer,
 			maxbalance => $maxmb,

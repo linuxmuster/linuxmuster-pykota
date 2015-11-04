@@ -20,7 +20,7 @@ The HTML template is druckquotas_classes.tt.
 use strict;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
-use Schulkonsole::Druckquota;
+use Schulkonsole::Druckquotas;
 use Schulkonsole::DB;
 
 
@@ -74,9 +74,9 @@ or $q->param('deleteclasses')) and do {
 			my @schueler = keys %$class_userdatas;
 			$is_changed = $is_changed + @schueler;
 			if ($q->param('resetclasses')) {
-				Schulkonsole::Druckquota::reset_balance ($id, $password, $default_balance, @schueler);
+				Schulkonsole::Druckquotas::reset_balance ($id, $password, $default_balance, @schueler);
 			} else {
-				Schulkonsole::Druckquota::delete_balance ($id, $password, @schueler);
+				Schulkonsole::Druckquotas::delete_balance ($id, $password, @schueler);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ $q->param('acceptclasses') and do {
 				    } else {
 					my $class_userdatas = Schulkonsole::DB::get_class_userdatas($gid);
 					my @schueler = keys %$class_userdatas;
-					Schulkonsole::Druckquota::set_balance ($id, $password, $value, @schueler);
+					Schulkonsole::Druckquotas::set_balance ($id, $password, $value, @schueler);
 					$is_changed = $is_changed + @schueler;
 					push @processed_params, $param;
 					}
