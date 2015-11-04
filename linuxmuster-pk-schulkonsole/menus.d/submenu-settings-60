@@ -1,0 +1,3 @@
+[% IF link_settings_druckquotas %]
+	<li><a [% dohref('settings_druckquotas') %]>[% loc('Druck-Quota') %]</a>
+[% END %]

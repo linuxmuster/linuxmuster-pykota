@@ -41,7 +41,7 @@
 	<ul>
 	<li><input type="submit" name="acceptprojects" value="[% loc('Änderungen übernehmen') %]"></li>
 	<li><input type="submit" name="resetprojects" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
-	<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+	<input size="6" maxlength="5" name="defaultbalance" value=""></li>
 	<li><input type="submit" name="deleteprojects" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
 	</ul>
 	

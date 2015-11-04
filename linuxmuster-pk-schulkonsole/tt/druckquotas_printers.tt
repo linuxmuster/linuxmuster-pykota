@@ -51,11 +51,9 @@
 	<p>[% loc('Es gibt keine Drucker.') %]</p>
 [% END %]
 <hr>
-<p>Hinweis: Jeder Drucker muss zunächst bei CUPS so konfiguriert werden, dass Pykota die 
-Quotierung durchführen kann.
-</p>
+<p>[% loc('Hinweis: Jeder Drucker muss zunächst bei CUPS so konfiguriert werden, dass Pykota die Quotierung durchführen kann.') %]</p>
 
-<input size="10" maxlength="10" name="newprinter" value="[% loc('') %]">
+<input size="10" maxlength="10" name="newprinter" value="">
 <input type="submit" name="addprinter" value="[% loc('Drucker in die Pykota-Datenbank aufnehmen') %]">
 
 <br>

@@ -1,11 +1,11 @@
 [% page = {
-      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Einstellungen'),
+      title    => loc('Schulkonsole')_ "-" _ loc('Einstellungen') _ " - " _ loc('Druck-Quota') ,
       menu     => 1,
       info     => loc('Hier können Sie die Einstellungen zu pykota ändern.</p><p>Bei den Standardeinstellungen der Gruppen können Sie festlegen, welche Quota einem Benutzer zugeordnet wird, wenn er das erste mal druckt. Maßgebend ist die höchste Quota eines seiner Gruppen. Auf Benutzer, die bereits gedruckt haben, hat dies jedoch keine Auswirkung.</p><p>Durch Aktivierung einer askconfirmation-Option erhält der Benutzer bei jedem Druckjob in einem Fenster die Aufforderung den Job zu bestätigen.</p>'),
    }
 %]
 
-<h2>[% loc('Druck-Quota') %]</h2>
+<h2>[% loc('Einstellungen') %] :: [% loc('Druck-Quota') %]</h2>
 
 <p>[% loc('Standardeinstellungen der Gruppen:') %]</p>
 
@@ -45,9 +45,9 @@
 [% END %]
 
 <br>
-Gruppe:<input size="10" maxlength="10" name="newgroup" value="[% loc('') %]">
+Gruppe:<input size="10" maxlength="10" name="newgroup" value="">
 &nbsp;&nbsp;
-Druck-Quota:<input size="10" maxlength="10" name="newgroupbalance" value="[% loc('') %]">
+Druck-Quota:<input size="10" maxlength="10" name="newgroupbalance" value="">
 
 <input type="submit" name="addstandard" value="[% loc('Gruppe aufnehmen') %]">
 
@@ -79,7 +79,7 @@ Druck-Quota:<input size="10" maxlength="10" name="newgroupbalance" value="[% loc
   </tr>
   </table>
   <br>
-  Welche Nummer soll aktiviert werden ( 0 - keine):<input size="3" maxlength="3" name="newaktiv" value="[% loc('') %]">
+  Welche Nummer soll aktiviert werden ( 0 - keine):<input size="3" maxlength="3" name="newaktiv" value="">
   <input type="submit" name="setaktiv" value="[% loc('Übernehmen') %]">
 
 [% END %]

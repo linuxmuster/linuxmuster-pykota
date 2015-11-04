@@ -16,6 +16,3 @@
 [% IF link_druckquotas_others %]
 	<li><a [% dohref('druckquotas_others') %]>[% loc('Sonderquota') %]</a>
 [% END %]
-[% IF link_druckquotas_settings %]
-	<li><a [% dohref('druckquotas_settings') %]>[% loc('Einstellungen') %]</a>
-[% END %]

@@ -12,7 +12,7 @@
 
 <hr>
 <br>
-<br>Benutzername:     <input size="14" maxlength="14" name="benutzer" value="[% loc('') %]">
+<br>Benutzername:     <input size="14" maxlength="14" name="benutzer" value="">
 <input type="submit" name="showbalance" value="[% loc('Kontingent des Benutzers anzeigen') %]">
 
 [% IF benutzer %]
@@ -37,7 +37,7 @@
 	
 [% END %]
 
-<br>Neues Kontingent: <input size="10" maxlength="10" name="newbalance" value="[% loc('') %]">
+<br>Neues Kontingent: <input size="10" maxlength="10" name="newbalance" value="">
 <input type="submit" name="setbalance" value="[% loc('Kontingent des Benutzers ändern') %]">
 <input type="submit" name="resetbalance" value="[% loc('Kontingent neu setzen') %]">
 

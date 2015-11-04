@@ -5,12 +5,12 @@
    }
 %]      
 
-<h2>[% loc('Druck-Quota') %] :: [% loc('Sch&uuml;ler') %]</h2>
+<h2>[% loc('Druck-Quota') %] :: [% loc('Schüler') %]</h2>
 
 [% IF classes %]
 	<form method="post">
 	<p>
-	Klasse auswählen:<select name="classes">
+	[% loc('Klasse auswählen') %]:<select name="classes">
 	<optgroup label="Klassen">
 	[% FOREACH c IN classes %] <option value"[% c.gid %]"[% IF class && class == c %] selected[% END %]>[% c.name %]</option>[% END %]
 	</optgroup>
@@ -65,7 +65,7 @@
 		<ul>
 		<li><input type="submit" name="acceptstudents" value="[% loc('Änderungen übernehmen') %]"></li>
 		<li><input type="submit" name="resetstudents" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
-		<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+		<input size="6" maxlength="5" name="defaultbalance" value=""></li>
 		<li><input type="submit" name="deletestudents" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
 		</ul>
 		

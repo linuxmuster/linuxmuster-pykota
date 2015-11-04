@@ -40,7 +40,7 @@
 	<ul>
 	<li><input type="submit" name="acceptclasses" value="[% loc('&Auml;nderungen &uuml;bernehmen') %]"></li>
 	<li><input type="submit" name="resetclasses" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
-	<input size="6" maxlength="5" name="defaultbalance" value="[% loc('') %]"></li>
+	<input size="6" maxlength="5" name="defaultbalance" value=""></li>
 	<li><input type="submit" name="deleteclasses" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
 	</ul>
 	
