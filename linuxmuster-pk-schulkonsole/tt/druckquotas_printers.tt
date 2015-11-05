@@ -20,7 +20,6 @@
 	<th>[% loc('Passthrough Mode') %]</th>
 	<th>[% loc('Seitenkosten festlegen') %]</th>
 	<th>[% loc('Jobkosten festlegen') %]</th>
-	<th>[% loc('Passthrough festlegen') %]</th>
 	<th>[% loc('Auswahl') %]</th>
 	</tr>
 	[% lfdnr = 1 %]
@@ -29,10 +28,13 @@
 	<td>[% p.printername %]</td>
 	<td>[% p.pagecost %]</td>
 	<td>[% p.jobcost %]</td>
-	<td>[% p.passthrough %]</td>
+	<td><select name="[% p.printername %]_printernewpassthrough">
+	[% FOREACH v IN ['ON','OFF'] %]
+		<option name="[% v %]" value="[% v %]"[% IF v == p.passthrough %] selected[% END %]>[% v %]</option>
+	[% END %]
+	</select></td>
 	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewpage" value="[% p.newpage %]"></td>
 	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewjob" value="[% p.newjob %]"></td>
-	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewpassthrough" value="[% p.newpassthrough %]"></td>
 	<td><input type="checkbox" name="[% p.printername %];select"></td>
 	[% lfdnr = lfdnr + 1 %]</tr>
 	[% END %]

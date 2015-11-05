@@ -21,7 +21,6 @@ The HTML template is druckquotas_teachers.tt.
 
 
 use strict;
-use CGI::Inspect;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Session;
 use Schulkonsole::Druckquotas;
@@ -83,7 +82,7 @@ my @errors;
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		if($q-param('resetteachers')) {
+		if($q->param('resetteachers')) {
 			$sk_session->set_status($d->get("Druckquotas gesetzt: $is_changed mal"), 0);
 		} else {
 			$sk_session->set_status($d->get("Druckquotas entfernt: $is_changed mal"), 0);			

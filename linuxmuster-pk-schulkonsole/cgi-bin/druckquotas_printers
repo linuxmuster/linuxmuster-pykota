@@ -82,17 +82,13 @@ $q->param('acceptprinters') and do {
 		}
 		if (my ($printer) = $param =~ /^(.+)_printernewpassthrough$/) {
 			if ($printer ne '') {
-				my ($value) = $q->param($param) =~ /^\s*(\w+)\s*$/i;
-				if ( $value =~ /\S/) {
-					if ($value !~ /^(ON|OFF)$/i) {
-						push @errors, sprintf($d->get('%s: Bitte ON oder OFF angegeben'), $printer);
-				        } else {
-						push @processed_params, $param;
-						Schulkonsole::Druckquotas::passthrough_printer($id, $password, $value, $printer);
-						$is_changed++;
-					}
-				} elsif ($q->param($param) !~ /^\s*$/) {
-					push @errors, sprintf($d->get('%s: Bitte ON oder OFF angegeben'), $printer);
+				my ($value) = $q->param($param) =~ /^\s*(ON|OFF)\s*$/;
+				if ($value) {
+					push @processed_params, $param;
+					Schulkonsole::Druckquotas::passthrough_printer($id, $password, $value, $printer);
+					$is_changed++;
+				} else {
+					push @errors, sprintf($d->get('Ungültiger passthrough-Wert %s'), $value);
 				}
 			} else {
 				push @errors, sprintf($d->get(

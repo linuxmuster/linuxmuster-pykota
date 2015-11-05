@@ -1,9 +1,0 @@
-Package: linuxmuster-pk-schulkonsole
-Version: 0.1.0-0
-Architecture: all
-Maintainer: Frank Schiebel <schiebel@aeg-reutlingen.de>
-Installed-Size: 145
-Depends: pykota, pkipplib, pkpgcounter, linuxmuster-schulkonsole
-Section: unknown
-Priority: optional
-Description: This package provides schulkonsole plugin for pykota wrapper.

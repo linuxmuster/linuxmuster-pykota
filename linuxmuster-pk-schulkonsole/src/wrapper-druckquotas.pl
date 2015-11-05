@@ -26,7 +26,6 @@ wrapper-druckquotas.pl - wrapper for configuration of druckquotas
 =cut
 
 use strict;
-use CGI::Inspect;
 use DBI;
 use lib '/usr/share/schulkonsole';
 use Schulkonsole::Config;
@@ -326,7 +325,11 @@ sub printquota_printer {
 	my $value = 0;
 	if($action == 3 or $action == 4) {
 		$value = <>;
-		($value) = $value =~ /^([+-]?\d+)$/;
+		if($action == 3) {
+			($value) = $value =~ /^([+-]?\d+)$/;
+		} else {
+			($value) = $value =~ /^(ON|OFF)$/;
+		}
 		exit (  Schulkonsole::Error::Druckquotas::WRAPPER_INVALID_VALUE
 		      - Schulkonsole::Error::Druckquotas::WRAPPER_ERROR_BASE)
 		      unless $value;
@@ -403,17 +406,10 @@ sub printquota_printer {
 		};
 		
 		$action == 4 and do {
-			if ($value =~ m/^\s*((?:ON|OFF))\s*$/i) {
-				my $wert = $1;
-				my $dbprinter = $dbh->selectrow_hashref("SELECT id FROM printers WHERE printername ='$printer'");
-				my $id = $dbprinter->{'id'};
-				if ($id) {
-					if ($wert =~ m/ON/i) {
-						$dbh->do("UPDATE printers SET passthrough = '1' WHERE id = '$id'");
-					} else {
-						$dbh->do("UPDATE printers SET passthrough = '0' WHERE id = '$id'");
-					}
-				}
+			my $dbprinter = $dbh->selectrow_hashref("SELECT id FROM printers WHERE printername ='$printer'");
+			my $id = $dbprinter->{'id'};
+			if ($id) {
+				$dbh->do("UPDATE printers SET passthrough = '" . ($value eq 'ON'? 1 : 0 ) . "' WHERE id = '$id'");
 			}
 			last ACTION;
 		};
