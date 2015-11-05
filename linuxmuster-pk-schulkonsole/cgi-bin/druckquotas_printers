@@ -99,12 +99,10 @@ $q->param('acceptprinters') and do {
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		$sk_session->set_status($d->get(
-			"Änderungen übernommen."), 0);
+		$sk_session->set_status($d->get("Änderungen übernommen."), 0);
 		$q->delete(@processed_params);
 	} else {
-		$sk_session->set_status($d->get(
-			'Keine Änderungen.'), 1);
+		$sk_session->set_status($d->get('Keine Änderungen.'), 1);
 	}
 	last COMMANDS;
 };  # end acceptprinters
@@ -125,7 +123,8 @@ $q->param('deleteprinters') and do {
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		$sk_session->set_status($d->get("Drucker gelöscht: $is_changed mal"), 0);
+		$sk_session->set_status(sprintf(
+			$d->get("Drucker gelöscht: %s mal"), $is_changed), 0);
 	} else {
 		$sk_session->set_status($d->get('Keine Änderungen.'), 1);
 	}

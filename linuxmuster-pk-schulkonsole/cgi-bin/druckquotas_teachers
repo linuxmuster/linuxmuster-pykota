@@ -83,9 +83,11 @@ my @errors;
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
 		if($q->param('resetteachers')) {
-			$sk_session->set_status($d->get("Druckquotas gesetzt: $is_changed mal"), 0);
+			$sk_session->set_status(sprintf(
+				$d->get("Druckquotas gesetzt: %s mal"), $is_changed), 0);
 		} else {
-			$sk_session->set_status($d->get("Druckquotas entfernt: $is_changed mal"), 0);			
+			$sk_session->set_status(sprintf(
+				$d->get("Druckquotas entfernt: %s mal"), $is_changed), 0);
 		}
 	} else {
 		$sk_session->set_status($d->get('Keine Änderungen.'), 1);
@@ -117,8 +119,8 @@ $q->param('acceptteachers') and do {
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		$sk_session->set_status($d->get(
-			"Änderungen übernommen: $is_changed mal"), 0);
+		$sk_session->set_status(sprintf($d->get(
+			"Änderungen übernommen: %s mal"), $is_changed), 0);
 		$q->delete(@processed_params);
 	} else {
 		$sk_session->set_status($d->get("Keine Änderungen."), 1);

@@ -43,6 +43,7 @@ build-indep-stamp:
 	# Add here command to compile/build the arch indep package.
 	# It's ok not to do anything here, if you don't need to build
 	#  anything for this package.
+	(cd po; $(MAKE) all-local)
 
 	touch build-indep-stamp
 
@@ -68,6 +69,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package.
+	(cd po; $(MAKE) install-locale)
 	dh_install
 
 # Build architecture-independent files here.

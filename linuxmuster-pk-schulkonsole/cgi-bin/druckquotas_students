@@ -105,9 +105,9 @@ my @errors;
 	if (@errors) {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
-		$sk_session->set_status($d->get("Druckquotas gesetzt: $is_changed mal"), 0);
+		$sk_session->set_status(sprintf($d->get("Druckquotas gesetzt: %s mal"), $is_changed), 0);
 	} else {
-		$sk_session->set_status($d->get('Keine &Auml;nderungen.'), 1);
+		$sk_session->set_status($d->get('Keine Änderungen.'), 1);
 	}
 }; # end resetstudents
 #############################################################
@@ -137,11 +137,10 @@ $q->param('acceptstudents') and do {
 		$sk_session->set_status(join(', ', @errors), 1);
 	} elsif ($is_changed) {
 		$sk_session->set_status($d->get(
-			"&Auml;nderungen &uuml;bernommen."), 0);
+			"Änderungen übernommen."), 0);
 		$q->delete(@processed_params);
 	} else {
-		$sk_session->set_status($d->get(
-			"Keine &Auml;nderungen. $id $password"), 1);
+		$sk_session->set_status($d->get("Keine Änderungen."), 1);
 	}
 
 

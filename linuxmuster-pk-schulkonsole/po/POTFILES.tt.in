@@ -1,0 +1,12 @@
+# List of toolkit template source files which contain translatable strings.
+../menus.d/submenu-settings-60
+../menus.d/menu-60
+../menus.d/submenu-druckquotas-01
+../menus.d/submenu-druckquotas-99
+../tt/druckquotas_teachers.tt
+../tt/settings_druckquotas.tt
+../tt/druckquotas_printers.tt
+../tt/druckquotas_students.tt
+../tt/druckquotas_others.tt
+../tt/druckquotas_classes.tt
+../tt/druckquotas_projects.tt
