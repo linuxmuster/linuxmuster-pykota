@@ -1,4 +1,5 @@
 [% page = {
+      textdomain => 'linuxmuster-pk-schulkonsole',
       title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Schüler'),
       menu     => 1,
       info     => loc('<p>Hier können Sie die Druckquota für Schüler ändern. Die Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert geändert werden.</p><p>Beim "Neu-Setzen" wird zusätzlich der bisherige Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</p>'),

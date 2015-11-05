@@ -1,4 +1,5 @@
 [% page = {
+      textdomain => 'linuxmuster-pk-schulkonsole',
       title    => loc('Schulkonsole')_ "-" _ loc('Einstellungen') _ " - " _ loc('Druck-Quota') ,
       menu     => 1,
       info     => loc('Hier können Sie die Einstellungen zu pykota ändern.</p><p>Bei den Standardeinstellungen der Gruppen können Sie festlegen, welche Quota einem Benutzer zugeordnet wird, wenn er das erste mal druckt. Maßgebend ist die höchste Quota eines seiner Gruppen. Auf Benutzer, die bereits gedruckt haben, hat dies jedoch keine Auswirkung.</p><p>Durch Aktivierung einer askconfirmation-Option erhält der Benutzer bei jedem Druckjob in einem Fenster die Aufforderung den Job zu bestätigen.</p>'),

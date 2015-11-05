@@ -1,4 +1,5 @@
 [% page = {
+      textdomain => 'linuxmuster-pk-schulkonsole',
       title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Drucker'),
       menu     => 1,
       info     => loc('<p>Hier können Sie die Kosten für Drucker ändern. Die Kosten können pro Seite und pro Duckjob gesetzt werden.</p><p>Kosten pro Druckjob müssen immer mit den Seitenkosten angegeben werden.</p><p>Alle Kosten (Guthabeneinheiten) sind mit Dezimalpunkt einzugeben.</p><p>Zum Festlegen des Passthrough die Werte "ON" oder "OFF" eingeben. Bei Passthrough ON findet eine Abrechnung des Druckers <b>nicht</b> statt.</p>'),
