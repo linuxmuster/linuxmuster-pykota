@@ -5,5 +5,6 @@ linuxmuster-pk-schulkonsole (0.1.0-0) babo-testing; urgency=low
   * Create Error::Druckquotas, DruckquotasConfig, create and use wrapper-druckquotas for security
   * fix Makefile and rules file for wrapper.
   * added locale files
+  * translated en locale file
 
- -- Frank Schütte <fschuett@gymhim.de>  Thu, 05 Nov 2015 14:34:53 +0100
+ -- Frank Schütte <fschuett@gymhim.de>  Thu, 05 Nov 2015 15:03:17 +0100

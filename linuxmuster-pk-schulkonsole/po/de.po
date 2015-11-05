@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmuster-pk-schulkonsole 0.1.0\n"
 "Report-Msgid-Bugs-To: fschuett@gymhim.de\n"
-"POT-Creation-Date: 2015-11-05 14:32+0100\n"
+"POT-Creation-Date: 2015-11-05 15:03+0100\n"
 "PO-Revision-Date: 2014-04-06 14:22+0200\n"
 "Last-Translator: root <root@linuxmuster.lokal>\n"
 "Language-Team: German\n"
@@ -99,43 +99,43 @@ msgstr ""
 msgid "Aktivierung ausgef&uuml;hrt."
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:56
+#: ../tt/settings_druckquotas.tt:57
 msgid ""
 "Aktuelle Einstellungen für \"askconfirmation\":<br>(ggf. noch den "
 "PASSTHROUGH-Modus der Drucker anpassen)"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:33 ../tt/druckquotas_projects.tt:34
-#: ../tt/druckquotas_students.tt:59 ../tt/druckquotas_teachers.tt:37
+#: ../tt/druckquotas_classes.tt:34 ../tt/druckquotas_projects.tt:35
+#: ../tt/druckquotas_students.tt:60 ../tt/druckquotas_teachers.tt:38
 msgid "An"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:31
+#: ../tt/druckquotas_students.tt:32
 msgid "Ausgewählte Klasse:"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:19 ../tt/druckquotas_printers.tt:23
-#: ../tt/druckquotas_projects.tt:19 ../tt/druckquotas_students.tt:43
-#: ../tt/druckquotas_teachers.tt:22
+#: ../tt/druckquotas_classes.tt:20 ../tt/druckquotas_printers.tt:24
+#: ../tt/druckquotas_projects.tt:20 ../tt/druckquotas_students.tt:44
+#: ../tt/druckquotas_teachers.tt:23
 msgid "Auswahl"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:42 ../tt/druckquotas_printers.tt:45
-#: ../tt/druckquotas_projects.tt:42 ../tt/druckquotas_students.tt:67
-#: ../tt/druckquotas_teachers.tt:45
+#: ../tt/druckquotas_classes.tt:43 ../tt/druckquotas_printers.tt:46
+#: ../tt/druckquotas_projects.tt:43 ../tt/druckquotas_students.tt:68
+#: ../tt/druckquotas_teachers.tt:46
 msgid "Auswahl aus der Druckdatenbank löschen"
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:41
+#: ../tt/settings_druckquotas.tt:42
 msgid "Auswahl löschen"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:40 ../tt/druckquotas_projects.tt:40
-#: ../tt/druckquotas_students.tt:65 ../tt/druckquotas_teachers.tt:43
+#: ../tt/druckquotas_classes.tt:41 ../tt/druckquotas_projects.tt:41
+#: ../tt/druckquotas_students.tt:66 ../tt/druckquotas_teachers.tt:44
 msgid "Auswahl: Kontingent neu setzen auf:"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:18
+#: ../tt/druckquotas_students.tt:19
 msgid "Auswählen"
 msgstr ""
 
@@ -152,17 +152,17 @@ msgstr ""
 msgid "Die Standard-Gruppe %s kann nicht gel&ouml;scht werden."
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:8
-#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:8
-#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:8
-#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:8
-#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:8
-#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:8
-#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:8
+#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:9
+#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:9
+#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:9
+#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:9
+#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:9
+#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:9
+#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:9
 msgid "Druck-Quota"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:8
+#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:9
 msgid "Drucker"
 msgstr ""
 
@@ -181,11 +181,11 @@ msgstr ""
 msgid "Drucker in die Datenbank aufgenommen."
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:57
+#: ../tt/druckquotas_printers.tt:58
 msgid "Drucker in die Pykota-Datenbank aufnehmen"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:17
+#: ../tt/druckquotas_printers.tt:18
 msgid "Druckername"
 msgstr ""
 
@@ -200,32 +200,32 @@ msgstr ""
 msgid "Druckquotas gesetzt: %s mal"
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:8
+#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:9
 msgid "Einstellungen"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:51
+#: ../tt/druckquotas_printers.tt:52
 msgid "Es gibt keine Drucker."
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:48
+#: ../tt/druckquotas_classes.tt:49
 msgid "Es gibt keine Klassen."
 msgstr ""
 
-#: ../tt/druckquotas_teachers.tt:51
+#: ../tt/druckquotas_teachers.tt:52
 msgid "Es gibt keine Lehrer."
 msgstr ""
 
-#: ../tt/druckquotas_projects.tt:48
+#: ../tt/druckquotas_projects.tt:49
 msgid "Es gibt keine Projekte."
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:73
+#: ../tt/druckquotas_students.tt:74
 msgid "Es gibt keine Schüler in der Klasse."
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:23 ../tt/druckquotas_students.tt:40
-#: ../tt/druckquotas_teachers.tt:19
+#: ../tt/druckquotas_others.tt:24 ../tt/druckquotas_students.tt:41
+#: ../tt/druckquotas_teachers.tt:20
 msgid "Gesamtes Kontingent"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Gruppe aufgenommen."
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:52
+#: ../tt/settings_druckquotas.tt:53
 msgid "Gruppe aufnehmen"
 msgstr ""
 
@@ -272,13 +272,13 @@ msgid ""
 "Fenster die Aufforderung den Job zu bestätigen.</p>"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:54
+#: ../tt/druckquotas_printers.tt:55
 msgid ""
 "Hinweis: Jeder Drucker muss zunächst bei CUPS so konfiguriert werden, dass "
 "Pykota die Quotierung durchführen kann."
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:22
+#: ../tt/druckquotas_printers.tt:23
 msgid "Jobkosten festlegen"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "Keine Änderungen."
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:17
+#: ../tt/druckquotas_classes.tt:18
 msgid "Klasse"
 msgstr ""
 
@@ -305,16 +305,16 @@ msgstr ""
 msgid "Klasse %s unbekannt"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:13
+#: ../tt/druckquotas_students.tt:14
 msgid "Klasse auswählen"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:8
-#: ../tt/druckquotas_students.tt:29
+#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:9
+#: ../tt/druckquotas_students.tt:30
 msgid "Klassen"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:29
+#: ../tt/druckquotas_students.tt:30
 msgid "Klassenliste"
 msgstr ""
 
@@ -323,32 +323,32 @@ msgstr ""
 msgid "Kontingent %s falsch angegeben."
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:16
+#: ../tt/druckquotas_others.tt:17
 msgid "Kontingent des Benutzers anzeigen"
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:41
+#: ../tt/druckquotas_others.tt:42
 msgid "Kontingent des Benutzers ändern"
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:42
+#: ../tt/druckquotas_others.tt:43
 msgid "Kontingent neu setzen"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:18 ../tt/druckquotas_projects.tt:18
-#: ../tt/druckquotas_students.tt:42 ../tt/druckquotas_teachers.tt:21
+#: ../tt/druckquotas_classes.tt:19 ../tt/druckquotas_projects.tt:19
+#: ../tt/druckquotas_students.tt:43 ../tt/druckquotas_teachers.tt:22
 msgid "Kontingent setzen oder ändern"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:19
+#: ../tt/druckquotas_printers.tt:20
 msgid "Kosten Job"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:18
+#: ../tt/druckquotas_printers.tt:19
 msgid "Kosten Seite"
 msgstr ""
 
-#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:8
+#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:9
 msgid "Lehrer"
 msgstr ""
 
@@ -357,16 +357,16 @@ msgstr ""
 msgid "Lehrer %s unbekannt"
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:22 ../tt/druckquotas_students.tt:38
-#: ../tt/druckquotas_teachers.tt:17
+#: ../tt/druckquotas_others.tt:23 ../tt/druckquotas_students.tt:39
+#: ../tt/druckquotas_teachers.tt:18
 msgid "Login"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:39 ../tt/druckquotas_teachers.tt:18
+#: ../tt/druckquotas_students.tt:40 ../tt/druckquotas_teachers.tt:19
 msgid "Name"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:37
+#: ../tt/druckquotas_students.tt:38
 msgid "Nr."
 msgstr ""
 
@@ -378,11 +378,11 @@ msgstr ""
 msgid "Nummer zu gross."
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:20
+#: ../tt/druckquotas_printers.tt:21
 msgid "Passthrough Mode"
 msgstr ""
 
-#: ../tt/druckquotas_projects.tt:17
+#: ../tt/druckquotas_projects.tt:18
 msgid "Projekt"
 msgstr ""
 
@@ -391,17 +391,17 @@ msgstr ""
 msgid "Projekt %s unbekannt"
 msgstr ""
 
-#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:8
+#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:9
 msgid "Projekte"
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:24 ../tt/druckquotas_students.tt:41
-#: ../tt/druckquotas_teachers.tt:20
+#: ../tt/druckquotas_others.tt:25 ../tt/druckquotas_students.tt:42
+#: ../tt/druckquotas_teachers.tt:21
 msgid "Restliches Kontingent"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:32 ../tt/druckquotas_projects.tt:33
-#: ../tt/druckquotas_students.tt:58 ../tt/druckquotas_teachers.tt:36
+#: ../tt/druckquotas_classes.tt:33 ../tt/druckquotas_projects.tt:34
+#: ../tt/druckquotas_students.tt:59 ../tt/druckquotas_teachers.tt:37
 msgid "Schnellauswahl"
 msgstr ""
 
@@ -412,7 +412,7 @@ msgstr ""
 msgid "Schulkonsole"
 msgstr ""
 
-#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:8
+#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:9
 msgid "Schüler"
 msgstr ""
 
@@ -421,15 +421,15 @@ msgstr ""
 msgid "Schüler %s unbekannt"
 msgstr ""
 
-#: ../tt/druckquotas_printers.tt:21
+#: ../tt/druckquotas_printers.tt:22
 msgid "Seitenkosten festlegen"
 msgstr ""
 
-#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:8
+#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:9
 msgid "Sonderquota"
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:10
+#: ../tt/settings_druckquotas.tt:11
 msgid "Standardeinstellungen der Gruppen:"
 msgstr ""
 
@@ -438,9 +438,9 @@ msgstr ""
 msgid "Ungültiger passthrough-Wert %s"
 msgstr ""
 
-#: ../tt/druckquotas_classes.tt:39 ../tt/druckquotas_printers.tt:44
-#: ../tt/druckquotas_projects.tt:39 ../tt/druckquotas_students.tt:64
-#: ../tt/druckquotas_teachers.tt:42 ../tt/settings_druckquotas.tt:40
+#: ../tt/druckquotas_classes.tt:40 ../tt/druckquotas_printers.tt:45
+#: ../tt/druckquotas_projects.tt:40 ../tt/druckquotas_students.tt:65
+#: ../tt/druckquotas_teachers.tt:43 ../tt/settings_druckquotas.tt:41
 msgid "Änderungen übernehmen"
 msgstr ""
 
@@ -455,6 +455,6 @@ msgstr ""
 msgid "Änderungen übernommen: %s mal"
 msgstr ""
 
-#: ../tt/settings_druckquotas.tt:83
+#: ../tt/settings_druckquotas.tt:84
 msgid "Übernehmen"
 msgstr ""

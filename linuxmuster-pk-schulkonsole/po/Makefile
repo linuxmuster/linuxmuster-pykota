@@ -28,7 +28,7 @@ install-locale:
 	done
 
 # generate .mo files from the .po files
-all-local: $(MSGFILES)
+all-local: clean $(MSGFILES)
 
 
 
