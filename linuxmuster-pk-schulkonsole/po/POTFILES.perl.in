@@ -8,4 +8,5 @@
 ../cgi-bin/druckquotas_projects
 ../lib/DruckquotasConfig.pm
 ../lib/Druckquotas.pm
+../lib/DruckquotasError.pm
 ../lib/Error/Druckquotas.pm

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmuster-pk-schulkonsole 0.1.0\n"
 "Report-Msgid-Bugs-To: fschuett@gymhim.de\n"
-"POT-Creation-Date: 2015-11-05 15:03+0100\n"
+"POT-Creation-Date: 2015-11-06 11:10+0100\n"
 "PO-Revision-Date: 2014-04-06 14:22+0200\n"
 "Last-Translator: root <root@linuxmuster.lokal>\n"
 "Language-Team: German\n"
@@ -147,6 +147,10 @@ msgstr ""
 msgid "Bitte Gruppenname korrigieren."
 msgstr ""
 
+#: ../lib/DruckquotasError.pm:72
+msgid "Das Datenbankpassword konnte nicht ermittelt werden"
+msgstr ""
+
 #: ../cgi-bin/settings_druckquotas:136
 #, perl-format
 msgid "Die Standard-Gruppe %s kann nicht gel&ouml;scht werden."
@@ -284,6 +288,10 @@ msgstr ""
 
 #: ../cgi-bin/settings_druckquotas:196 ../cgi-bin/settings_druckquotas:254
 msgid "Keine &Auml;nderungen."
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:60
+msgid "Keine Benutzer vorhanden"
 msgstr ""
 
 #: ../cgi-bin/druckquotas_students:110 ../cgi-bin/druckquotas_students:143
@@ -433,9 +441,41 @@ msgstr ""
 msgid "Standardeinstellungen der Gruppen:"
 msgstr ""
 
+#: ../lib/DruckquotasError.pm:48
+msgid "Ungültige Aktion"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:57
+msgid "Ungültige Benutzerliste"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:66
+msgid "Ungültige Gruppe"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:69
+msgid "Ungültige Zahl"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:45
+msgid "Ungültiger Benutzer"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:63
+msgid "Ungültiger Drucker"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:54
+msgid "Ungültiger Wert"
+msgstr ""
+
 #: ../cgi-bin/druckquotas_printers:91
 #, perl-format
 msgid "Ungültiger passthrough-Wert %s"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:51
+msgid "Unpassende Aktion"
 msgstr ""
 
 #: ../tt/druckquotas_classes.tt:40 ../tt/druckquotas_printers.tt:45

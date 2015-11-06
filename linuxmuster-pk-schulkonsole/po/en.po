@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmuster-pk-schulkonsole 0.1.0\n"
 "Report-Msgid-Bugs-To: fschuett@gymhim.de\n"
-"POT-Creation-Date: 2015-11-05 15:03+0100\n"
+"POT-Creation-Date: 2015-11-06 11:10+0100\n"
 "PO-Revision-Date: 2015-11-05 15:01+0100\n"
 "Last-Translator: Frank Schütte <fschuett@gymhim.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -170,6 +170,10 @@ msgstr "user contingent changed"
 msgid "Bitte Gruppenname korrigieren."
 msgstr "Please correct the group name."
 
+#: ../lib/DruckquotasError.pm:72
+msgid "Das Datenbankpassword konnte nicht ermittelt werden"
+msgstr ""
+
 #: ../cgi-bin/settings_druckquotas:136
 #, perl-format
 msgid "Die Standard-Gruppe %s kann nicht gel&ouml;scht werden."
@@ -318,6 +322,11 @@ msgstr "specify print job costs"
 msgid "Keine &Auml;nderungen."
 msgstr "no changes"
 
+#: ../lib/DruckquotasError.pm:60
+#, fuzzy
+msgid "Keine Benutzer vorhanden"
+msgstr "modify users contingent"
+
 #: ../cgi-bin/druckquotas_students:110 ../cgi-bin/druckquotas_students:143
 #: ../cgi-bin/settings_druckquotas:106 ../cgi-bin/settings_druckquotas:152
 #: ../cgi-bin/druckquotas_teachers:93 ../cgi-bin/druckquotas_teachers:126
@@ -465,10 +474,44 @@ msgstr "other quota"
 msgid "Standardeinstellungen der Gruppen:"
 msgstr "group defaults:"
 
+#: ../lib/DruckquotasError.pm:48
+msgid "Ungültige Aktion"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:57
+msgid "Ungültige Benutzerliste"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:66
+msgid "Ungültige Gruppe"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:69
+msgid "Ungültige Zahl"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:45
+msgid "Ungültiger Benutzer"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:63
+#, fuzzy
+msgid "Ungültiger Drucker"
+msgstr "invalid pass through value %s"
+
+#: ../lib/DruckquotasError.pm:54
+#, fuzzy
+msgid "Ungültiger Wert"
+msgstr "invalid pass through value %s"
+
 #: ../cgi-bin/druckquotas_printers:91
 #, perl-format
 msgid "Ungültiger passthrough-Wert %s"
 msgstr "invalid pass through value %s"
+
+#: ../lib/DruckquotasError.pm:51
+msgid "Unpassende Aktion"
+msgstr ""
 
 #: ../tt/druckquotas_classes.tt:40 ../tt/druckquotas_printers.tt:45
 #: ../tt/druckquotas_projects.tt:40 ../tt/druckquotas_students.tt:65
