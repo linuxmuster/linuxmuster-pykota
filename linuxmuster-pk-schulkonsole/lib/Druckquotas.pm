@@ -2,7 +2,7 @@ use strict;
 use utf8;
 use IPC::Open3;
 use POSIX 'sys_wait_h';
-use Schulkonsole::Error;
+use Schulkonsole::DruckquotasError;
 use Schulkonsole::Error::Druckquotas;
 use Schulkonsole::Config;
 use Schulkonsole::DruckquotasConfig;
@@ -17,8 +17,8 @@ Schulkonsole::Druckquotas - interface to Pykota Druckquotas
 
 =head1 DESCRIPTION
 
-If a wrapper command fails, it usually dies with a Schulkonsole::Error.
-The output of the failed command is stored in the Schulkonsole::Error.
+If a wrapper command fails, it usually dies with a Schulkonsole::DruckquotasError.
+The output of the failed command is stored in the Schulkonsole::DruckquotasError.
 
 25.6.2012
 
@@ -369,7 +369,7 @@ sub start_wrapper {
 
 	my $pid = IPC::Open3::open3 $out, $in, $err,
 		$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas
-		or die new Schulkonsole::Error(
+		or die new Schulkonsole::DruckquotasError(
 			Schulkonsole::Error::WRAPPER_EXEC_FAILED,
 			$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!);
 
@@ -382,11 +382,11 @@ sub start_wrapper {
 	    or $re == -1) {
 		my $error = ($? >> 8) - 256;
 		if ($error < -127) {
-			die new Schulkonsole::Error(
+			die new Schulkonsole::DruckquotasError(
 				Schulkonsole::Error::WRAPPER_EXEC_FAILED,
 				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!);
 		} else {
-			die new Schulkonsole::Error(
+			die new Schulkonsole::DruckquotasError(
 				Schulkonsole::Error::Druckquotas::WRAPPER_ERROR_BASE + $error,
 				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas);
 		}
@@ -408,12 +408,12 @@ sub stop_wrapper {
 	    and $?) {
 		my $error = ($? >> 8) - 256;
 		if ($error < -127) {
-			die new Schulkonsole::Error(
+			die new Schulkonsole::DruckquotasError(
 				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
 				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
 				($input_buffer ? "Output: $input_buffer" : 'No Output'));
 		} else {
-			die new Schulkonsole::Error(
+			die new Schulkonsole::DruckquotasError(
 				Schulkonsole::Error::Druckquotas::WRAPPER_ERROR_BASE + $error,
 				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas);
 		}
@@ -421,14 +421,14 @@ sub stop_wrapper {
 
 	if ($out) {
 		close $out
-			or die new Schulkonsole::Error(
+			or die new Schulkonsole::DruckquotasError(
 				Schulkonsole::Error::WRAPPER_BROKEN_PIPE_OUT,
 				$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
 				($input_buffer ? "Output: $input_buffer" : 'No Output'));
 	}
 
 	close $in
-		or die new Schulkonsole::Error(
+		or die new Schulkonsole::DruckquotasError(
 			Schulkonsole::Error::WRAPPER_BROKEN_PIPE_IN,
 			$Schulkonsole::DruckquotasConfig::_wrapper_druckquotas, $!,
 			($input_buffer ? "Output: $input_buffer" : 'No Output'));
