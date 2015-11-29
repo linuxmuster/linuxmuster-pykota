@@ -17,6 +17,9 @@ use vars qw(%balance $ROCONFIG);
 
 my $opt_h;
 my $opt_autopykota;
+my $opt_t;
+my $opt_m;
+my $opt_user;
 
 #
 # Command line options processing
@@ -25,7 +28,10 @@ sub init()
 {
 	use Getopt::Long;
 	GetOptions( "h"     =>  \$opt_h,
-		    "autopykota=s" => \$opt_autopykota
+		    "autopykota=s" => \$opt_autopykota,
+		    "t"    =>   \$opt_t,
+		    "m"    =>   \$opt_m,
+		    "user=s" => \$opt_user
 		    );
 	
 	usage() if $opt_h;
@@ -51,10 +57,19 @@ init();
 sub conf_read {
   do "/etc/linuxmuster/pykota.conf";
 }
+
 if ($opt_autopykota) {
   autopykota($opt_autopykota);
+  exit 0;
+} elsif ($opt_t && $opt_user) {
+  print "10\n";
+  exit 0;
+} elsif ($opt_m && $opt_user) {
+  print "20\n";
+  exit 0;
 }
 
+exit 1;
 
 # 
 # gets initial balance for a specified user

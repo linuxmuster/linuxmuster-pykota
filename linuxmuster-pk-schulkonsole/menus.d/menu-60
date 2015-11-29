@@ -1,0 +1,3 @@
+[% IF link_druckquotas %]
+ <li><a>[% loc('Druckquotas') %]</a><ul>[% INCLUDE "submenu-druckquotas.inc.tt" %]</ul></li>
+[% END %]

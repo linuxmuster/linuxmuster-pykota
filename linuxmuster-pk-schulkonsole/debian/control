@@ -1,0 +1,11 @@
+Source: linuxmuster-pk-schulkonsole
+Section: debian-linuxmuster
+Priority: optional
+Maintainer: Frank Schütte <fschuett@gymhim.de>
+Build-Depends: debhelper (>= 4.0.0), liblocale-maketext-lexicon-perl
+Standards-Version: 3.6.0
+
+Package: linuxmuster-pk-schulkonsole
+Architecture: all
+Depends: pykota, pkipplib, pkpgcounter, linuxmuster-schulkonsole (>= 0.19.0-1)
+Description: This package provides schulkonsole plugin for pykota wrapper.

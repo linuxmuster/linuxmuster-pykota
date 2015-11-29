@@ -1,0 +1,535 @@
+# English translations for linuxmuster-pk-schulkonsole package.
+# Copyright (C) 2015 Frank Schütte
+# This file is distributed under the same license as the linuxmuster-pk-schulkonsole package.
+#
+# root <root@linuxmuster.lokal>, 2015.
+# Frank Schütte <fschuett@gymhim.de>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmuster-pk-schulkonsole 0.1.0\n"
+"Report-Msgid-Bugs-To: fschuett@gymhim.de\n"
+"POT-Creation-Date: 2015-11-17 17:45+0100\n"
+"PO-Revision-Date: 2015-11-05 15:01+0100\n"
+"Last-Translator: Frank Schütte <fschuett@gymhim.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../cgi-bin/settings_druckquotas:166
+#, perl-format
+msgid "%s: Druckquota falsch angegeben."
+msgstr "%s: wrong print quota value"
+
+#: ../cgi-bin/settings_druckquotas:87 ../cgi-bin/settings_druckquotas:132
+#, perl-format
+msgid "%s: Gruppe existiert nicht."
+msgstr "%s: group not existing."
+
+#: ../cgi-bin/settings_druckquotas:173
+#, perl-format
+msgid "%s: Gruppe existiert schon."
+msgstr "%s: group not unique."
+
+#: ../cgi-bin/settings_druckquotas:68 ../cgi-bin/druckquotas_printers:64
+#, perl-format
+msgid "%s: Neue Kosten sind falsch angegeben"
+msgstr "%s: wrong value for new costs"
+
+#: ../cgi-bin/druckquotas_students:123 ../cgi-bin/druckquotas_teachers:106
+#: ../cgi-bin/druckquotas_classes:103 ../cgi-bin/druckquotas_projects:103
+#, perl-format
+msgid "%s: Neue Quota muss eine Zahl ggf. mit Vorzeichen sein"
+msgstr "%s: new quota value needs to be an integer maybe with sign"
+
+#: ../cgi-bin/druckquotas_students:96 ../cgi-bin/druckquotas_teachers:73
+#: ../cgi-bin/druckquotas_classes:70 ../cgi-bin/druckquotas_projects:70
+#, perl-format
+msgid "%s: Neue Quota muss eine Zahl sein"
+msgstr "%s: new quota value needs to be of type integer"
+
+#: ../tt/druckquotas_others.tt:1
+msgid ""
+"<p>Hier können Sie die Druckquota eines Benutzers ändern. Die Druckquota "
+"kann mit einer Zahl gesetzt werden oder mit \"+/- Wert\" um einen Wert "
+"geändert werden.</p><p>Beim \"Neu-Setzen\" wird zusätzlich der bisherige "
+"Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig "
+"einzugeben.</p>"
+msgstr ""
+"<p>On this page you can change a users print quota value. Set print quota "
+"with an integer and change existing value with a signed integer.</p> <p>On "
+"quota setting the balance will be reset.</p><p>All values are integers.</p>"
+
+#: ../tt/druckquotas_students.tt:1
+msgid ""
+"<p>Hier können Sie die Druckquota für Schüler ändern. Die Druckquota kann "
+"mit einer Zahl gesetzt werden oder mit \"+/- Wert\" um einen Wert geändert "
+"werden.</p><p>Beim \"Neu-Setzen\" wird zusätzlich der bisherige Verbrauch "
+"gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</"
+"p>"
+msgstr ""
+"<p>On this page you can change a students print quota value. Set print quota "
+"with an integer and change existing value with a signed integer.</p> <p>On "
+"quota setting the balance will be reset.</p><p>All values are integers.</p>"
+
+#: ../tt/druckquotas_projects.tt:1
+msgid ""
+"<p>Hier können Sie die Druckquota für alle Mitglieder (Schüler und Lehrer) "
+"eines Projektes ändern. Die Druckquota kann mit einer Zahl gesetzt werden "
+"oder mit \"+/- Wert\" um einen Wert geändert werden.</p><p>Beim \"Neu-Setzen"
+"\" wird zusätzlich der bisherige Verbrauch gelöscht.</p><p>Alle Werte "
+"(Guthabeneinheiten) sind ganzzahlig einzugeben.</p>"
+msgstr ""
+"<p>On this page you can change all project members (teachers or students) "
+"print quota values. Set print quota with an integer and change existing "
+"value with a signed integer.</p> <p>On quota setting the balance will be "
+"reset.</p><p>All values are integers.</p>"
+
+#: ../tt/druckquotas_classes.tt:1
+msgid ""
+"<p>Hier können Sie die Druckquota für alle Schüler/innen einer Klasse "
+"ändern. Die Druckquota kann mit einer Zahl gesetzt werden oder mit \"+/- Wert"
+"\" um einen Wert geändert werden.</p><p>Beim \"Neu-Setzen\" wird zusätzlich "
+"der bisherige Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind "
+"ganzzahlig einzugeben.</p>"
+msgstr ""
+"<p>On this page you can change all class students print quota values. Set "
+"print quota with an integer and change existing value with a signed integer."
+"</p> <p>On quota setting the balance will be reset.</p><p>All values are "
+"integers.</p>"
+
+#: ../tt/druckquotas_printers.tt:1
+msgid ""
+"<p>Hier können Sie die Kosten für Drucker ändern. Die Kosten können pro "
+"Seite und pro Duckjob gesetzt werden.</p><p>Kosten pro Druckjob müssen immer "
+"mit den Seitenkosten angegeben werden.</p><p>Alle Kosten (Guthabeneinheiten) "
+"sind mit Dezimalpunkt einzugeben.</p><p>Zum Festlegen des Passthrough die "
+"Werte \"ON\" oder \"OFF\" eingeben. Bei Passthrough ON findet eine "
+"Abrechnung des Druckers <b>nicht</b> statt.</p>"
+msgstr ""
+"<p>On this page you can modify the printers printing costs. Costs can be set "
+"per page or per print job.</p> <p>Costs per print job have to be set with "
+"page costs.</p><p>Each value is a decimal number with decimal dot.<p> <p>For "
+"pass through choose either \"ON\" or \"OFF\". For pass through there will be "
+"<b>no</b> charging for the printer.</p>"
+
+#: ../cgi-bin/settings_druckquotas:251
+msgid "Aktivierung ausgef&uuml;hrt."
+msgstr "Activation done."
+
+#: ../tt/settings_druckquotas.tt:57
+msgid ""
+"Aktuelle Einstellungen für \"askconfirmation\":<br>(ggf. noch den "
+"PASSTHROUGH-Modus der Drucker anpassen)"
+msgstr ""
+"Current settings for \"askconfirmation\".<br>(Adjust pass through modus for "
+"the corresponding printer.)"
+
+#: ../tt/druckquotas_classes.tt:34 ../tt/druckquotas_projects.tt:35
+#: ../tt/druckquotas_students.tt:60 ../tt/druckquotas_teachers.tt:38
+msgid "An"
+msgstr "on"
+
+#: ../tt/druckquotas_students.tt:32
+msgid "Ausgewählte Klasse:"
+msgstr "selected class:"
+
+#: ../tt/druckquotas_classes.tt:20 ../tt/druckquotas_printers.tt:24
+#: ../tt/druckquotas_projects.tt:20 ../tt/druckquotas_students.tt:44
+#: ../tt/druckquotas_teachers.tt:23
+msgid "Auswahl"
+msgstr "selection"
+
+#: ../tt/druckquotas_classes.tt:43 ../tt/druckquotas_printers.tt:46
+#: ../tt/druckquotas_projects.tt:43 ../tt/druckquotas_students.tt:68
+#: ../tt/druckquotas_teachers.tt:46
+msgid "Auswahl aus der Druckdatenbank löschen"
+msgstr "remove selected"
+
+#: ../tt/settings_druckquotas.tt:42
+msgid "Auswahl löschen"
+msgstr "remove selected"
+
+#: ../tt/druckquotas_classes.tt:41 ../tt/druckquotas_projects.tt:41
+#: ../tt/druckquotas_students.tt:66 ../tt/druckquotas_teachers.tt:44
+msgid "Auswahl: Kontingent neu setzen auf:"
+msgstr "set selected contingents"
+
+#: ../tt/druckquotas_students.tt:19
+msgid "Auswählen"
+msgstr "select"
+
+#: ../cgi-bin/druckquotas_others:79
+msgid "Benutzerkontingent geändert."
+msgstr "user contingent changed"
+
+#: ../cgi-bin/settings_druckquotas:188
+msgid "Bitte Gruppenname korrigieren."
+msgstr "Please correct the group name."
+
+#: ../lib/DruckquotasError.pm:72
+msgid "Das Datenbankpassword konnte nicht ermittelt werden"
+msgstr ""
+
+#: ../cgi-bin/settings_druckquotas:136
+#, perl-format
+msgid "Die Standard-Gruppe %s kann nicht gel&ouml;scht werden."
+msgstr "The default group %s can not be deleted."
+
+#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:9
+#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:9
+#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:9
+#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:9
+#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:9
+#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:9
+#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:9
+msgid "Druck-Quota"
+msgstr "print quota"
+
+#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_printers.tt:9
+msgid "Drucker"
+msgstr "printer"
+
+#: ../cgi-bin/druckquotas_printers:80 ../cgi-bin/druckquotas_printers:95
+#: ../cgi-bin/druckquotas_printers:119
+#, perl-format
+msgid "Drucker %s unbekannt"
+msgstr "printer %s unknown"
+
+#: ../cgi-bin/druckquotas_printers:127
+#, perl-format
+msgid "Drucker gelöscht: %s mal"
+msgstr "printer deleted, %s times"
+
+#: ../cgi-bin/druckquotas_printers:144
+msgid "Drucker in die Datenbank aufgenommen."
+msgstr "printer added to printer database."
+
+#: ../tt/druckquotas_printers.tt:58
+msgid "Drucker in die Pykota-Datenbank aufnehmen"
+msgstr "Add printer to Pykota database"
+
+#: ../tt/druckquotas_printers.tt:18
+msgid "Druckername"
+msgstr "printer name"
+
+#: ../cgi-bin/druckquotas_teachers:90
+#, perl-format
+msgid "Druckquotas entfernt: %s mal"
+msgstr "print quota removed: %s times"
+
+#: ../cgi-bin/druckquotas_students:108 ../cgi-bin/druckquotas_teachers:87
+#: ../cgi-bin/druckquotas_classes:87 ../cgi-bin/druckquotas_projects:87
+#, perl-format
+msgid "Druckquotas gesetzt: %s mal"
+msgstr "print quota set: %s times"
+
+#: ../tt/settings_druckquotas.tt:1 ../tt/settings_druckquotas.tt:9
+msgid "Einstellungen"
+msgstr "settings"
+
+#: ../tt/druckquotas_printers.tt:52
+msgid "Es gibt keine Drucker."
+msgstr "no printers availabe."
+
+#: ../tt/druckquotas_classes.tt:49
+msgid "Es gibt keine Klassen."
+msgstr "No classes available."
+
+#: ../tt/druckquotas_teachers.tt:52
+msgid "Es gibt keine Lehrer."
+msgstr "no teachers available."
+
+#: ../tt/druckquotas_projects.tt:49
+msgid "Es gibt keine Projekte."
+msgstr "No projects available."
+
+#: ../tt/druckquotas_students.tt:74
+msgid "Es gibt keine Schüler in der Klasse."
+msgstr "Class does not contain any students."
+
+#: ../tt/druckquotas_others.tt:24 ../tt/druckquotas_students.tt:41
+#: ../tt/druckquotas_teachers.tt:20
+msgid "Gesamtes Kontingent"
+msgstr "whole contingent"
+
+#: ../cgi-bin/settings_druckquotas:93
+#, perl-format
+msgid "Gruppe %s falsch."
+msgstr "wrong group %s."
+
+#: ../cgi-bin/settings_druckquotas:140
+#, perl-format
+msgid "Gruppe %s unbekannt"
+msgstr "unknown group %s"
+
+#: ../cgi-bin/settings_druckquotas:193
+msgid "Gruppe aufgenommen."
+msgstr "group added"
+
+#: ../tt/settings_druckquotas.tt:53
+msgid "Gruppe aufnehmen"
+msgstr "add group"
+
+#: ../cgi-bin/settings_druckquotas:150
+#, perl-format
+msgid "Gruppe gelöscht: %s mal"
+msgstr "group deleted: %s times"
+
+#: ../tt/druckquotas_teachers.tt:1
+msgid ""
+"Hier können Sie die Druckquota für Lehrer/innen ändern. Die Druckquota kann "
+"mit einer Zahl gesetzt werden oder mit \"+/- Wert\" um einen Wert ge&auml;"
+"ndert werden.</p><p>Beim \"Neu-Setzen\" wird zusätzlich der bisherige "
+"Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig "
+"einzugeben.</p>"
+msgstr ""
+"<p>Here you can change teachers print quota. Set print quota with a absolute "
+"value or adjust print quota with a signed value.</p><p>On setting the "
+"current balance will be reset.</p> <p>All values have to be integers.<p>"
+
+#: ../tt/settings_druckquotas.tt:1
+msgid ""
+"Hier können Sie die Einstellungen zu pykota ändern.</p><p>Bei den "
+"Standardeinstellungen der Gruppen können Sie festlegen, welche Quota einem "
+"Benutzer zugeordnet wird, wenn er das erste mal druckt. Maßgebend ist die "
+"höchste Quota eines seiner Gruppen. Auf Benutzer, die bereits gedruckt "
+"haben, hat dies jedoch keine Auswirkung.</p><p>Durch Aktivierung einer "
+"askconfirmation-Option erhält der Benutzer bei jedem Druckjob in einem "
+"Fenster die Aufforderung den Job zu bestätigen.</p>"
+msgstr ""
+"<p>Here you can adjust pykota settings.</p><p>The groups default values  are "
+"added to users printing for the first time. The highest value is used if "
+"more than one value apply. The defaults are ignored for users that did "
+"already print.<p> <p>If \"askconfirmation\" is activated the user will be "
+"asked for confirmation before each print job.</p>"
+
+#: ../tt/druckquotas_printers.tt:55
+msgid ""
+"Hinweis: Jeder Drucker muss zunächst bei CUPS so konfiguriert werden, dass "
+"Pykota die Quotierung durchführen kann."
+msgstr ""
+"hint: each printer has to be configured for pykota quotas by means of CUPS."
+
+#: ../tt/druckquotas_printers.tt:23
+msgid "Jobkosten festlegen"
+msgstr "specify print job costs"
+
+#: ../cgi-bin/settings_druckquotas:196 ../cgi-bin/settings_druckquotas:254
+msgid "Keine &Auml;nderungen."
+msgstr "no changes"
+
+#: ../lib/DruckquotasError.pm:60
+#, fuzzy
+msgid "Keine Benutzer vorhanden"
+msgstr "modify users contingent"
+
+#: ../cgi-bin/druckquotas_students:110 ../cgi-bin/druckquotas_students:143
+#: ../cgi-bin/settings_druckquotas:106 ../cgi-bin/settings_druckquotas:152
+#: ../cgi-bin/druckquotas_teachers:93 ../cgi-bin/druckquotas_teachers:126
+#: ../cgi-bin/druckquotas_classes:89 ../cgi-bin/druckquotas_classes:127
+#: ../cgi-bin/druckquotas_others:82 ../cgi-bin/druckquotas_printers:105
+#: ../cgi-bin/druckquotas_printers:129 ../cgi-bin/druckquotas_printers:147
+#: ../cgi-bin/druckquotas_projects:89 ../cgi-bin/druckquotas_projects:128
+msgid "Keine Änderungen."
+msgstr "no changes"
+
+#: ../tt/druckquotas_classes.tt:18
+msgid "Klasse"
+msgstr "class"
+
+#: ../cgi-bin/druckquotas_classes:64 ../cgi-bin/druckquotas_classes:115
+#, perl-format
+msgid "Klasse %s unbekannt"
+msgstr "unknown class %s"
+
+#: ../tt/druckquotas_students.tt:14
+msgid "Klasse auswählen"
+msgstr "select class"
+
+#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_classes.tt:9
+#: ../tt/druckquotas_students.tt:30
+msgid "Klassen"
+msgstr "classes"
+
+#: ../tt/druckquotas_students.tt:30
+msgid "Klassenliste"
+msgstr "class list"
+
+#: ../cgi-bin/druckquotas_others:73
+#, perl-format
+msgid "Kontingent %s falsch angegeben."
+msgstr "wrong value for contingent %s"
+
+#: ../tt/druckquotas_others.tt:17
+msgid "Kontingent des Benutzers anzeigen"
+msgstr "show users contingent"
+
+#: ../tt/druckquotas_others.tt:42
+msgid "Kontingent des Benutzers ändern"
+msgstr "modify users contingent"
+
+#: ../tt/druckquotas_others.tt:43
+msgid "Kontingent neu setzen"
+msgstr "set contingent"
+
+#: ../tt/druckquotas_classes.tt:19 ../tt/druckquotas_projects.tt:19
+#: ../tt/druckquotas_students.tt:43 ../tt/druckquotas_teachers.tt:22
+msgid "Kontingent setzen oder ändern"
+msgstr "set or modify contingent"
+
+#: ../tt/druckquotas_printers.tt:20
+msgid "Kosten Job"
+msgstr "print job costs"
+
+#: ../tt/druckquotas_printers.tt:19
+msgid "Kosten Seite"
+msgstr "page costs"
+
+#: ../tt/druckquotas_teachers.tt:1 ../tt/druckquotas_teachers.tt:9
+msgid "Lehrer"
+msgstr "teacher"
+
+#: ../cgi-bin/druckquotas_teachers:66 ../cgi-bin/druckquotas_teachers:115
+#, perl-format
+msgid "Lehrer %s unbekannt"
+msgstr "unknown teacher %s"
+
+#: ../tt/druckquotas_others.tt:23 ../tt/druckquotas_students.tt:39
+#: ../tt/druckquotas_teachers.tt:18
+msgid "Login"
+msgstr "login"
+
+#: ../tt/druckquotas_students.tt:40 ../tt/druckquotas_teachers.tt:19
+msgid "Name"
+msgstr "name"
+
+#: ../tt/druckquotas_students.tt:38
+msgid "Nr."
+msgstr "no."
+
+#: ../cgi-bin/settings_druckquotas:246
+msgid "Nummer falsch."
+msgstr "wrong value"
+
+#: ../cgi-bin/settings_druckquotas:242
+msgid "Nummer zu gross."
+msgstr "value too big"
+
+#: ../tt/druckquotas_printers.tt:21
+msgid "Passthrough Mode"
+msgstr "pass through mode"
+
+#: ../tt/druckquotas_projects.tt:18
+msgid "Projekt"
+msgstr "project"
+
+#: ../cgi-bin/druckquotas_projects:64 ../cgi-bin/druckquotas_projects:115
+#, perl-format
+msgid "Projekt %s unbekannt"
+msgstr "unknown project %s"
+
+#: ../tt/druckquotas_projects.tt:1 ../tt/druckquotas_projects.tt:9
+msgid "Projekte"
+msgstr "projects"
+
+#: ../tt/druckquotas_others.tt:25 ../tt/druckquotas_students.tt:42
+#: ../tt/druckquotas_teachers.tt:21
+msgid "Restliches Kontingent"
+msgstr "current balance"
+
+#: ../tt/druckquotas_classes.tt:33 ../tt/druckquotas_projects.tt:34
+#: ../tt/druckquotas_students.tt:59 ../tt/druckquotas_teachers.tt:37
+msgid "Schnellauswahl"
+msgstr "quick selection"
+
+#: ../tt/druckquotas_classes.tt:1 ../tt/druckquotas_others.tt:1
+#: ../tt/druckquotas_printers.tt:1 ../tt/druckquotas_projects.tt:1
+#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_teachers.tt:1
+#: ../tt/settings_druckquotas.tt:1
+msgid "Schulkonsole"
+msgstr "school console"
+
+#: ../tt/druckquotas_students.tt:1 ../tt/druckquotas_students.tt:9
+msgid "Schüler"
+msgstr "student"
+
+#: ../cgi-bin/druckquotas_students:89 ../cgi-bin/druckquotas_students:132
+#, perl-format
+msgid "Schüler %s unbekannt"
+msgstr "unknown student %s"
+
+#: ../tt/druckquotas_printers.tt:22
+msgid "Seitenkosten festlegen"
+msgstr "specify page costs"
+
+#: ../tt/druckquotas_others.tt:1 ../tt/druckquotas_others.tt:9
+msgid "Sonderquota"
+msgstr "other quota"
+
+#: ../tt/settings_druckquotas.tt:11
+msgid "Standardeinstellungen der Gruppen:"
+msgstr "group defaults:"
+
+#: ../lib/DruckquotasError.pm:48
+msgid "Ungültige Aktion"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:57
+msgid "Ungültige Benutzerliste"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:66
+msgid "Ungültige Gruppe"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:69
+msgid "Ungültige Zahl"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:45
+msgid "Ungültiger Benutzer"
+msgstr ""
+
+#: ../lib/DruckquotasError.pm:63
+#, fuzzy
+msgid "Ungültiger Drucker"
+msgstr "invalid pass through value %s"
+
+#: ../lib/DruckquotasError.pm:54
+#, fuzzy
+msgid "Ungültiger Wert"
+msgstr "invalid pass through value %s"
+
+#: ../cgi-bin/druckquotas_printers:91
+#, perl-format
+msgid "Ungültiger passthrough-Wert %s"
+msgstr "invalid pass through value %s"
+
+#: ../lib/DruckquotasError.pm:51
+msgid "Unpassende Aktion"
+msgstr ""
+
+#: ../tt/druckquotas_classes.tt:40 ../tt/druckquotas_printers.tt:45
+#: ../tt/druckquotas_projects.tt:40 ../tt/druckquotas_students.tt:65
+#: ../tt/druckquotas_teachers.tt:43 ../tt/settings_druckquotas.tt:41
+msgid "Änderungen übernehmen"
+msgstr "apply changes"
+
+#: ../cgi-bin/druckquotas_students:140 ../cgi-bin/druckquotas_printers:102
+#: ../cgi-bin/druckquotas_projects:124
+msgid "Änderungen übernommen."
+msgstr "changes applied"
+
+#: ../cgi-bin/settings_druckquotas:103 ../cgi-bin/druckquotas_teachers:123
+#: ../cgi-bin/druckquotas_classes:124
+#, perl-format
+msgid "Änderungen übernommen: %s mal"
+msgstr "changes applied: %s times"
+
+#: ../tt/settings_druckquotas.tt:84
+msgid "Übernehmen"
+msgstr "apply"

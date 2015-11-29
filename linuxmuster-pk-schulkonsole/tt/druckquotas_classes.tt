@@ -1,0 +1,51 @@
+[% page = {
+      textdomain => 'linuxmuster-pk-schulkonsole',
+      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Klassen'),
+      menu     => 1,
+      info     => loc('<p>Hier können Sie die Druckquota für alle Schüler/innen einer Klasse ändern. Die Druckquota kann mit einer Zahl gesetzt werden oder mit "+/- Wert" um einen Wert geändert werden.</p><p>Beim "Neu-Setzen" wird zusätzlich der bisherige Verbrauch gelöscht.</p><p>Alle Werte (Guthabeneinheiten) sind ganzzahlig einzugeben.</p>'),
+   }
+%]
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Klassen') %]</h2>
+
+
+[% IF classes %]
+
+	<form method="post">
+	
+	<table id="quotasclasses" class="liste">
+	<tr>
+	<th>[% loc('Klasse') %]</th>
+	<th>[% loc('Kontingent setzen oder ändern') %]</th>
+	<th>[% loc('Auswahl') %]</th>
+	</tr>
+	
+	[% lfdnr = 1 %]
+	[% FOREACH c IN classes %]
+		<tr class="[% IF lfdnr % 2 == 1 %]odd[% ELSE %]even[% END %]">
+		<td>[% c.name %]</td>
+		<td><input size="6" maxlength="5" name="[% c.name %]_classdruckquota" value="[% c.druckquota %]"></td>
+		<td><input type="checkbox" name="[% c.name %];select"></td>
+		[% lfdnr = lfdnr + 1 %]</tr>
+	[% END %]
+	
+	<tr class="quickselection">
+	<td colspan="2">[% loc('Schnellauswahl') %]</td>
+	<td colspan="2"><input type="button" value="[% loc('An') %]" name="select" onClick="check_uncheck(this)"></td>
+	</tr>
+	
+	</table>
+	
+	<ul>
+	<li><input type="submit" name="acceptclasses" value="[% loc('Änderungen übernehmen') %]"></li>
+	<li><input type="submit" name="resetclasses" value="[% loc('Auswahl: Kontingent neu setzen auf:') %]">
+	<input size="6" maxlength="5" name="defaultbalance" value=""></li>
+	<li><input type="submit" name="deleteclasses" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
+	</ul>
+	
+	</form>
+	
+[% ELSE %]
+	<p>[% loc('Es gibt keine Klassen.') %]</p>
+[% END %]
+

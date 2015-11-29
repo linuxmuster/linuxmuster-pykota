@@ -1,0 +1,61 @@
+[% page = {
+      textdomain => 'linuxmuster-pk-schulkonsole',
+      title    => loc('Schulkonsole') _ " - " _ loc('Druck-Quota') _ "-" _ loc('Drucker'),
+      menu     => 1,
+      info     => loc('<p>Hier können Sie die Kosten für Drucker ändern. Die Kosten können pro Seite und pro Duckjob gesetzt werden.</p><p>Kosten pro Druckjob müssen immer mit den Seitenkosten angegeben werden.</p><p>Alle Kosten (Guthabeneinheiten) sind mit Dezimalpunkt einzugeben.</p><p>Zum Festlegen des Passthrough die Werte "ON" oder "OFF" eingeben. Bei Passthrough ON findet eine Abrechnung des Druckers <b>nicht</b> statt.</p>'),
+   }
+%]
+
+<h2>[% loc('Druck-Quota') %] :: [% loc('Drucker') %]</h2>
+<br>
+
+<form method="post">
+
+[% IF printers %]
+
+	<table id="quotasteachers" class="liste">
+	<tr>
+	<th>[% loc('Druckername') %]</th>
+	<th>[% loc('Kosten Seite') %]</th>
+	<th>[% loc('Kosten Job') %]</th>
+	<th>[% loc('Passthrough Mode') %]</th>
+	<th>[% loc('Seitenkosten festlegen') %]</th>
+	<th>[% loc('Jobkosten festlegen') %]</th>
+	<th>[% loc('Auswahl') %]</th>
+	</tr>
+	[% lfdnr = 1 %]
+	[% FOREACH p IN printers %]
+	<tr class="[% IF lfdnr % 2 == 1%]odd[% ELSE %]even[% END %]">
+	<td>[% p.printername %]</td>
+	<td>[% p.pagecost %]</td>
+	<td>[% p.jobcost %]</td>
+	<td><select name="[% p.printername %]_printernewpassthrough">
+	[% FOREACH v IN ['ON','OFF'] %]
+		<option name="[% v %]" value="[% v %]"[% IF v == p.passthrough %] selected[% END %]>[% v %]</option>
+	[% END %]
+	</select></td>
+	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewpage" value="[% p.newpage %]"></td>
+	<td><input size="6" maxlength="5" name="[% p.printername %]_printernewjob" value="[% p.newjob %]"></td>
+	<td><input type="checkbox" name="[% p.printername %];select"></td>
+	[% lfdnr = lfdnr + 1 %]</tr>
+	[% END %]
+	</table>
+	
+	<ul>
+	<li><input type="submit" name="acceptprinters" value="[% loc('Änderungen übernehmen') %]"></li>
+	<li><input type="submit" name="deleteprinters" value="[% loc('Auswahl aus der Druckdatenbank löschen') %]"></li>
+	</ul>
+	<br>
+	
+	
+[% ELSE %]
+	<p>[% loc('Es gibt keine Drucker.') %]</p>
+[% END %]
+<hr>
+<p>[% loc('Hinweis: Jeder Drucker muss zunächst bei CUPS so konfiguriert werden, dass Pykota die Quotierung durchführen kann.') %]</p>
+
+<input size="10" maxlength="10" name="newprinter" value="">
+<input type="submit" name="addprinter" value="[% loc('Drucker in die Pykota-Datenbank aufnehmen') %]">
+
+<br>
+</form>

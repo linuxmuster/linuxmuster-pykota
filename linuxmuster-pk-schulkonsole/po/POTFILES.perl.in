@@ -1,0 +1,12 @@
+# List of perl source files which contain translatable strings.
+../cgi-bin/druckquotas_students
+../cgi-bin/settings_druckquotas
+../cgi-bin/druckquotas_teachers
+../cgi-bin/druckquotas_classes
+../cgi-bin/druckquotas_others
+../cgi-bin/druckquotas_printers
+../cgi-bin/druckquotas_projects
+../lib/DruckquotasConfig.pm
+../lib/Druckquotas.pm
+../lib/DruckquotasError.pm
+../lib/Error/Druckquotas.pm
